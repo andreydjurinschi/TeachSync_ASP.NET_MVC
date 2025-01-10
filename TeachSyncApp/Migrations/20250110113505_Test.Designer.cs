@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TeachSyncApp.Context;
 
@@ -11,9 +12,11 @@ using TeachSyncApp.Context;
 namespace TeachSyncApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250110113505_Test")]
+    partial class Test
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,7 +80,7 @@ namespace TeachSyncApp.Migrations
             modelBuilder.Entity("TeachSyncApp.Models.User", b =>
                 {
                     b.HasOne("TeachSyncApp.Models.Role", "Role")
-                        .WithMany("Users")
+                        .WithMany("User")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -87,7 +90,7 @@ namespace TeachSyncApp.Migrations
 
             modelBuilder.Entity("TeachSyncApp.Models.Role", b =>
                 {
-                    b.Navigation("Users");
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

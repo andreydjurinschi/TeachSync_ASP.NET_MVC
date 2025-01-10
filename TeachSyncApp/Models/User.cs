@@ -24,6 +24,7 @@ public class User
     public DateTime CreatedAt { get; set; } = DateTime.Now;
 
     [Required(ErrorMessage = "User must have role")] 
+    [Display(Name = "Role")]
     public int RoleId { get; set; }
     public Role Role { get; set; } = null!;// 1 роль у 1 пользователя
 }

@@ -18,12 +18,14 @@ public class ApplicationDbContext : DbContext
         base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<Role>().ToTable("Roles");
         modelBuilder.Entity<User>().ToTable("Users");
-        
+
         modelBuilder.Entity<User>()
             .HasOne(u => u.Role)
-            .WithMany(u => u.Users)
+            .WithMany(r => r.Users)
             .HasForeignKey(u => u.RoleId)
             .OnDelete(DeleteBehavior.Restrict);
         
+
     }
+
 }
