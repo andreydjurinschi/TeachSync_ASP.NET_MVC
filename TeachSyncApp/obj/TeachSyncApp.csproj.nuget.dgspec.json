@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Work\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\TeachSyncApp.csproj": {}
+    "C:\\Users\\Work\\RiderProjects\\TeachSync_ASP.NET\\TeachSyncApp\\TeachSyncApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Work\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\TeachSyncApp.csproj": {
+    "C:\\Users\\Work\\RiderProjects\\TeachSync_ASP.NET\\TeachSyncApp\\TeachSyncApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Work\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\TeachSyncApp.csproj",
+        "projectUniqueName": "C:\\Users\\Work\\RiderProjects\\TeachSync_ASP.NET\\TeachSyncApp\\TeachSyncApp.csproj",
         "projectName": "TeachSyncApp",
-        "projectPath": "C:\\Users\\Work\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\TeachSyncApp.csproj",
+        "projectPath": "C:\\Users\\Work\\RiderProjects\\TeachSync_ASP.NET\\TeachSyncApp\\TeachSyncApp.csproj",
         "packagesPath": "C:\\Users\\Work\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Work\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\obj\\",
+        "outputPath": "C:\\Users\\Work\\RiderProjects\\TeachSync_ASP.NET\\TeachSyncApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

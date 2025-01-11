@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "d/d1IP73db4=",
+  "dgSpecHash": "CF6MkGtd2CQ=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Work\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\TeachSyncApp.csproj",
+  "projectFilePath": "C:\\Users\\Work\\RiderProjects\\TeachSync_ASP.NET\\TeachSyncApp\\TeachSyncApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Work\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Work\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
