@@ -1,0 +1,23 @@
+@model TeachSyncApp.Models.User
+
+<h1>Delete Page</h1>
+
+<div class="card" style="width: 30rem;">
+    <div class="card-body">
+        <h4 class="card-title" >@Html.DisplayFor(model => model.Name) @Html.DisplayFor(model => model.Surname)</h4>
+        <h5 class="card-subtitle mb-2 text-body-secondary">@Html.DisplayNameFor(model => model.Email): @Html.DisplayFor(model => model.Email)</h5>
+
+        <h5 class="card-subtitle mb-2 text-body-secondary">@Html.DisplayNameFor(model => model.CreatedAt): @Html.DisplayFor(model => model.CreatedAt)</h5>
+
+        <h5 class="card-subtitle mb-2 text-body-secondary">@Html.DisplayNameFor(model => model.Role): @Html.DisplayFor(model => model.Role.Name)</h5>
+
+        <a class="card-link" asp-action="Edit">Edit User</a>
+        <a class="card-link" asp-action="Index">Back to users</a>
+    </div>
+</div>
+<form asp-action="DeleteConfirmed" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="id" value="@Model.Id" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

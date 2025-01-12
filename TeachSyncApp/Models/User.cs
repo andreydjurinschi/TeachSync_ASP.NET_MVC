@@ -27,4 +27,5 @@ public class User
     [Display(Name = "Role")]
     public int RoleId { get; set; }
     public Role Role { get; set; } = null!;// 1 роль у 1 пользователя
+    public ICollection<Courses> Courses { get; set; } = new List<Courses>();
 }

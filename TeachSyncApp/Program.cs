@@ -1,7 +1,6 @@
-using System.Runtime.InteropServices.Marshalling;
 using Microsoft.EntityFrameworkCore;
 using TeachSyncApp.Context;
-using TeachSyncApp.Models;
+using TeachSyncApp.Models.SeedData;
 
 var builder = WebApplication.CreateBuilder(args);
 
