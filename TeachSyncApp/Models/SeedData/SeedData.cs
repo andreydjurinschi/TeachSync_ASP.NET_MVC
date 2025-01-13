@@ -28,6 +28,15 @@ public class SeedData
                 context.SaveChanges();
             }
 
+            context.Groups.Add(new Group
+            {
+                Name = "IA2001",
+                Capacity = 30,
+                Year = DateTime.Now.Year
+            });
+            context.SaveChanges();
+
+
             // Добавляем пользователей
             var admin = new User
             {
@@ -61,6 +70,7 @@ public class SeedData
             );
 
             context.SaveChanges();
+            
         }
     }
 

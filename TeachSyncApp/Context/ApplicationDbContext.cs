@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.Json;
 using TeachSyncApp.Models;
 
 namespace TeachSyncApp.Context;
@@ -14,6 +13,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Role> Roles { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<Group> Groups { get; set; }
+    
     public DbSet<Topic> Topics { get; set; }
     public DbSet<Courses> Courses { get; set; }
     
@@ -36,7 +36,7 @@ public class ApplicationDbContext : DbContext
             .HasOne(c => c.User)         
             .WithMany(u => u.Courses)                      
             .HasForeignKey(c => c.TeacherId) 
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.SetNull);
             
 
     }

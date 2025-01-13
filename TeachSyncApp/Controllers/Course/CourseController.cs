@@ -76,9 +76,7 @@ public class CourseController(ApplicationDbContext context) : Controller
         {
             return NotFound();
         }
-
-        var course = await context.Courses.Include(c => c.User).Where(c => c.Id == id).FirstOrDefaultAsync();
-
+        var course = await  context.Courses.Include(c => c.User).Where(c => c.Id == id).FirstOrDefaultAsync();
         if (course == null)
         {
             return NotFound();
@@ -88,7 +86,7 @@ public class CourseController(ApplicationDbContext context) : Controller
             context.Users.Where(u => u.RoleId == 3).Select(u => new
                 {
                     u.Id,
-                    FullName = u.Name + " " + u.Surname
+                    Fillname = u.Name + " " + u.Surname
                 }
             ),
             "Id", "FullName"
@@ -129,4 +127,40 @@ public class CourseController(ApplicationDbContext context) : Controller
             await context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet]
+    public async Task<IActionResult> Delete(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+        var course = await context.Courses.Include(c => c.User).Where(c => c.Id == id).FirstOrDefaultAsync();
+        if (course == null)
+        {
+            return NotFound();
+        }
+        return View(course);
     }
+
+    public async Task<IActionResult> DeleteConfirmed(int id)
+    {
+        var course = await context.Courses.FindAsync(id);
+        if (course == null)
+        {
+            return NotFound();
+        }
+
+        try
+        {
+            context.Courses.Remove(course);
+            await context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        catch (DbUpdateException)
+        {
+            ModelState.AddModelError("", "Course cannot be deleted");
+            return View(course);
+        }
+    }
+}
