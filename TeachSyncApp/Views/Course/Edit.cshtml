@@ -17,12 +17,15 @@
         <input asp-for="Description" class="form-control" />
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
-
-
-
-    <div class="form-group">
-        <label asp-for="TeacherId"></label>
-        <select asp-for="TeacherId" asp-items="ViewBag.Users" class="form-control"></select>
+    
+    <div class="form-group mt-3">
+        <label class="form-label">Teacher</label>
+        <select asp-for="TeacherId" class="form-control">
+            <option value="">Нет учителя</option>
+            @foreach (var item in ViewBag.Users){
+                <option value="@item.Value">@item.Text</option>
+            }
+        </select>
         <span asp-validation-for="TeacherId" class="text-danger"></span>
     </div>
     

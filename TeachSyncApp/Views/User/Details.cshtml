@@ -11,7 +11,7 @@
         
         <h5 class="card-subtitle mb-2 text-body-secondary">@Html.DisplayNameFor(model => model.Role): @Html.DisplayFor(model => model.Role.Name)</h5>
         
-        <a class="card-link" asp-action="Edit">Edit User</a>
+        <a class="card-link" asp-action="Edit" asp-route-id="@Model.Id">Edit User</a>
         <a class="card-link" asp-action="Index">Back to users</a>
     </div>
 </div>

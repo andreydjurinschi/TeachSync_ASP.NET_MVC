@@ -52,6 +52,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3JvdXBcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Calculator/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Group/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3JvdXBcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Calculator/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Group/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3JvdXBcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Calculator/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Group/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3JvdXBcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Calculator/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Group/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3JvdXBcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -70,6 +82,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Calculator/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Calculator/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Topic/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Calculator/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Topic/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Calculator/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/User/Create.cshtml]

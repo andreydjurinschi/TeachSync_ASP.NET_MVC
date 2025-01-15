@@ -115,8 +115,8 @@ public class GroupController : Controller
         return View(group);
     }
 
-    [HttpDelete]
-    public async Task<IActionResult> Delete(int id)
+    [HttpPost]
+    public async Task<IActionResult> DeleteConfirmed(int id)
     {
         var group = await _context.Groups.FirstOrDefaultAsync(g => g.Id == id);
         if (group == null)
@@ -128,11 +128,13 @@ public class GroupController : Controller
         {
             _context.Groups.Remove(group);
             await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
         catch (DbUpdateException )
         {
             ModelState.AddModelError("", "Can not delete group");
+            return View(group);
         }
-        return RedirectToAction(nameof(Index));
+        
     }
 }

@@ -44,8 +44,9 @@ public class CourseController(ApplicationDbContext context) : Controller
                     FullName = u.Name + " " + u.Surname
                 }
                 ),
-            "Id", "FullName"
+            "Id", "FullName", null
             );
+        
         return View();
     }
 
@@ -54,7 +55,15 @@ public class CourseController(ApplicationDbContext context) : Controller
     {
         if (!ModelState.IsValid)
         {
-            ViewBag.Users = new SelectList(context.Users, "Id", "Name");
+            ViewBag.Users = new SelectList(
+                context.Users.Where(u => u.RoleId == 3).Select(u => new
+                    {
+                        u.Id,
+                        FullName = u.Name + " " + u.Surname
+                    }
+                ),
+                "Id", "FullName", null
+            );
             return View(courseModel);
         }
 
@@ -86,10 +95,10 @@ public class CourseController(ApplicationDbContext context) : Controller
             context.Users.Where(u => u.RoleId == 3).Select(u => new
                 {
                     u.Id,
-                    Fillname = u.Name + " " + u.Surname
+                    FullName = u.Name + " " + u.Surname
                 }
             ),
-            "Id", "FullName"
+            "Id", "FullName", null
         );
         return View(new CourseViewModel
         {
@@ -112,7 +121,7 @@ public class CourseController(ApplicationDbContext context) : Controller
                             FullName = u.Name + " " + u.Surname
                         }
                     ),
-                    "Id", "FullName"
+                    "Id", "FullName", null
                 );
                 return View(courseModel);
             }

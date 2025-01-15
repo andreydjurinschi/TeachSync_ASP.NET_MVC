@@ -1,0 +1,36 @@
+@model TeachSyncApp.Models.Group
+
+<h1>Edit User</h1>
+
+<form asp-action="Edit" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Capacity"></label>
+        <input asp-for="Capacity" class="form-control" />
+        <span asp-validation-for="Capacity" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mt-3">
+        <label asp-for="Year" class="form-label"></label>
+        <div class="form-group mt-3">
+            <select name="Year" id="Year" class="form-control">
+                @for (int year = 2018; year <= 2025; year++)
+                {
+                    <option value="@year">@year</option>
+                }
+            </select>
+        </div>
+    </div>
+    
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

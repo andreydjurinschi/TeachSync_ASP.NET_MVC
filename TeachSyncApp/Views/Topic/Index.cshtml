@@ -1,0 +1,31 @@
+@model IEnumerable<Topic>
+
+
+<a asp-controller="Topic" asp-action="Create" class="p-2">Create new Group</a>
+<table class="table table-striped table-hover">
+    <thead>
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Name)</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+            </td>            
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

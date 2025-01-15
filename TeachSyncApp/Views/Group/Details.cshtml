@@ -1,0 +1,13 @@
+@model TeachSyncApp.Models.Group
+
+<h1>Details Page</h1>
+
+<div class="card" style="width: 30rem;">
+    <div class="card-body">
+        <h4 class="card-title" >@Html.DisplayFor(model => model.Name)</h4>
+        <h5 class="card-subtitle mb-2 text-body-secondary">@Html.DisplayNameFor(model => model.Capacity): @Html.DisplayFor(model => model.Capacity)</h5>
+        <h5 class="card-subtitle mb-2 text-body-secondary">@Html.DisplayNameFor(model => model.Year): @Html.DisplayFor(model => model.Year)</h5>
+        <a class="card-link" asp-action="Edit" asp-route-id="@Model.Id">Edit Course</a>
+        <a class="card-link" asp-action="Index">Back to courses</a>
+    </div>
+</div>

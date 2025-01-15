@@ -1,3 +1,5 @@
+using TeachSyncApp.Models.intermediateModels;
+
 namespace TeachSyncApp.Models;
 
 public class Courses
@@ -7,5 +9,7 @@ public class Courses
     public string Description { get; set; } = string.Empty;
     public int? TeacherId { get; set; }
     public User? User { get; set; }
+    
+    public ICollection<CourseTopic> CoursesTopics { get; set; } = new HashSet<CourseTopic>();
 
 }
