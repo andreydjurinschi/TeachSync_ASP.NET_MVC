@@ -1,20 +1,18 @@
-@model TeachSyncApp.Models.intermediateModels.CourseTopic
+@model dynamic
 
-<h1>Create Course</h1>
+<form asp-action="CreatePost" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" name="courseId" value="@ViewBag.CourseId" />
 
-<form asp-controller="CourseTopic" asp-action="Create" method="post">
     <div class="form-group">
-        <label asp-for="CourseId" class="form-label"></label>
-        <input asp-for="CourseId" class="form-control" />
-        <span asp-validation-for="CourseId" class="text-danger"></span>
+        <label for="topicId">Select Topic</label>
+        <select id="topicId" name="topicId" class="form-control">
+            @foreach (var topic in ViewBag.Topics)
+            {
+                <option value="@topic.Value">@topic.Text</option>
+            }
+        </select>
     </div>
-    <div class="form-group mt-3">
-        <label asp-for="TopicId" class="form-label"></label>
-        <input asp-for="TopicId" class="form-control" />
-        <span asp-validation-for="TopicId" class="text-danger"></span>
-    </div>
-    
-    <div class="mt-3">
-        <button type="submit" class="btn btn-primary">Save</button>
-    </div>
+
+    <button type="submit" class="btn btn-primary">Connect course with topic</button>
 </form>

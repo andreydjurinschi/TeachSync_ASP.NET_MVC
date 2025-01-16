@@ -11,5 +11,6 @@ public class Courses
     public User? User { get; set; }
     
     public ICollection<CourseTopic> CoursesTopics { get; set; } = new HashSet<CourseTopic>();
+    public ICollection<GroupCourse> GroupCourses { get; set; } = new HashSet<GroupCourse>();
 
 }

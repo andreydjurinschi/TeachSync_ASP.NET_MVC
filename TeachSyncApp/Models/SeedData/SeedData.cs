@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using TeachSyncApp.Context;
+using TeachSyncApp.Models.intermediateModels;
 
 namespace TeachSyncApp.Models.SeedData;
 
@@ -11,25 +12,18 @@ public class SeedData
                new ApplicationDbContext(
                    serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
         {
-            if (!context.Topics.Any())
+            if (!context.ClassRooms.Any())
             {
-                context.Topics.AddRange(
-                    new Topic()
-                    {
-                        Name = "Programming"
-                    },
-                    new Topic()
-                        {
-                           Name = "Mathematics" 
-                        },
-                    new Topic()
-                        {
-                          Name = "Design"  
-                        }
-                    );
-                context.SaveChanges();
+               context.ClassRooms.AddRange(
+                   new ClassRoom()
+                   {
+                       Name = "Classroom 1",
+                       Capacity = 25,
+                   }
+                   );
+               context.SaveChanges();
             }
-            
+
 
         }
     }

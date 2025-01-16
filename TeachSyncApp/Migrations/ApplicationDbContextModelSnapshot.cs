@@ -17,10 +17,30 @@ namespace TeachSyncApp.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.0")
+                .HasAnnotation("ProductVersion", "9.0.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("TeachSyncApp.Models.ClassRoom", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Capacity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ClassRooms", (string)null);
+                });
 
             modelBuilder.Entity("TeachSyncApp.Models.Courses", b =>
                 {
@@ -141,6 +161,52 @@ namespace TeachSyncApp.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
+            modelBuilder.Entity("TeachSyncApp.Models.intermediateModels.CourseTopic", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TopicId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("TopicId");
+
+                    b.ToTable("CoursesTopics");
+                });
+
+            modelBuilder.Entity("TeachSyncApp.Models.intermediateModels.GroupCourse", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GroupId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("GroupId");
+
+                    b.ToTable("GroupCourses");
+                });
+
             modelBuilder.Entity("TeachSyncApp.Models.Courses", b =>
                 {
                     b.HasOne("TeachSyncApp.Models.User", "User")
@@ -162,9 +228,64 @@ namespace TeachSyncApp.Migrations
                     b.Navigation("Role");
                 });
 
+            modelBuilder.Entity("TeachSyncApp.Models.intermediateModels.CourseTopic", b =>
+                {
+                    b.HasOne("TeachSyncApp.Models.Courses", "Course")
+                        .WithMany("CoursesTopics")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TeachSyncApp.Models.Topic", "Topic")
+                        .WithMany("CoursesTopics")
+                        .HasForeignKey("TopicId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("Topic");
+                });
+
+            modelBuilder.Entity("TeachSyncApp.Models.intermediateModels.GroupCourse", b =>
+                {
+                    b.HasOne("TeachSyncApp.Models.Courses", "Course")
+                        .WithMany("GroupCourses")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TeachSyncApp.Models.Group", "Group")
+                        .WithMany("GroupCourses")
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("Group");
+                });
+
+            modelBuilder.Entity("TeachSyncApp.Models.Courses", b =>
+                {
+                    b.Navigation("CoursesTopics");
+
+                    b.Navigation("GroupCourses");
+                });
+
+            modelBuilder.Entity("TeachSyncApp.Models.Group", b =>
+                {
+                    b.Navigation("GroupCourses");
+                });
+
             modelBuilder.Entity("TeachSyncApp.Models.Role", b =>
                 {
                     b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("TeachSyncApp.Models.Topic", b =>
+                {
+                    b.Navigation("CoursesTopics");
                 });
 
             modelBuilder.Entity("TeachSyncApp.Models.User", b =>

@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using TeachSyncApp.Context;
 using TeachSyncApp.Models;
 using TeachSyncApp.ViewModels;
@@ -14,25 +12,27 @@ public class CourseController(ApplicationDbContext context) : Controller
     [HttpGet]
     public async Task<IActionResult> Index()
     {
-        var courses = await context.Courses.Include(c => c.User).ToListAsync();
+        var courses = await context.Courses.Include(c => c.User).Include(c => c.CoursesTopics)!.ThenInclude(c=> c.Topic).ToListAsync();
 
         return View(courses); // передаем список Courses
     }
 
-    [HttpGet]
-    public async Task<IActionResult> Details(int? id)
+    public async Task<IActionResult> Details(int id)
     {
-        if (id == null)
-        {
-            return NotFound();
-        }
-        var course = await context.Courses.Include(c => c.User).Where(c => c.Id == id).FirstOrDefaultAsync();
+        var course = await context.Courses
+            .Include(c => c.User)
+            .Include(c => c.CoursesTopics)!
+            .ThenInclude(ct => ct.Topic)
+            .FirstOrDefaultAsync(c => c.Id == id);
+
         if (course == null)
         {
             return NotFound();
         }
-        return View(course);
+
+        return View(course);  
     }
+
 
     [HttpGet]
     public IActionResult Create()
@@ -172,4 +172,5 @@ public class CourseController(ApplicationDbContext context) : Controller
             return View(course);
         }
     }
+
 }

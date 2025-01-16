@@ -1,10 +1,11 @@
 @model TeachSyncApp.Models.Courses
+@using TeachSyncApp.Models.intermediateModels
 
 <h1>Details Page</h1>
 
 <div class="card" style="width: 30rem;">
     <div class="card-body">
-        <h4 class="card-title" >@Html.DisplayFor(model => model.Name)</h4>
+        <h4 class="card-title">@Html.DisplayFor(model => model.Name)</h4>
         <h5 class="card-subtitle mb-2 text-body-secondary">@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)</h5>
         
         <h5 class="card-subtitle mb-2 text-body-secondary">@Html.DisplayNameFor(model => model.TeacherId): 
@@ -12,7 +13,27 @@
             {
                 <span>No teacher</span>
             }
-            @Html.DisplayFor(model => model.User.Name) @Html.DisplayFor(model => model.User.Surname)</h5>
+            else
+            {
+                @Html.DisplayFor(model => model.User.Name) @Html.DisplayFor(model => model.User.Surname)
+            }
+        </h5>
+        
+        <h5 class="card-subtitle mb-2 text-body-secondary">@Html.DisplayNameFor(model => model.CoursesTopics):
+            @if (Model.CoursesTopics.Any())
+            {
+                <ul>
+                    @foreach (var courseTopic in Model.CoursesTopics)
+                    {
+                        <li>@courseTopic.Topic.Name</li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p>No topics assigned</p>
+            }
+        </h5>
         
         <a class="card-link" asp-action="Edit" asp-route-id="@Model.Id">Edit Course</a>
         <a class="card-link" asp-action="Index">Back to courses</a>

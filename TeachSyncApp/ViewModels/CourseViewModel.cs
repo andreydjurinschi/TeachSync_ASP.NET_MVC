@@ -6,4 +6,6 @@ public class CourseViewModel
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public int? TeacherId { get; set; }
+    
+    public int? TopicId { get; set; }
 }
