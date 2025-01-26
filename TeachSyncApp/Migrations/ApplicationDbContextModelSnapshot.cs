@@ -91,6 +91,40 @@ namespace TeachSyncApp.Migrations
                     b.ToTable("Groups", (string)null);
                 });
 
+            modelBuilder.Entity("TeachSyncApp.Models.Replacement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("ApprovedById")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CourseTopicId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("RequestRime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ScheduleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApprovedById");
+
+                    b.HasIndex("CourseTopicId");
+
+                    b.HasIndex("ScheduleId");
+
+                    b.ToTable("Replacements");
+                });
+
             modelBuilder.Entity("TeachSyncApp.Models.Role", b =>
                 {
                     b.Property<int>("Id")
@@ -106,6 +140,45 @@ namespace TeachSyncApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles", (string)null);
+                });
+
+            modelBuilder.Entity("TeachSyncApp.Models.Schedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ClassRoomId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DayOfWeekId")
+                        .HasColumnType("int");
+
+                    b.Property<TimeSpan>("EndTime")
+                        .HasColumnType("time");
+
+                    b.Property<int>("GroupCourseId")
+                        .HasColumnType("int");
+
+                    b.Property<TimeSpan>("StartTime")
+                        .HasColumnType("time");
+
+                    b.Property<int>("TeacherId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClassRoomId");
+
+                    b.HasIndex("DayOfWeekId");
+
+                    b.HasIndex("GroupCourseId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("Schedules");
                 });
 
             modelBuilder.Entity("TeachSyncApp.Models.Topic", b =>
@@ -159,6 +232,23 @@ namespace TeachSyncApp.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("Users", (string)null);
+                });
+
+            modelBuilder.Entity("TeachSyncApp.Models.WeekDays", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DaysOfWeek");
                 });
 
             modelBuilder.Entity("TeachSyncApp.Models.intermediateModels.CourseTopic", b =>
@@ -217,6 +307,67 @@ namespace TeachSyncApp.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("TeachSyncApp.Models.Replacement", b =>
+                {
+                    b.HasOne("TeachSyncApp.Models.User", "TeacherApprove")
+                        .WithMany("Replacements")
+                        .HasForeignKey("ApprovedById")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TeachSyncApp.Models.intermediateModels.CourseTopic", "CourseTopic")
+                        .WithMany("Replacements")
+                        .HasForeignKey("CourseTopicId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TeachSyncApp.Models.Schedule", "Schedule")
+                        .WithMany("Replacements")
+                        .HasForeignKey("ScheduleId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("CourseTopic");
+
+                    b.Navigation("Schedule");
+
+                    b.Navigation("TeacherApprove");
+                });
+
+            modelBuilder.Entity("TeachSyncApp.Models.Schedule", b =>
+                {
+                    b.HasOne("TeachSyncApp.Models.ClassRoom", "ClassRoom")
+                        .WithMany("Schedules")
+                        .HasForeignKey("ClassRoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TeachSyncApp.Models.WeekDays", "WeekDays")
+                        .WithMany("Schedules")
+                        .HasForeignKey("DayOfWeekId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TeachSyncApp.Models.intermediateModels.GroupCourse", "GroupCourse")
+                        .WithMany("Schedules")
+                        .HasForeignKey("GroupCourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TeachSyncApp.Models.User", "Teacher")
+                        .WithMany("Schedules")
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ClassRoom");
+
+                    b.Navigation("GroupCourse");
+
+                    b.Navigation("Teacher");
+
+                    b.Navigation("WeekDays");
+                });
+
             modelBuilder.Entity("TeachSyncApp.Models.User", b =>
                 {
                     b.HasOne("TeachSyncApp.Models.Role", "Role")
@@ -266,6 +417,11 @@ namespace TeachSyncApp.Migrations
                     b.Navigation("Group");
                 });
 
+            modelBuilder.Entity("TeachSyncApp.Models.ClassRoom", b =>
+                {
+                    b.Navigation("Schedules");
+                });
+
             modelBuilder.Entity("TeachSyncApp.Models.Courses", b =>
                 {
                     b.Navigation("CoursesTopics");
@@ -283,6 +439,11 @@ namespace TeachSyncApp.Migrations
                     b.Navigation("Users");
                 });
 
+            modelBuilder.Entity("TeachSyncApp.Models.Schedule", b =>
+                {
+                    b.Navigation("Replacements");
+                });
+
             modelBuilder.Entity("TeachSyncApp.Models.Topic", b =>
                 {
                     b.Navigation("CoursesTopics");
@@ -291,6 +452,25 @@ namespace TeachSyncApp.Migrations
             modelBuilder.Entity("TeachSyncApp.Models.User", b =>
                 {
                     b.Navigation("Courses");
+
+                    b.Navigation("Replacements");
+
+                    b.Navigation("Schedules");
+                });
+
+            modelBuilder.Entity("TeachSyncApp.Models.WeekDays", b =>
+                {
+                    b.Navigation("Schedules");
+                });
+
+            modelBuilder.Entity("TeachSyncApp.Models.intermediateModels.CourseTopic", b =>
+                {
+                    b.Navigation("Replacements");
+                });
+
+            modelBuilder.Entity("TeachSyncApp.Models.intermediateModels.GroupCourse", b =>
+                {
+                    b.Navigation("Schedules");
                 });
 #pragma warning restore 612, 618
         }

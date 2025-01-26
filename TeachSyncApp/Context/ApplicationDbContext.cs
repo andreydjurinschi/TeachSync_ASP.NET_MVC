@@ -19,6 +19,10 @@ public class ApplicationDbContext : DbContext
     public DbSet<CourseTopic> CoursesTopics { get; set; }
     public DbSet<ClassRoom> ClassRooms { get; set; }
     public DbSet<GroupCourse> GroupCourses { get; set; }
+    public DbSet<WeekDays> DaysOfWeek { get; set; }
+    public DbSet<Schedule> Schedules { get; set; }
+    
+    public DbSet<Replacement> Replacements { get; set; }
     
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -38,6 +42,48 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<GroupCourse>().HasKey(cc => cc.Id);
         modelBuilder.Entity<GroupCourse>().HasOne(cc => cc.Group).WithMany(c => c.GroupCourses).HasForeignKey(cc => cc.GroupId);
         modelBuilder.Entity<GroupCourse>().HasOne(cc => cc.Course).WithMany(c => c.GroupCourses).HasForeignKey(cc => cc.CourseId);
+        
+        modelBuilder.Entity<Schedule>().HasKey(s => s.Id);
+        
+        modelBuilder.Entity<Schedule>().HasOne(s => s.Teacher)
+            .WithMany(t => t.Schedules)
+            .HasForeignKey(s => s.TeacherId)
+            .OnDelete(DeleteBehavior.Cascade);
+        
+        modelBuilder.Entity<Schedule>().HasOne(s=> s.ClassRoom)
+            .WithMany(classRoom => classRoom.Schedules)
+            .HasForeignKey(s=> s.ClassRoomId)
+            .OnDelete(DeleteBehavior.Cascade);    
+        
+        modelBuilder.Entity<Schedule>().HasOne(s=> s.GroupCourse)
+            .WithMany(gc => gc.Schedules)
+            .HasForeignKey(s=> s.GroupCourseId)
+            .OnDelete(DeleteBehavior.Cascade);
+        
+        modelBuilder.Entity<Schedule>().HasOne(s=> s.WeekDays)
+            .WithMany(wd => wd.Schedules)
+            .HasForeignKey(s=> s.DayOfWeekId)
+            .OnDelete(DeleteBehavior.Cascade);
+        
+        modelBuilder.Entity<Replacement>().HasKey(rr => rr.Id);
+        modelBuilder.Entity<Replacement>().Property(r => r.Status).HasConversion<int>(); // status
+        
+        modelBuilder.Entity<Replacement>().HasOne(rr => rr.TeacherApprove)
+            .WithMany(teacher => teacher.Replacements)
+            .HasForeignKey(r => r.ApprovedById)
+            .OnDelete(DeleteBehavior.Cascade); // teacher
+
+        modelBuilder.Entity<Replacement>().HasOne(rr => rr.Schedule)
+            .WithMany(s=> s.Replacements)
+            .HasForeignKey(r => r.ScheduleId)
+            .OnDelete(DeleteBehavior.Restrict); // schedule
+        
+        modelBuilder.Entity<Replacement>().HasOne(r => r.CourseTopic)
+            .WithMany(c => c.Replacements)
+            .HasForeignKey(r => r.CourseTopicId)
+            .OnDelete(DeleteBehavior.Cascade); // courseTopic
+
+
     }
 
 }

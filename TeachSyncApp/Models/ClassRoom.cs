@@ -9,5 +9,6 @@ public class ClassRoom
     public string Name { get; set; } = string.Empty;
     [Required(ErrorMessage = "Please enter the capacity of the room")]
     public int Capacity { get; set; }
+    public ICollection<Schedule> Schedules { get; set; } = new List<Schedule>();
     
 }

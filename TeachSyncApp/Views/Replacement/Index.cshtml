@@ -1,0 +1,47 @@
+@model IEnumerable<Replacement>
+
+<a asp-controller="Replacement" asp-action="Create">Request for replacement</a>
+<table class="table table-striped table-hover">
+    <thead>
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.RequestRime)</th>
+        <th>@Html.DisplayNameFor(model => model.CourseTopic)</th>
+        <th>@Html.DisplayNameFor(model => model.Schedule)</th>
+        <th>@Html.DisplayNameFor(model => model.TeacherApprove)</th>
+        <th>@Html.DisplayNameFor(model => model.Status)</th>
+    </tr>
+    <tr></tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequestRime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseTopic.Course.Name)
+                &
+                @Html.DisplayFor(modelItem => item.CourseTopic.Topic.Name)
+            </td>
+            <td>
+                <a asp-controller="Schedule" asp-action="Edit" asp-route-id="@item.ScheduleId">Check Schedule</a>
+            </td>
+            <td>
+                @if (item.ApprovedById == null)
+                {
+                    <p>Not approved</p>
+                }
+                else
+                {
+                    <p>@item.TeacherApprove?.Name</p>
+                    <p>@item.TeacherApprove?.Surname</p>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

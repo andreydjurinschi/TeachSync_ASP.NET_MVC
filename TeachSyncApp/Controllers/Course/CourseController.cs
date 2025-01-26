@@ -12,7 +12,7 @@ public class CourseController(ApplicationDbContext context) : Controller
     [HttpGet]
     public async Task<IActionResult> Index()
     {
-        var courses = await context.Courses.Include(c => c.User).Include(c => c.CoursesTopics)!.ThenInclude(c=> c.Topic).ToListAsync();
+        var courses = await context.Courses.Include(c => c.User).Include(c => c.CoursesTopics).ThenInclude(c=> c.Topic).ToListAsync();
 
         return View(courses); // передаем список Courses
     }
@@ -21,7 +21,7 @@ public class CourseController(ApplicationDbContext context) : Controller
     {
         var course = await context.Courses
             .Include(c => c.User)
-            .Include(c => c.CoursesTopics)!
+            .Include(c => c.CoursesTopics)
             .ThenInclude(ct => ct.Topic)
             .FirstOrDefaultAsync(c => c.Id == id);
 
@@ -169,7 +169,7 @@ public class CourseController(ApplicationDbContext context) : Controller
         catch (DbUpdateException)
         {
             ModelState.AddModelError("", "Course cannot be deleted");
-            return View(course);
+            return RedirectToAction("Index");
         }
     }
 

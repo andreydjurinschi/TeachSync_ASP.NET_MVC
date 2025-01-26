@@ -1,0 +1,17 @@
+@model TeachSyncApp.Models.intermediateModels.GroupCourse
+
+<form asp-action="CreatePost" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" name="groupId" value="@ViewBag.GroupId">
+    
+    <div class="form-group">
+        <label for="courseId">Select Course</label>
+        <select name="courseId" id="courseId" class="form-control">
+            @foreach (var course in ViewBag.Courses)
+            {
+                <option value="@course.Value">@course.Text</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Connect group with course</button>
+</form>

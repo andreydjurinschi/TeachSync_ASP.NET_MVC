@@ -1,5 +1,5 @@
 @model IEnumerable<Group>
-
+@using TeachSyncApp.Models.intermediateModels
 
 <a asp-controller="Group" asp-action="Create" class="p-2">Create new Group</a>
 <table class="table table-striped table-hover">
@@ -8,6 +8,7 @@
         <th>@Html.DisplayNameFor(model => model.Name)</th>
         <th>@Html.DisplayNameFor(model => model.Year)</th>
         <th>@Html.DisplayNameFor(model => model.Capacity)</th>
+        <th>@Html.DisplayNameFor(model => model.GroupCourses)</th>
         <th></th>
     </tr>
     </thead>
@@ -25,7 +26,25 @@
                 @Html.DisplayFor(modelItem => item.Capacity)
             </td>
             <td>
+                @if (item.GroupCourses.Any())
+                {
+                    <ul>
+                        @foreach (var courseTopic in item.GroupCourses)
+                        {
+                            <li>@courseTopic.Course.Name</li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p>No courses assigned</p>
+                }
+            </td>
+            <td>
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+            </td>
+            <td>
+                <a asp-controller="GroupCourse" asp-action="CreateGet" asp-route-id="@item.Id">Add course</a>
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>

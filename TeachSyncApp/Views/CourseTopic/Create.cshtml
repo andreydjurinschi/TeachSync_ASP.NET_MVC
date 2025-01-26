@@ -1,4 +1,4 @@
-@model dynamic
+@model TeachSyncApp.Models.intermediateModels.CourseTopic
 
 <form asp-action="CreatePost" method="post">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -13,6 +13,8 @@
             }
         </select>
     </div>
+    
+    
 
     <button type="submit" class="btn btn-primary">Connect course with topic</button>
 </form>

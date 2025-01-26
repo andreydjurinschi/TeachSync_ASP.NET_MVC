@@ -11,4 +11,6 @@ public class CourseTopic
     [Required(ErrorMessage = "Please enter a topic name")]
     public int TopicId { get; set; }
     public Topic Topic { get; set; } = null!;
+    
+    public ICollection<Replacement> Replacements { get; set; }
 }

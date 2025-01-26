@@ -50,7 +50,7 @@ public class GroupCourseController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(int courseId, int groupId)
+    public async Task<IActionResult> CreatePost(int courseId, int groupId)
     {
         if (!ModelState.IsValid)
         {
@@ -76,7 +76,7 @@ public class GroupCourseController : Controller
         
         _context.Add(groupCourse);
         await _context.SaveChangesAsync();
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction("Index", "Group");
     }
 
     [HttpGet]
@@ -102,7 +102,25 @@ public class GroupCourseController : Controller
             ModelState.AddModelError("", "This group already have this course");
             return View(groupCourse);
         }
-        bool exists = await _context.GroupCourses.AnyAsync(c => c.GroupId == groupId && c.CourseId == courseId);
+        bool exists = await _context.GroupCourses.AnyAsync(
+            gc => gc.GroupId == groupCourse.GroupId && gc.CourseId == groupCourse.CourseId && gc.Id != id
+            );
+        if (exists)
+        {
+            ModelState.AddModelError(" ", "This group already have this course");
+        }
+
+        var groupCoursetoUpdate = await _context.GroupCourses.FirstOrDefaultAsync(gc => gc.Id == id);
+        if (groupCoursetoUpdate == null)
+        {
+            return NotFound();
+        }
+        groupCourse.GroupId = groupCourse.GroupId;
+        groupCourse.CourseId = groupCourse.CourseId;
+        _context.Update(groupCourse);
+        await _context.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
+    }
 
 
 }

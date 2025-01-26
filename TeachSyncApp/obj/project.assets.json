@@ -8332,23 +8332,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Calculator\\.nuget\\packages\\": {},
+    "C:\\Users\\Work\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Calculator\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\TeachSyncApp.csproj",
+      "projectUniqueName": "C:\\Users\\Work\\RiderProjects\\Teza\\TeachSyncApp\\TeachSyncApp.csproj",
       "projectName": "TeachSyncApp",
-      "projectPath": "C:\\Users\\Calculator\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\TeachSyncApp.csproj",
-      "packagesPath": "C:\\Users\\Calculator\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Calculator\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\obj\\",
+      "projectPath": "C:\\Users\\Work\\RiderProjects\\Teza\\TeachSyncApp\\TeachSyncApp.csproj",
+      "packagesPath": "C:\\Users\\Work\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Work\\RiderProjects\\Teza\\TeachSyncApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Calculator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Work\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -8357,7 +8357,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -8424,7 +8423,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

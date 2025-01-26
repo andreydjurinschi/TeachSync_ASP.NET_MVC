@@ -18,7 +18,7 @@ public class GroupController : Controller
     public async Task<IActionResult> Index()
     {
         
-        var groups = await _context.Groups.ToListAsync();
+        var groups = await _context.Groups.Include(g=> g.GroupCourses).ThenInclude(c=> c.Course).ToListAsync();
         return View(groups);
     }
     
@@ -133,7 +133,7 @@ public class GroupController : Controller
         catch (DbUpdateException )
         {
             ModelState.AddModelError("", "Can not delete group");
-            return View(group);
+            return RedirectToAction("Delete", "Group");
         }
         
     }

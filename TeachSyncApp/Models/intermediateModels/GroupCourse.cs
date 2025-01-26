@@ -8,11 +8,11 @@ public class GroupCourse
     [Required(ErrorMessage = "Please enter a course name")]
     public int GroupId { get; set; }
 
-    public Group Group { get; set; }
+    public Group Group { get; set; } 
     [Required(ErrorMessage = "Please enter a course number")]
     public int CourseId { get; set; }
 
     public Courses Course { get; set; }
-
+    public ICollection<Schedule> Schedules { get; set; } = new List<Schedule>();
 
 }

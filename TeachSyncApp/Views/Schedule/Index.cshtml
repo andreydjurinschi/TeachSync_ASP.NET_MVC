@@ -1,0 +1,29 @@
+@model IEnumerable<Schedule>
+
+<a asp-controller="Schedule" asp-action="Create" class="btn btn-primary mb-3">Create Schedule</a>
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card" style="width: 100%;">
+                        <div class="card-body">
+                            <h5 class="card-title">Teacher: @Html.DisplayFor(modelItem => item.Teacher.Name)
+                                @Html.DisplayFor(modelItem => item.Teacher.Surname)</h5>
+                            <h5 class="card-title">Group: @Html.DisplayFor(modelItem => item.GroupCourse.Group.Name)</h5>
+                            <h5 class="card-title">Course: @Html.DisplayFor(modelItem => item.GroupCourse.Course.Name)</h5>
+                            <h5 class="card-title">Start: @Html.DisplayFor(modelItem => item.StartTime)</h5>
+                            <h5 class="card-title">End: @Html.DisplayFor(modelItem => item.EndTime)</h5>
+                            <h5 class="card-title">Classroom: @Html.DisplayFor(modelItem => item.ClassRoom.Name)</h5>
+                            <h5 class="card-title">Week: @Html.DisplayFor(modelItem => item.WeekDays.Name)</h5>
+                            
+                            <a class="card-link" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            <a class="card-link" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

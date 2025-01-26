@@ -12,15 +12,15 @@ using TeachSyncApp.Context;
 namespace TeachSyncApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250116161846_Classroom created")]
-    partial class Classroomcreated
+    [Migration("20250119135134_InitialCreateOnLaptop")]
+    partial class InitialCreateOnLaptop
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.0")
+                .HasAnnotation("ProductVersion", "9.0.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -187,6 +187,29 @@ namespace TeachSyncApp.Migrations
                     b.ToTable("CoursesTopics");
                 });
 
+            modelBuilder.Entity("TeachSyncApp.Models.intermediateModels.GroupCourse", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GroupId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("GroupId");
+
+                    b.ToTable("GroupCourses");
+                });
+
             modelBuilder.Entity("TeachSyncApp.Models.Courses", b =>
                 {
                     b.HasOne("TeachSyncApp.Models.User", "User")
@@ -227,9 +250,35 @@ namespace TeachSyncApp.Migrations
                     b.Navigation("Topic");
                 });
 
+            modelBuilder.Entity("TeachSyncApp.Models.intermediateModels.GroupCourse", b =>
+                {
+                    b.HasOne("TeachSyncApp.Models.Courses", "Course")
+                        .WithMany("GroupCourses")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TeachSyncApp.Models.Group", "Group")
+                        .WithMany("GroupCourses")
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("Group");
+                });
+
             modelBuilder.Entity("TeachSyncApp.Models.Courses", b =>
                 {
                     b.Navigation("CoursesTopics");
+
+                    b.Navigation("GroupCourses");
+                });
+
+            modelBuilder.Entity("TeachSyncApp.Models.Group", b =>
+                {
+                    b.Navigation("GroupCourses");
                 });
 
             modelBuilder.Entity("TeachSyncApp.Models.Role", b =>

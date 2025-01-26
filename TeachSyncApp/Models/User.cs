@@ -28,4 +28,6 @@ public class User
     public int RoleId { get; set; }
     public Role Role { get; set; } = null!;// 1 роль у 1 пользователя
     public ICollection<Courses> Courses { get; set; } = new List<Courses>();
+    public ICollection<Schedule> Schedules { get; set; } = new List<Schedule>();
+    public ICollection<Replacement> Replacements { get; set; } = new HashSet<Replacement>();
 }
