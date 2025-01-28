@@ -104,8 +104,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Replacement/Approve.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwbGFjZW1lbnRcQXBwcm92ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Replacement/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwbGFjZW1lbnRcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Replacement/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwbGFjZW1lbnRcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Replacement/Index.cshtml]

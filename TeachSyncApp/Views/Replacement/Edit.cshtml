@@ -1,18 +1,14 @@
-@model TModel
+@model TeachSyncApp.ViewModels.ReplacementViewModel
 
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>title</title>
-</head>
-<body>
-<div>
-      
-</div>
-</body>
-</html>
+<form asp-action="Edit" method="post">
+        <label class="form-label">Teacher to approve</label>
+        <select asp-for="ApprovedById" class="form-control">
+            @foreach (var item in ViewBag.Teachers){
+                <option value="@item.Value">@item.Text</option>
+            }
+        </select>
+        <span asp-validation-for="ApprovedById" class="text-danger"></span>
+        
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Back to schedule</a>
+</form>

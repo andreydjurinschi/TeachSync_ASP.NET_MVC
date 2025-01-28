@@ -26,7 +26,7 @@ public class ReplacementController : Controller
         );
         ViewBag.Schedules = new SelectList(
             _context.Schedules.Select(
-                s => new { s.Id, Name = s.GroupCourse.Group.Name + " " + s.GroupCourse.Course.Name }
+                s => new { s.Id, Name = "Group: " + s.GroupCourse.Group.Name + "; Course: " + s.GroupCourse.Course.Name }
             ),
             "Id", "Name"
         );
@@ -42,6 +42,9 @@ public class ReplacementController : Controller
     {
         var replacements = await _context.Replacements
             .Include(r => r.Schedule)
+            .ThenInclude(s => s.Teacher)
+            .Include(r => r.Schedule)
+            .ThenInclude(s => s.WeekDays)
             .Include(r => r.TeacherApprove)
             .Include(r => r.CourseTopic)
             .ThenInclude(c => c.Topic)
@@ -103,7 +106,7 @@ public class ReplacementController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, ReplacementViewModel replacementViewModel)
+    public async Task<IActionResult> Edit(int id,int teacherId, ReplacementViewModel replacementViewModel)
     {
         if (!ModelState.IsValid)
         {
@@ -121,9 +124,9 @@ public class ReplacementController : Controller
         if (replacementToEdit == null)
         {
             ViewBags();
-            return View(replacementToEdit);
+            return NotFound();
         }
-        replacementToEdit.ApprovedById = replacementViewModel.ApprovedById;
+        replacementToEdit.ApprovedById = teacherId;
         replacementToEdit.CourseTopicId = replacementViewModel.CourseTopicId;
         replacementToEdit.RequestRime = DateTime.Now;
         replacementToEdit.ScheduleId = replacementViewModel.ScheduleId;
@@ -141,7 +144,7 @@ public class ReplacementController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Create()
+    public IActionResult Create()
     {
         ViewBags();
         return View();
@@ -168,5 +171,57 @@ public class ReplacementController : Controller
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
     }
+
+    [HttpGet]
+    public async Task<IActionResult> Approve(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+        var replacement = await _context.Replacements.Include(r => r.Schedule).FirstOrDefaultAsync(r => r.Id == id);
+        if (replacement == null)
+        {
+            return NotFound();
+        }
+        var startTime = replacement.Schedule.StartTime;
+        var endTime = replacement.Schedule.EndTime;
+        var availableTeachers = await _context.Users.Where(u => u.RoleId == 3)
+            .Where(u => !u.Schedules.Any(s=> s.StartTime <= endTime && s.EndTime >= startTime)).ToListAsync();
+        if (availableTeachers.Count == 0)
+        {
+            ModelState.AddModelError("", "No teachers are available to approve");
+        }
+        ViewBag.AvailableTeachers = availableTeachers;
+        return View(replacement);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Approve(int replacementId, int teacherId)
+    {
+        var replacement = await _context.Replacements.Include(r => r.Schedule).FirstOrDefaultAsync(r => r.Id == replacementId);
+        if (replacement == null)
+        {
+            return NotFound();
+        }
+        var startTime = replacement.Schedule.StartTime;
+        var endTime = replacement.Schedule.EndTime;
+        
+        var teacher = await _context.Users.Include(u => u.Schedules).FirstOrDefaultAsync(u => u.Id == teacherId);
+        if (teacher == null || teacher.Schedules.Any(s => s.StartTime <= endTime && s.EndTime >= startTime))
+        {
+            ModelState.AddModelError("", "No teachers are available to approve"); 
+            var availableTeachers = await _context.Users.Where(u => u.RoleId == 3)
+                .Where(u => !u.Schedules.Any(s=> s.StartTime <= endTime && s.EndTime >= startTime)).ToListAsync();
+            ViewBag.AvailableTeachers = availableTeachers;
+            return View(replacement);
+        }
+        
+        replacement.ApprovedById = teacherId;
+        replacement.Status = Status.Approved;
+        await _context.SaveChangesAsync();
+        return RedirectToAction("Index");
+    }
+
 
 }

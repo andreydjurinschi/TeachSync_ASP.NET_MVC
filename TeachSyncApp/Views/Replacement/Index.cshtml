@@ -5,7 +5,7 @@
     <thead>
     <tr>
         <th>@Html.DisplayNameFor(model => model.RequestRime)</th>
-        <th>@Html.DisplayNameFor(model => model.CourseTopic)</th>
+        <th>Teacher Sent</th>
         <th>@Html.DisplayNameFor(model => model.Schedule)</th>
         <th>@Html.DisplayNameFor(model => model.TeacherApprove)</th>
         <th>@Html.DisplayNameFor(model => model.Status)</th>
@@ -20,17 +20,28 @@
                 @Html.DisplayFor(modelItem => item.RequestRime)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CourseTopic.Course.Name)
-                &
-                @Html.DisplayFor(modelItem => item.CourseTopic.Topic.Name)
+                @Html.DisplayFor(modelItem => item.Schedule.Teacher.Name)
+                @Html.DisplayFor(modelItem => item.Schedule.Teacher.Surname)
             </td>
             <td>
-                <a asp-controller="Schedule" asp-action="Edit" asp-route-id="@item.ScheduleId">Check Schedule</a>
+                <div class="dropdown">
+                    <a class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        Schedule
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><span class="dropdown-item"><b>Teacher:</b> @item.Schedule.Teacher.Name @item.Schedule.Teacher.Surname</span></li>
+                        <li><span class="dropdown-item"><b>Course:</b> @item.CourseTopic.Course.Name</span></li>
+                        <li><span class="dropdown-item"><b>Topics:</b>@item.CourseTopic.Topic.Name</span></li>
+                        <li><span class="dropdown-item"><b>Time:</b> @item.Schedule.StartTime - @item.Schedule.EndTime</span></li>
+                        <li><span class="dropdown-item"><b>Day:</b> @item.Schedule.WeekDays.Name</span></li>
+                    </ul>
+                </div>
             </td>
             <td>
                 @if (item.ApprovedById == null)
                 {
-                    <p>Not approved</p>
+                    <span>Not approved</span>
+                    <a class="btn btn-primary" asp-controller="Replacement" asp-action="Approve" asp-route-id="@item.Id">Approve</a>
                 }
                 else
                 {

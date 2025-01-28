@@ -1,18 +1,16 @@
-@model TModel
+@model TeachSyncApp.Models.Replacement
 
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>title</title>
-</head>
-<body>
-<div>
-      
-</div>
-</body>
-</html>
+<form asp-action="Approve" method="post">
+    <input type="hidden" name="replacementId" value="@Model.Id" />
+    <div>
+        <label for="teacherId">Select Teacher:</label>
+        <select id="teacherId" name="teacherId">
+            <option value="">-- Select a Teacher --</option>
+            @foreach (var teacher in ViewBag.AvailableTeachers)
+            {
+                <option value="@teacher.Id">@teacher.Name @teacher.Surname</option>
+            }
+        </select>
+    </div>
+    <button type="submit">Approve</button>
+</form>

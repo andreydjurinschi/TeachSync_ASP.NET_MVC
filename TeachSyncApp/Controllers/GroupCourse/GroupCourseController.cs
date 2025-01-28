@@ -38,7 +38,7 @@ public class GroupCourseController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> CreateGet(int? id)
+    public IActionResult CreateGet(int? id)
     {
         if (id == null)
         {

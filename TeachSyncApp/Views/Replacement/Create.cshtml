@@ -1,6 +1,6 @@
 @model TeachSyncApp.ViewModels.ReplacementViewModel
 
-<h1>Create Schedule</h1>
+<h1>Create Request</h1>
 
 <form asp-action="Create" method="post">
     <div class="form-group mt-3">
@@ -14,7 +14,7 @@
         <span asp-validation-for="ScheduleId" class="text-danger"></span>
     </div>
     <div class="form-group mt-3">
-        <label class="form-label">CourseTopics</label>
+        <label class="form-label">Topic</label>
         <select asp-for="CourseTopicId" class="form-control">
             @foreach (var item in ViewBag.CourseTopics){
                 <option value="@item.Value">@item.Text</option>

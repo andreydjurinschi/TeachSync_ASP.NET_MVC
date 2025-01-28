@@ -47,7 +47,8 @@ public class ScheduleController : Controller
             .Include(s => s.GroupCourse)
             .ThenInclude(g => g.Group)
             .Include(s => s.GroupCourse)
-            .ThenInclude(g => g.Course);
+            .ThenInclude(g => g.Course)
+            .Include(s => s.WeekDays);
         return View(await schedule.ToListAsync());
     }
 

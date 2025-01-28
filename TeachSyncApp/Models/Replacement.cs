@@ -9,7 +9,8 @@ public class Replacement
     public int Id { get; set; }
     [Required]
     public int ScheduleId { get; set; }
-    public Schedule Schedule { get; set; }
+
+    public Schedule Schedule { get; set; } 
     [Required]
     public int CourseTopicId { get; set; }
     public CourseTopic CourseTopic { get; set; }
