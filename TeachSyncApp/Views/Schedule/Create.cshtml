@@ -3,54 +3,74 @@
 <h1>Create Schedule</h1>
 
 <form asp-action="Create" method="post">
-    <div class="form-group">
-        <label asp-for="StartTime" class="form-label"></label>
-        <input asp-for="StartTime" class="form-control" type="time"/>
-        <span asp-validation-for="StartTime" class="text-danger"></span>
-    </div>
-    <div class="form-group mt-3">
-        <label asp-for="EndTime" class="form-label"></label>
-        <input asp-for="EndTime" class="form-control" type="time"/>
-        <span asp-validation-for="EndTime" class="text-danger"></span>
-    </div>
-    <div class="form-group mt-3">
-        <label class="form-label">Teacher</label>
-        <select asp-for="TeacherId" class="form-control">
-            @foreach (var item in ViewBag.Users){
-                <option value="@item.Value">@item.Text</option>
-            }
+    @Html.AntiForgeryToken()
+    @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+    {
+        <div class="alert alert-danger">@error.ErrorMessage</div>
+    }
 
+    <div class="form-group">
+        <label class="control-label">Day of Week</label>
+        <select name="DayOfWeekId" class="form-control">
+            @foreach (var day in Model.DayOfWeekList)
+            {
+                <option value="@day.Id">@day.Name</option>
+            }
+            
+        </select>
+        <span asp-validation-for="DayOfWeekId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Teacher</label>
+        <select name="TeacherId" class="form-control">
+            @foreach (var teacher in Model.TeacherList)
+            {
+                <option value="@teacher.Id">@teacher.Name</option>
+            }
         </select>
         <span asp-validation-for="TeacherId" class="text-danger"></span>
     </div>
-    <div class="form-group mt-3">
-        <label class="form-label">Classroom</label>
-        <select asp-for="ClassRoomId" class="form-control">
-            @foreach (var item in ViewBag.ClassRoom){
-                <option value="@item.Value">@item.Text</option>
+
+    <div class="form-group">
+        <label class="control-label">Classroom</label>
+        <select name="ClassRoomId" class="form-control">
+            @foreach (var classroom in Model.ClassRoomList)
+            {
+                <option value="@classroom.Id">@classroom.Name</option>
             }
         </select>
         <span asp-validation-for="ClassRoomId" class="text-danger"></span>
     </div>
-    <div class="form-group mt-3">
-        <label class="form-label">Day of week</label>
-        <select asp-for="DayOfWeekId" class="form-control">
-            @foreach (var item in ViewBag.WeekDay){
-                <option value="@item.Value">@item.Text</option>
-            }
-        </select>
-        <span asp-validation-for="DayOfWeekId" class="text-danger"></span>
-    </div>
-    <div class="form-group mt-3">
-        <label class="form-label">GroupCourse</label>
-        <select asp-for="GroupCourseId" class="form-control">
-            @foreach (var item in ViewBag.GroupCourse){
-                <option value="@item.Value">@item.Text</option>
+
+    <div class="form-group">
+        <label class="control-label">Group-Course</label>
+        <select name="GroupCourseId" class="form-control">
+            @foreach (var groupCourse in Model.GroupCourseList)
+            {
+                <option value="@groupCourse.Id">@groupCourse.Group.Name - @groupCourse.Course.Name</option>
             }
         </select>
         <span asp-validation-for="GroupCourseId" class="text-danger"></span>
     </div>
-    <div class="mt-3">
-        <button type="submit" class="btn btn-primary">Save</button>
+
+    <div class="form-group">
+        <label asp-for="StartTime" class="control-label">Start Time</label>
+        <input asp-for="StartTime" class="form-control" type="time" />
+        <span asp-validation-for="StartTime" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="EndTime" class="control-label">End Time</label>
+        <input asp-for="EndTime" class="form-control" type="time" />
+        <span asp-validation-for="EndTime" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Create Schedule</button>
     </div>
 </form>
+
+<div>
+    <a asp-action="Index">Back to list</a>
+</div>

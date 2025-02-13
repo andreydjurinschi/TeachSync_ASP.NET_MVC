@@ -17,169 +17,169 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = TeachSyncApp
 build_property.RootNamespace = TeachSyncApp
-build_property.ProjectDir = C:\Users\Work\RiderProjects\Teza\TeachSyncApp\
+build_property.ProjectDir = C:\Users\Vladimir Djurinschi\RiderProjects\TeachSync_ASP.NET_MVC\TeachSyncApp\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Work\RiderProjects\Teza\TeachSyncApp
+build_property.MSBuildProjectDirectory = C:\Users\Vladimir Djurinschi\RiderProjects\TeachSync_ASP.NET_MVC\TeachSyncApp
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Classroom/Create.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Classroom/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3Nyb29tXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Classroom/Delete.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Classroom/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3Nyb29tXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Classroom/Details.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Classroom/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3Nyb29tXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Classroom/Edit.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Classroom/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3Nyb29tXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Classroom/Index.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Classroom/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3Nyb29tXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/CourseTopic/Create.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/CourseTopic/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlVG9waWNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Course/Create.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Course/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Course/Delete.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Course/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Course/Details.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Course/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Course/Edit.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Course/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Course/Index.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Course/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/GroupCourse/Create.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/GroupCourse/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3JvdXBDb3Vyc2VcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Group/Create.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Group/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3JvdXBcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Group/Delete.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Group/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3JvdXBcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Group/Details.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Group/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3JvdXBcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Group/Edit.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Group/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3JvdXBcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Group/Index.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Group/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3JvdXBcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Home/Index.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Home/Privacy.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Replacement/Approve.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Replacement/Approve.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwbGFjZW1lbnRcQXBwcm92ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Replacement/Create.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Replacement/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwbGFjZW1lbnRcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Replacement/Edit.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Replacement/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwbGFjZW1lbnRcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Replacement/Index.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Replacement/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwbGFjZW1lbnRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Schedule/Create.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Schedule/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2NoZWR1bGVcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Schedule/Delete.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Schedule/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2NoZWR1bGVcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Schedule/Edit.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Schedule/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2NoZWR1bGVcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Schedule/Index.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Schedule/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2NoZWR1bGVcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Shared/Error.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Topic/Create.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Topic/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Topic/Index.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Topic/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/User/Create.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/User/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/User/Delete.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/User/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/User/Details.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/User/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/User/Edit.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/User/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/User/Index.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/User/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/_ViewImports.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/_ViewStart.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Work/RiderProjects/Teza/TeachSyncApp/Views/Shared/_Layout.cshtml]
+[C:/Users/Vladimir Djurinschi/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-or4tn1xj63

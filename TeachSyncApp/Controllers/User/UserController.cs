@@ -36,7 +36,7 @@ public class UserController(ApplicationDbContext context) : Controller
 
 
     [HttpGet]
-    public async Task<IActionResult> Details(int? id) //получаю только 1 пользователя
+    public async Task<IActionResult> Details(int? id) 
     {
         if (id == null)
         {

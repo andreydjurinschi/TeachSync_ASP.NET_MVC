@@ -53,7 +53,7 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<Schedule>().HasOne(s=> s.ClassRoom)
             .WithMany(classRoom => classRoom.Schedules)
             .HasForeignKey(s=> s.ClassRoomId)
-            .OnDelete(DeleteBehavior.Cascade);    
+            .OnDelete(DeleteBehavior.Restrict);    
         
         modelBuilder.Entity<Schedule>().HasOne(s=> s.GroupCourse)
             .WithMany(gc => gc.Schedules)
