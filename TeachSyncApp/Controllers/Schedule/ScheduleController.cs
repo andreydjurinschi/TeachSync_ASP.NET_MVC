@@ -48,9 +48,9 @@ public class ScheduleController : Controller
             StartTime = scheduleData.StartTime,
             EndTime = scheduleData.EndTime,
         };
-        if (checkTime(schedule) == false)
+        if (CheckTime(schedule) == false)
         {
-            ModelState.AddModelError("", "Please input data correctly");
+            ModelState.AddModelError("", "Please input time correctly");
             scheduleData = await GetScheduleViewModels();
             return View(scheduleData);
         }
@@ -101,7 +101,7 @@ public class ScheduleController : Controller
         schedule.GroupCourseId = scheduleData.GroupCourseId;
         schedule.StartTime = scheduleData.StartTime;
         schedule.EndTime = scheduleData.EndTime;
-        if (checkTime(schedule) == false)
+        if (CheckTime(schedule) == false)
         {
             ModelState.AddModelError("", "Please input data correctly");
             scheduleData = await GetScheduleViewModels();
@@ -151,7 +151,7 @@ public class ScheduleController : Controller
         return schedule;
     }
 
-    private bool checkTime(Models.Schedule schedule)
+    private bool CheckTime(Models.Schedule schedule)
     {
         if (schedule.EndTime < schedule.StartTime)
         {

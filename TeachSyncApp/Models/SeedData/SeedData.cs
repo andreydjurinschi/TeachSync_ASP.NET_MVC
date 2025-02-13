@@ -215,7 +215,18 @@ public class SeedData
                 context.SaveChanges();
             }
 
+            if (!context.Replacements.Any())
             {
+                context.Replacements.AddRange(
+                    new Replacement()
+                    {
+                        ScheduleId = 9,
+                        CourseTopicId = 4,
+                        RequestRime = DateTime.Now,
+                        Status = Status.Pending
+                    }
+                    );
+                context.SaveChanges();
             }
         }
     }
