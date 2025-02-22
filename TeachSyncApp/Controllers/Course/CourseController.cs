@@ -12,42 +12,49 @@ public class CourseController(ApplicationDbContext context) : Controller
     [HttpGet]
     public async Task<IActionResult> Index()
     {
-        var courses = await context.Courses.Include(c => c.User).Include(c => c.CoursesTopics).ThenInclude(c=> c.Topic).ToListAsync();
-
-        return View(courses); // передаем список Courses
+        var courses = await GetCourses();
+        return View(courses); 
     }
 
-    public async Task<IActionResult> Details(int id)
+    private async Task<List<Courses>> GetCourses()
+    {
+        var courses = await context.Courses.Include(c => c.User)
+            .Include(c => c.CoursesTopics).ThenInclude(c=> c.Topic)
+            .ToListAsync();
+        return courses;
+    }
+
+    private async Task<CourseViewModel> GetCourseViewModel() {
+        var courseViewModel = new CourseViewModel
+        {
+            TeachersList = await context.Users.Where(u => u.RoleId == 3).ToListAsync(),
+        };
+        return courseViewModel;
+    }
+
+    private async Task<Courses?> GetCourse(int courseId)
     {
         var course = await context.Courses
             .Include(c => c.User)
             .Include(c => c.CoursesTopics)
             .ThenInclude(ct => ct.Topic)
-            .FirstOrDefaultAsync(c => c.Id == id);
+            .FirstOrDefaultAsync(c => c.Id == courseId);
+        return course;
+    }
 
-        if (course == null)
-        {
-            return NotFound();
-        }
-
+    public async Task<IActionResult> Details(int id)
+    {
+        var course =await  GetCourse(id);
         return View(course);  
     }
 
 
     [HttpGet]
-    public IActionResult Create()
+    public async Task<IActionResult> Create()
     {
-        ViewBag.Users = new SelectList(
-            context.Users.Where(u => u.RoleId == 3).Select(u => new
-                {
-                    u.Id,
-                    FullName = u.Name + " " + u.Surname
-                }
-                ),
-            "Id", "FullName", null
-            );
+        var courseViewModel = await GetCourseViewModel();
         
-        return View();
+        return View(courseViewModel);
     }
 
     [HttpPost]
@@ -55,15 +62,7 @@ public class CourseController(ApplicationDbContext context) : Controller
     {
         if (!ModelState.IsValid)
         {
-            ViewBag.Users = new SelectList(
-                context.Users.Where(u => u.RoleId == 3).Select(u => new
-                    {
-                        u.Id,
-                        FullName = u.Name + " " + u.Surname
-                    }
-                ),
-                "Id", "FullName", null
-            );
+            courseModel = await GetCourseViewModel();
             return View(courseModel);
         }
 
@@ -90,22 +89,14 @@ public class CourseController(ApplicationDbContext context) : Controller
         {
             return NotFound();
         }
-
-        ViewBag.Users = new SelectList(
-            context.Users.Where(u => u.RoleId == 3).Select(u => new
-                {
-                    u.Id,
-                    FullName = u.Name + " " + u.Surname
-                }
-            ),
-            "Id", "FullName", null
-        );
+        var teacherData = await GetCourseViewModel();
         return View(new CourseViewModel
         {
             Id = course.Id,
             Name = course.Name,
             Description = course.Description,
             TeacherId = course.TeacherId,
+            TeachersList = teacherData.TeachersList,
         });
     }
 
@@ -114,15 +105,7 @@ public class CourseController(ApplicationDbContext context) : Controller
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.Users = new SelectList(
-                    context.Users.Where(u => u.RoleId == 3).Select(u => new
-                        {
-                            u.Id,
-                            FullName = u.Name + " " + u.Surname
-                        }
-                    ),
-                    "Id", "FullName", null
-                );
+                courseModel = await GetCourseViewModel();
                 return View(courseModel);
             }
             var course = await context.Courses.Include(c => c.User).Where(c => c.Id == id).FirstOrDefaultAsync();

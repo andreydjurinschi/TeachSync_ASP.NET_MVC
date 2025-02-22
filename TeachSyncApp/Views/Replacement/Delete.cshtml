@@ -1,0 +1,16 @@
+@model TeachSyncApp.Models.Replacement
+
+<h1>Delete replacement</h1>
+
+<div class="card" style="width: 30rem;">
+    <div class="card-body">
+        <h4 class="card-title" >Teacher sended: @Html.DisplayFor(model => model.Schedule.Teacher.Name) @Html.DisplayFor(model => model.Schedule.Teacher.Surname)</h4>
+        <h5 class="card-subtitle mb-2 text-body-secondary">Time: @Html.DisplayFor(model => model.Schedule.WeekDays.Name) @Html.DisplayFor(model => model.Schedule.StartTime) @Html.DisplayFor(model => model.Schedule.EndTime)</h5>
+        <a class="card-link" asp-action="Index">Back to replacements</a>
+    </div>
+</div>
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

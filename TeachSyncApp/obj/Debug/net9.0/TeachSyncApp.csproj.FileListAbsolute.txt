@@ -1375,16 +1375,7 @@ C:\Users\Vladimir Djurinschi\RiderProjects\TeachSync_ASP.NET_MVC\TeachSyncApp\bi
 C:\Users\Vladimir Djurinschi\RiderProjects\TeachSync_ASP.NET_MVC\TeachSyncApp\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Relational.dll
 C:\Users\Vladimir Djurinschi\RiderProjects\TeachSync_ASP.NET_MVC\TeachSyncApp\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Sqlite.dll
 C:\Users\Vladimir Djurinschi\RiderProjects\TeachSync_ASP.NET_MVC\TeachSyncApp\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.SqlServer.dll
-C:\Users\Vladimir Djurinschi\RiderProjects\TeachSync_ASP.NET_MVC\TeachSyncApp\bin\Debug\net9.0\Microsoft.Extensions.Caching.Abstractions.dll
-C:\Users\Vladimir Djurinschi\RiderProjects\TeachSync_ASP.NET_MVC\TeachSyncApp\bin\Debug\net9.0\Microsoft.Extensions.Caching.Memory.dll
-C:\Users\Vladimir Djurinschi\RiderProjects\TeachSync_ASP.NET_MVC\TeachSyncApp\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Abstractions.dll
-C:\Users\Vladimir Djurinschi\RiderProjects\TeachSync_ASP.NET_MVC\TeachSyncApp\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.dll
-C:\Users\Vladimir Djurinschi\RiderProjects\TeachSync_ASP.NET_MVC\TeachSyncApp\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\Vladimir Djurinschi\RiderProjects\TeachSync_ASP.NET_MVC\TeachSyncApp\bin\Debug\net9.0\Microsoft.Extensions.DependencyModel.dll
-C:\Users\Vladimir Djurinschi\RiderProjects\TeachSync_ASP.NET_MVC\TeachSyncApp\bin\Debug\net9.0\Microsoft.Extensions.Logging.dll
-C:\Users\Vladimir Djurinschi\RiderProjects\TeachSync_ASP.NET_MVC\TeachSyncApp\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
-C:\Users\Vladimir Djurinschi\RiderProjects\TeachSync_ASP.NET_MVC\TeachSyncApp\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
-C:\Users\Vladimir Djurinschi\RiderProjects\TeachSync_ASP.NET_MVC\TeachSyncApp\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
 C:\Users\Vladimir Djurinschi\RiderProjects\TeachSync_ASP.NET_MVC\TeachSyncApp\bin\Debug\net9.0\Microsoft.Identity.Client.dll
 C:\Users\Vladimir Djurinschi\RiderProjects\TeachSync_ASP.NET_MVC\TeachSyncApp\bin\Debug\net9.0\Microsoft.Identity.Client.Extensions.Msal.dll
 C:\Users\Vladimir Djurinschi\RiderProjects\TeachSync_ASP.NET_MVC\TeachSyncApp\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
@@ -1429,7 +1420,6 @@ C:\Users\Vladimir Djurinschi\RiderProjects\TeachSync_ASP.NET_MVC\TeachSyncApp\bi
 C:\Users\Vladimir Djurinschi\RiderProjects\TeachSync_ASP.NET_MVC\TeachSyncApp\bin\Debug\net9.0\System.Reflection.MetadataLoadContext.dll
 C:\Users\Vladimir Djurinschi\RiderProjects\TeachSync_ASP.NET_MVC\TeachSyncApp\bin\Debug\net9.0\System.Runtime.Caching.dll
 C:\Users\Vladimir Djurinschi\RiderProjects\TeachSync_ASP.NET_MVC\TeachSyncApp\bin\Debug\net9.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\Vladimir Djurinschi\RiderProjects\TeachSync_ASP.NET_MVC\TeachSyncApp\bin\Debug\net9.0\System.Text.Json.dll
 C:\Users\Vladimir Djurinschi\RiderProjects\TeachSync_ASP.NET_MVC\TeachSyncApp\bin\Debug\net9.0\af\Humanizer.resources.dll
 C:\Users\Vladimir Djurinschi\RiderProjects\TeachSync_ASP.NET_MVC\TeachSyncApp\bin\Debug\net9.0\ar\Humanizer.resources.dll
 C:\Users\Vladimir Djurinschi\RiderProjects\TeachSync_ASP.NET_MVC\TeachSyncApp\bin\Debug\net9.0\az\Humanizer.resources.dll

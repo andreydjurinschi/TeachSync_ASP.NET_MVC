@@ -9,6 +9,7 @@
         <th>@Html.DisplayNameFor(model => model.Year)</th>
         <th>@Html.DisplayNameFor(model => model.Capacity)</th>
         <th>@Html.DisplayNameFor(model => model.GroupCourses)</th>
+        <th>Teacher</th>
         <th></th>
     </tr>
     </thead>
@@ -24,7 +25,7 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Capacity)
-            </td>
+            </td>            
             <td>
                 @if (item.GroupCourses.Any())
                 {
@@ -38,6 +39,21 @@
                 else
                 {
                     <p>No courses assigned</p>
+                }
+            </td>
+            <td>
+                @if (item.GroupCourses.Any())
+                {
+                    <ul>
+                        @foreach (var courseTopic in item.GroupCourses)
+                        {
+                            <li>@courseTopic.Course.User?.Name @courseTopic.Course.User?.Surname</li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p>No teacher for this group</p>
                 }
             </td>
             <td>

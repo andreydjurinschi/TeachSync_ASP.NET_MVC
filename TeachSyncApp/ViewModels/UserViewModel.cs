@@ -19,8 +19,16 @@ public class UserViewModel
     [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessage = "Invalid email format.")]
     public string Email { get; set; } = string.Empty;
     
+    
+    [Required]
+    public string Password { get; set; } = string.Empty;
+    
+     
+    
     [Required(ErrorMessage = "User must have role")] 
     [Display(Name = "Role")]
     public int RoleId { get; set; }
+    
+    public List<Role> Roles { get; set; } = new List<Role>();
 
 }

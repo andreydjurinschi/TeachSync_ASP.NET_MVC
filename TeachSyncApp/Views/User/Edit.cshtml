@@ -1,4 +1,4 @@
-@model TeachSyncApp.ViewModels.UserViewModel
+@model TeachSyncApp.ViewModels.UserEditViewModel
 
 <h1>Edit User</h1>
 
@@ -24,12 +24,17 @@
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
 
+
     <div class="form-group">
-        <label asp-for="RoleId"></label>
-        <select asp-for="RoleId" asp-items="ViewBag.RoleId" class="form-control"></select>
+        <label class="control-label">Role</label>
+        <select name="RoleId" class="form-control">
+            @foreach (var role in Model.Roles)
+            {
+                <option value="@role.Id">@role.Name</option>
+            }
+        </select>
         <span asp-validation-for="RoleId" class="text-danger"></span>
     </div>
-    
 
     <button type="submit" class="btn btn-primary">Save</button>
     <a asp-action="Index" class="btn btn-secondary">Cancel</a>

@@ -50,12 +50,14 @@
                     }
                     else
                     {
-                        <p>@item.TeacherApprove?.Name</p>
-                        <p>@item.TeacherApprove?.Surname</p>
+                        <span>@item.TeacherApprove?.Name @item.TeacherApprove?.Surname </span>
                     }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
         }

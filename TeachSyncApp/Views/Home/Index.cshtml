@@ -1,6 +1,21 @@
-﻿@{
+﻿@using System.Security.Claims
+@model TeachSyncApp.Models.User
+@{
     ViewData["Title"] = "Home Page";
 }
+
+@if (User.Identity != null && User.Identity.IsAuthenticated)
+{
+    <p> HI! @User.Identity.Name</p>
+    <p> Email: @User.FindFirst(ClaimTypes.Email)?.Value</p>
+    <a asp-controller="Account" asp-action="Logout">Logout</a> 
+}
+else
+{
+    <p>Enter in system pls</p>
+    <a asp-controller="Account" asp-action="Login">Login</a> 
+}
+
 
 <div class="text-center">
     <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">

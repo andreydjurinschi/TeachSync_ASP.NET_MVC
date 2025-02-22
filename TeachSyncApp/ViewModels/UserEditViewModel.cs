@@ -1,11 +1,12 @@
 using System.ComponentModel.DataAnnotations;
+using TeachSyncApp.Models;
 
-namespace TeachSyncApp.Models;
+namespace TeachSyncApp.ViewModels;
 
-public class User
+public class UserEditViewModel
 {
     public int Id { get; set; }
-
+    
     [Required]
     [StringLength(20, MinimumLength = 2, ErrorMessage = "Username must be between 2 and 20 characters")]
     public string Name { get; set; } = string.Empty;
@@ -18,19 +19,9 @@ public class User
     [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessage = "Invalid email format.")]
     public string Email { get; set; } = string.Empty;
     
-    [Required]
-    public string Password { get; set; } = string.Empty;
-    
-    [DataType(DataType.Date)]
-    [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-    [Display(Name = "Created At")]
-    public DateTime CreatedAt { get; set; } = DateTime.Now;
-
     [Required(ErrorMessage = "User must have role")] 
     [Display(Name = "Role")]
     public int RoleId { get; set; }
-    public Role Role { get; set; } = null!;// 1 роль у 1 пользователя
-    public ICollection<Courses> Courses { get; set; } = new List<Courses>();
-    public ICollection<Schedule> Schedules { get; set; } = new List<Schedule>();
-    public ICollection<Replacement> Replacements { get; set; } = new HashSet<Replacement>();
+    
+    public List<Role> Roles { get; set; } = new List<Role>();
 }

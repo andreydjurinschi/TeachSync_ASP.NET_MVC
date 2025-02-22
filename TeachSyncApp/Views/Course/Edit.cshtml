@@ -22,8 +22,12 @@
         <label class="form-label">Teacher</label>
         <select asp-for="TeacherId" class="form-control">
             <option value="">Нет учителя</option>
-            @foreach (var item in ViewBag.Users){
-                <option value="@item.Value">@item.Text</option>
+            @if (Model.TeachersList != null)
+            {
+                foreach (var item in Model.TeachersList)
+                {
+                    <option value="@item.Id">@item.Name @item.Surname</option>
+                }
             }
         </select>
         <span asp-validation-for="TeacherId" class="text-danger"></span>

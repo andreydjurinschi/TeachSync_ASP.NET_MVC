@@ -21,4 +21,8 @@
       <Folder Include="Controllers\Classroom\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Views\Account\Login.cshtml" />
+    </ItemGroup>
+
 </Project>

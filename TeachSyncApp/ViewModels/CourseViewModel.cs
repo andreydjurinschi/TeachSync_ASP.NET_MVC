@@ -1,3 +1,5 @@
+using TeachSyncApp.Models;
+
 namespace TeachSyncApp.ViewModels;
 
 public class CourseViewModel
@@ -8,4 +10,6 @@ public class CourseViewModel
     public int? TeacherId { get; set; }
     
     public int? TopicId { get; set; }
+    
+    public List<User>? TeachersList { get; set; } = new List<User>();
 }

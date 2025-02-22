@@ -12,18 +12,6 @@ public class SeedData
                new ApplicationDbContext(
                    serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
         {
-            if (!context.ClassRooms.Any())
-            {
-               context.ClassRooms.AddRange(
-                   new ClassRoom()
-                   {
-                       Name = "Classroom 1",
-                       Capacity = 25,
-                   }
-                   );
-               context.SaveChanges();
-            }
-
             if (!context.Roles.Any())
             {
                 context.Roles.AddRange(
@@ -39,195 +27,238 @@ public class SeedData
                     {
                         Name = "Teacher"
                     }
-                    );
+                );
                 context.SaveChanges();
             }
 
             if (!context.Users.Any())
             {
-                context.Users.AddRange(
-                    new User()
-                    {
-                        Name = "Andrei",
-                        Surname = "Djurinschi",
-                        Email = "andrei@gmail.com",
-                        CreatedAt = DateTime.Now,
-                        RoleId = 3
-                    }
-                    );
+                /*context.Users.Add(new User
+                {
+                    Name = "Andrey", Surname = "Djurinschi", Email = "andrey@gmail.com", CreatedAt = DateTime.Now,
+                    RoleId = 1
+                });
+                context.Users.Add(new User
+                {
+                    Name = "Ivan", Surname = "Ivanov", Email = "ivan@gmail.com", CreatedAt = DateTime.Now, RoleId = 2
+                });
+                context.Users.Add(new User
+                {
+                    Name = "Petr", Surname = "Petrov", Email = "petr@gmail.com", CreatedAt = DateTime.Now, RoleId = 3
+                });
+                context.Users.Add(new User
+                {
+                    Name = "Anna", Surname = "Sidorova", Email = "anna@gmail.com", CreatedAt = DateTime.Now, RoleId = 1
+                });
+                context.Users.Add(new User
+                {
+                    Name = "Maria", Surname = "Kuznetsova", Email = "maria@gmail.com", CreatedAt = DateTime.Now,
+                    RoleId = 2
+                });
+                context.Users.Add(new User
+                {
+                    Name = "Oleg", Surname = "Semenov", Email = "oleg@gmail.com", CreatedAt = DateTime.Now, RoleId = 3
+                });
+                context.Users.Add(new User
+                {
+                    Name = "Sergey", Surname = "Fedorov", Email = "sergey@gmail.com", CreatedAt = DateTime.Now,
+                    RoleId = 1
+                });
+                context.Users.Add(new User
+                {
+                    Name = "Natalia", Surname = "Smirnova", Email = "natalia@gmail.com", CreatedAt = DateTime.Now,
+                    RoleId = 2
+                });
+                context.Users.Add(new User
+                {
+                    Name = "Elena", Surname = "Vasilieva", Email = "elena@gmail.com", CreatedAt = DateTime.Now,
+                    RoleId = 3
+                });
+                context.Users.Add(new User
+                {
+                    Name = "Dmitry", Surname = "Gorbachev", Email = "dmitry@gmail.com", CreatedAt = DateTime.Now,
+                    RoleId = 1
+                });
+                context.Users.Add(new User
+                {
+                    Name = "Yulia", Surname = "Popova", Email = "yulia@gmail.com", CreatedAt = DateTime.Now, RoleId = 2
+                });
+                context.Users.Add(new User
+                {
+                    Name = "Viktor", Surname = "Zaharov", Email = "viktor@gmail.com", CreatedAt = DateTime.Now,
+                    RoleId = 3
+                });*/
+                context.Users.Add(new User
+                {
+                    Name = "Alexey", Surname = "Volkov", Email = "alexey@gmail.com", CreatedAt = DateTime.Now,
+                    RoleId = 1, Password = "password1234"
+                });
+               /* context.Users.Add(new User
+                {
+                    Name = "Irina", Surname = "Komarova", Email = "irina@gmail.com", CreatedAt = DateTime.Now,
+                    RoleId = 2
+                });
+                context.Users.Add(new User
+                {
+                    Name = "Kirill", Surname = "Tikhonov", Email = "kirill@gmail.com", CreatedAt = DateTime.Now,
+                    RoleId = 3
+                });*/
+
                 context.SaveChanges();
             }
 
-            if (!context.Courses.Any())
+           /* if (!context.Courses.Any())
             {
                 context.Courses.AddRange(
-                    new Courses()
+                    new Courses
                     {
-                        Name = "Course 1",
-                        Description = "Course 1 description",
-                        TeacherId = 1,
+                        Name = "Introduction to Python",
+                        Description = "Basic concepts and syntax of Python programming",
+                        TeacherId = 4
+                    },
+                    new Courses
+                    {
+                        Name = "Data Science with R",
+                        Description = "Learn data analysis and visualization using R",
+                        TeacherId = 7
+                    },
+                    new Courses
+                    {
+                        Name = "Web Development Fundamentals",
+                        Description = "Building websites using HTML, CSS, and JavaScript",
+                        TeacherId = 10
+                    },
+                    new Courses
+                    {
+                        Name = "Mobile App Development",
+                        Description = "Creating mobile applications for Android and iOS",
+                        TeacherId = 13
+                    },
+                    new Courses
+                    {
+                        Name = "Machine Learning Basics",
+                        Description = "Introduction to machine learning algorithms and techniques",
+                        TeacherId = 16
                     }
-                    );
+                );
                 context.SaveChanges();
             }
 
             if (!context.Groups.Any())
             {
                 context.Groups.AddRange(
-                    new Group()
+                    new Group
                     {
-                        Name = "Group 1",
-                        Year = DateTime.Now.Year,
+                        Name = "I2302",
+                        Year = 2020,
+                        Capacity = 20
+                    },
+                    new Group
+                    {
+                        Name = "I2303",
+                        Year = 2020,
+                        Capacity = 25
+                    },
+                    new Group
+                    {
+                        Name = "I2304",
+                        Year = 2020,
                         Capacity = 30
-                    }
-                    );
+                    },
+                    new Group
+                    {
+                        Name = "I2305",
+                        Year = 2021,
+                        Capacity = 20
+                    },
+                    new Group
+                    {
+                        Name = "I2306",
+                        Year = 2021,
+                        Capacity = 25
+                    },
+                    new Group
+                    {
+                        Name = "I2307",
+                        Year = 2021,
+                        Capacity = 30
+                    },
+                    new Group
+                    {
+                        Name = "I2308",
+                        Year = 2022,
+                        Capacity = 20
+                    },
+                    new Group
+                    {
+                        Name = "I2309",
+                        Year = 2022,
+                        Capacity = 25
+                    },
+                    new Group
+                    {
+                        Name = "I2310",
+                        Year = 2022,
+                        Capacity = 30
+                    },
+                    new Group
+                    {
+                        Name = "I2311",
+                        Year = 2023,
+                        Capacity = 20
+                    },
+                    new Group
+                        {
+                            Name = "I2312",
+                            Year = 2023,
+                            Capacity = 25
+                        }
+                        );
                 context.SaveChanges();
             }
 
             if (!context.Topics.Any())
             {
                 context.Topics.AddRange(
-                new Topic() { Name = "Programming" },
-                new Topic() { Name = "Mathematics" },
-                new Topic() { Name = "Physics" },
-                new Topic() { Name = "Chemistry" },
-                new Topic() { Name = "Biology" },
-                new Topic() { Name = "History" },
-                new Topic() { Name = "Geography" },
-                new Topic() { Name = "Literature" },
-                new Topic() { Name = "Art" },
-                new Topic() { Name = "Music" },
-                new Topic() { Name = "Philosophy" },
-                new Topic() { Name = "Sociology" },
-                new Topic() { Name = "Psychology" },
-                new Topic() { Name = "Economics" },
-                new Topic() { Name = "Politics" },
-                new Topic() { Name = "Sports" },
-                new Topic() { Name = "Health" },
-                new Topic() { Name = "Education" },
-                new Topic() { Name = "Environment" },
-                new Topic() { Name = "Technology" },
-                new Topic() { Name = "Engineering" },
-                new Topic() { Name = "Astronomy" },
-                new Topic() { Name = "Robotics" },
-                new Topic() { Name = "AI and Machine Learning" },
-                new Topic() { Name = "Data Science" },
-                new Topic() { Name = "Cybersecurity" },
-                new Topic() { Name = "Digital Marketing" },
-                new Topic() { Name = "Photography" },
-                new Topic() { Name = "Video Production" },
-                new Topic() { Name = "Gaming" },
-                new Topic() { Name = "Web Development" },
-                new Topic() { Name = "Mobile Development" },
-                new Topic() { Name = "Networking" },
-                new Topic() { Name = "Cloud Computing" },
-                new Topic() { Name = "Databases" },
-                new Topic() { Name = "Operating Systems" },
-                new Topic() { Name = "Business Management" },
-                new Topic() { Name = "Project Management" },
-                new Topic() { Name = "Creative Writing" },
-                new Topic() { Name = "Public Speaking" },
-                new Topic() { Name = "Personal Finance" },
-                new Topic() { Name = "Investing" },
-                new Topic() { Name = "Cryptocurrency" },
-                new Topic() { Name = "Travel and Tourism" },
-                new Topic() { Name = "Food and Nutrition" },
-                new Topic() { Name = "Fitness and Exercise" },
-                new Topic() { Name = "Gardening" },
-                new Topic() { Name = "Languages" },
-                new Topic() { Name = "Culture and Society" }
-            );
-            context.SaveChanges();
-            }
-
-            if (!context.CoursesTopics.Any())
-            {
-                context.CoursesTopics.AddRange(
-                    new CourseTopic()
-                    {
-                        CourseId = 1,
-                        TopicId = 1
-                    }
-                    );
-            }
-            context.SaveChanges();
-
-            if (!context.GroupCourses.Any())
-            {
-                context.GroupCourses.AddRange(
-                    new GroupCourse()
-                    {
-                        GroupId = 1,
-                        CourseId = 1
-                    }
-                    );
+                    new Topic { Name = "Programming" },
+                    new Topic { Name = "Basic Programming" },
+                    new Topic { Name = "OOP" },
+                    new Topic { Name = "Web Development" },
+                    new Topic { Name = "Backend Development" },
+                    new Topic { Name = "Frontend Development" },
+                    new Topic { Name = "Databases" },
+                    new Topic { Name = "Algorithms" },
+                    new Topic { Name = "Data Structures" },
+                    new Topic { Name = "Mobile Development" },
+                    new Topic { Name = "Game Development" },
+                    new Topic { Name = "Software Design" },
+                    new Topic { Name = "Testing" },
+                    new Topic { Name = "Version Control" },
+                    new Topic { Name = "CI/CD" },
+                    new Topic { Name = "Cloud Computing" },
+                    new Topic { Name = "Machine Learning" },
+                    new Topic { Name = "Artificial Intelligence" },
+                    new Topic { Name = "Cybersecurity" },
+                    new Topic { Name = "DevOps" }
+                );
                 context.SaveChanges();
             }
 
             if (!context.DaysOfWeek.Any())
             {
                 context.DaysOfWeek.AddRange(
-                    new WeekDays()
-                    {
-                        Name = "Monday",
-                    },
-                    new WeekDays()
-                    {
-                        Name = "Tuesday",
-                    },
-                    new WeekDays()
-                    {
-                        Name = "Wednesday",
-                    },
-                    new WeekDays()
-                    {
-                        Name = "Thursday",
-                    },
-                    new WeekDays()
-                    {
-                        Name = "Friday",
-                    },
-                    new WeekDays()
-                    {
-                        Name = "Saturday",
-                    },
-                    new WeekDays()
-                    {
-                        Name = "Sunday",
-                    }
+                    new WeekDays { Name = "Monday" },
+                    new WeekDays { Name = "Tuesday" },
+                    new WeekDays { Name = "Wednesday" },
+                    new WeekDays { Name = "Thursday" },
+                    new WeekDays { Name = "Friday" },
+                    new WeekDays { Name = "Saturday" },
+                    new WeekDays { Name = "Sunday" }
+                    
                     );
-                context.SaveChanges();
-            }
-
-            if (!context.Schedules.Any())
-            {
-                context.Schedules.AddRange(
-                    new Schedule()
-                    {
-                        ClassRoomId = 1,
-                        DayOfWeekId = 1,
-                        GroupCourseId = 1,
-                        StartTime = TimeSpan.Parse("17:00:00"),
-                        EndTime = TimeSpan.Parse("20:00:00"),
-                        TeacherId = 1
-                    }
-                    );
-                context.SaveChanges();
-            }
-
-            if (!context.Replacements.Any())
-            {
-                context.Replacements.AddRange(
-                    new Replacement()
-                    {
-                        ScheduleId = 9,
-                        CourseTopicId = 4,
-                        RequestRime = DateTime.Now,
-                        Status = Status.Pending
-                    }
-                    );
-                context.SaveChanges();
+                context.SaveChanges();*/
             }
         }
     }
-}
+    
+

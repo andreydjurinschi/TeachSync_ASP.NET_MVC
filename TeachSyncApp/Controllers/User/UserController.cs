@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,7 @@ using TeachSyncApp.ViewModels;
 
 namespace TeachSyncApp.Controllers.User;
 
+[Authorize]
 public class UserController(ApplicationDbContext context) : Controller
 {
     [HttpGet]
@@ -52,10 +54,10 @@ public class UserController(ApplicationDbContext context) : Controller
     }
 
     [HttpGet]
-    public IActionResult Create()
+    public async Task<IActionResult> Create()
     {
-        ViewBag.RoleId = new SelectList(context.Roles, "Id", "Name");
-        return View();
+        var userData = await GetUserViewModel();
+        return View(userData);
     }
 
     [HttpPost]
@@ -63,7 +65,7 @@ public class UserController(ApplicationDbContext context) : Controller
     {
         if(!ModelState.IsValid)
         {
-            ViewBag.RoleId = new SelectList(context.Roles, "Id", "Name");
+            modelUser = await GetUserViewModel();
             return View(modelUser);
         }
 
@@ -72,6 +74,7 @@ public class UserController(ApplicationDbContext context) : Controller
             Name = modelUser.Name,
             Surname = modelUser.Surname,
             Email = modelUser.Email,
+            Password = modelUser.Password,
             RoleId = modelUser.RoleId
         };
         context.Users.Add(user);
@@ -87,42 +90,30 @@ public class UserController(ApplicationDbContext context) : Controller
             return NotFound();
         }
 
-        var user = await context.Users.FirstOrDefaultAsync(u => u.Id == id);
-        if (user == null)
-        {
-            return NotFound();
-        }
-
-        ViewBag.RoleId = new SelectList(context.Roles, "Id", "Name", user.RoleId);
-        return View(new UserViewModel
+        var user = await GetUserById(id);
+        var userRoles = await GetUserEditViewModel(); 
+        return View(new UserEditViewModel()
         {
             Id = user.Id,
             Name = user.Name,
             Surname = user.Surname,
             Email = user.Email,
-            RoleId = user.RoleId
+            RoleId = user.RoleId,
+            Roles = userRoles.Roles
         });
     }
 
 
     [HttpPost]
-    public async Task<IActionResult> Edit(int id, UserViewModel modelUser)
+    public async Task<IActionResult> Edit(int id, UserEditViewModel modelUser)
     {
         if(!ModelState.IsValid)
         {
-            ViewBag.RoleId = new SelectList(context.Roles, "Id", "Name");
+            modelUser = await GetUserEditViewModel(); 
             return View(modelUser);
         }
-        var user = await context.Users.FirstOrDefaultAsync(u => u.Id == id);
-        if (user == null)
-        {
-            return NotFound();
-        }
-
-        if(!ModelState.IsValid)
-        {
-            return View(modelUser);
-        }
+        var user = await GetUserById(id);
+        
         user.Name = modelUser.Name;
         user.Surname = modelUser.Surname;
         user.Email = modelUser.Email;
@@ -138,23 +129,14 @@ public class UserController(ApplicationDbContext context) : Controller
         {
             return NotFound();
         }
-        var user = await context.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.Id == id);
-        if (user == null)
-        {
-            return NotFound();
-        }
+        var user = await GetUserById(id);
         return View(user);
     }
 
     [HttpPost]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
-        var user = await context.Users.FindAsync(id);
-        if (user == null)
-        {
-            return NotFound();
-        }
-
+        var user = await GetUserById(id);
         try
         {
             context.Users.Remove(user);
@@ -164,8 +146,27 @@ public class UserController(ApplicationDbContext context) : Controller
         catch (DbUpdateException)
         {
             ModelState.AddModelError("", "User could not be deleted");
-            return View(user);
+            return RedirectToAction("Index", "User");
         }
+    }
+
+    private async Task<UserViewModel> GetUserViewModel()
+    {
+        var user = new UserViewModel();
+        user.Roles = await context.Roles.ToListAsync();
+        return user;
+    }
+
+    private async Task<UserViewModel> GetUserEditViewModel()
+    {
+        var user = new UserViewModel();
+        user.Roles = await context.Roles.ToListAsync();
+        return user;
+    }
+    
+    private async Task<Models.User> GetUserById(int? id)
+    {
+        return (await context.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.Id == id))!;
     }
 
 

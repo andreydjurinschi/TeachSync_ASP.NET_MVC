@@ -12,8 +12,8 @@ using TeachSyncApp.Context;
 namespace TeachSyncApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250212221652_initialCreate")]
-    partial class initialCreate
+    [Migration("20250218141755_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -222,6 +222,10 @@ namespace TeachSyncApp.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
@@ -305,7 +309,7 @@ namespace TeachSyncApp.Migrations
                     b.HasOne("TeachSyncApp.Models.User", "User")
                         .WithMany("Courses")
                         .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("User");
                 });
@@ -315,12 +319,12 @@ namespace TeachSyncApp.Migrations
                     b.HasOne("TeachSyncApp.Models.User", "TeacherApprove")
                         .WithMany("Replacements")
                         .HasForeignKey("ApprovedById")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("TeachSyncApp.Models.intermediateModels.CourseTopic", "CourseTopic")
                         .WithMany("Replacements")
                         .HasForeignKey("CourseTopicId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("TeachSyncApp.Models.Schedule", "Schedule")
@@ -341,25 +345,25 @@ namespace TeachSyncApp.Migrations
                     b.HasOne("TeachSyncApp.Models.ClassRoom", "ClassRoom")
                         .WithMany("Schedules")
                         .HasForeignKey("ClassRoomId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("TeachSyncApp.Models.WeekDays", "WeekDays")
                         .WithMany("Schedules")
                         .HasForeignKey("DayOfWeekId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("TeachSyncApp.Models.intermediateModels.GroupCourse", "GroupCourse")
                         .WithMany("Schedules")
                         .HasForeignKey("GroupCourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("TeachSyncApp.Models.User", "Teacher")
                         .WithMany("Schedules")
                         .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("ClassRoom");
@@ -387,13 +391,13 @@ namespace TeachSyncApp.Migrations
                     b.HasOne("TeachSyncApp.Models.Courses", "Course")
                         .WithMany("CoursesTopics")
                         .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("TeachSyncApp.Models.Topic", "Topic")
                         .WithMany("CoursesTopics")
                         .HasForeignKey("TopicId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Course");
@@ -406,13 +410,13 @@ namespace TeachSyncApp.Migrations
                     b.HasOne("TeachSyncApp.Models.Courses", "Course")
                         .WithMany("GroupCourses")
                         .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("TeachSyncApp.Models.Group", "Group")
                         .WithMany("GroupCourses")
                         .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Course");

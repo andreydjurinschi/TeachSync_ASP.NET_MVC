@@ -18,7 +18,7 @@ public class GroupController : Controller
     public async Task<IActionResult> Index()
     {
         
-        var groups = await _context.Groups.Include(g=> g.GroupCourses).ThenInclude(c=> c.Course).ToListAsync();
+        var groups = await _context.Groups.Include(g=> g.GroupCourses).ThenInclude(c=> c.Course).ThenInclude(c => c.User).ToListAsync();
         return View(groups);
     }
     

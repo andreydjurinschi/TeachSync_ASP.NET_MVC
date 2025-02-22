@@ -1,11 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
 using TeachSyncApp.Context;
 using TeachSyncApp.Models;
 using TeachSyncApp.ViewModels;
-using TeachSyncApp.Controllers;
 
 namespace TeachSyncApp.Controllers.Replacement;
 
@@ -22,6 +20,8 @@ public class ReplacementController : Controller
     {
         var replacements = await _context.Replacements
             .Include(r => r.Schedule)
+            .ThenInclude(s => s.WeekDays)
+            .Include(r => r.Schedule)
             .ThenInclude(s => s.Teacher)
             .Include(r => r.CourseTopic)
             .ThenInclude(ct => ct.Course)
@@ -32,6 +32,8 @@ public class ReplacementController : Controller
 
         return replacements;
     }
+
+    
 
     private async Task<ReplacementViewModel> GetReplacementViewModel()
     {
@@ -75,14 +77,11 @@ public class ReplacementController : Controller
             replacementData = await GetReplacementViewModel();
             return View(replacementData);
         }
-
-        // Получаем ID курса
-        int courseId = getCourseId(replacementData.ScheduleId);
     
         var replacement = new Models.Replacement
         {
             ScheduleId = replacementData.ScheduleId,
-            CourseTopicId = courseId, // Используем courseId
+            CourseTopicId = replacementData.CourseTopicId, 
             RequestRime = DateTime.Now,
             ApprovedById = replacementData.ApprovedById,
             Status = Status.Pending,
@@ -93,58 +92,181 @@ public class ReplacementController : Controller
         return RedirectToAction(nameof(Index));
     }
 
-    private int getCourseId(int scheduleId)
+    
+    public async Task<IActionResult> Delete(int? id)
     {
-        // Ищем расписание по ID
-        var schedule = _context.Schedules
-            .Include(s => s.GroupCourse)  // Необходимо убедиться, что GroupCourse загружен
-            .FirstOrDefault(c => c.Id == scheduleId);
-
-        if (schedule == null || schedule.GroupCourse == null)
+        if (id == null)
         {
-            throw new Exception("Schedule or GroupCourse not found.");
+            return NotFound();
         }
-
-        // Возвращаем CourseId
-        return schedule.GroupCourse.CourseId;
+        var replacement = await _context.Replacements
+            .Include(r => r.Schedule)
+            .ThenInclude(s => s.Teacher)
+            .Include(r => r.CourseTopic)
+            .ThenInclude(ct => ct.Course)
+            .Include(r => r.CourseTopic)
+            .ThenInclude(ct => ct.Topic)
+            .Include(r => r.TeacherApprove)
+            .FirstOrDefaultAsync(r => r.Id == id);
+        return View(replacement);
     }
+
+    [HttpPost]
+    public async Task<IActionResult> DeleteConfirmed(int id)
+    {
+        var replacement = await _context.Replacements.FindAsync(id);
+        if (replacement == null)
+        {
+            return NotFound();
+        }
+        try
+        {
+            _context.Replacements.Remove(replacement);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        catch (DbUpdateException)
+        {
+            ModelState.AddModelError("", "Cannot delete replacement");
+            return RedirectToAction(nameof(Index));
+        }
+    } 
+    
+        [HttpGet]
+    public async Task<IActionResult> Approve(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+        var replacement = await _context.Replacements.Include(r => r.Schedule).FirstOrDefaultAsync(r => r.Id == id);
+        if (replacement == null)
+        {
+            return NotFound();
+        }
+        var startTime = replacement.Schedule.StartTime;
+        var endTime = replacement.Schedule.EndTime;
+        var availableTeachers = await _context.Users.Where(u => u.RoleId == 3)
+            .Where(u => !u.Schedules.Any(s=> s.StartTime <= endTime && s.EndTime >= startTime)).ToListAsync();
+        if (availableTeachers.Count == 0)
+        {
+            ModelState.AddModelError("", "No teachers are available to approve");
+        }
+        ViewBag.AvailableTeachers = availableTeachers;
+        return View(replacement);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Approve(int replacementId, int teacherId)
+    {
+        var replacement = await _context.Replacements.Include(r => r.Schedule).FirstOrDefaultAsync(r => r.Id == replacementId);
+        if (replacement == null)
+        {
+            return NotFound();
+        }
+        var startTime = replacement.Schedule.StartTime;
+        var endTime = replacement.Schedule.EndTime;
+        
+        var teacher = await _context.Users.Include(u => u.Schedules).FirstOrDefaultAsync(u => u.Id == teacherId);
+        if (teacher == null || teacher.Schedules.Any(s => s.StartTime <= endTime && s.EndTime >= startTime))
+        {
+            ModelState.AddModelError("", "No teachers are available to approve"); 
+            var availableTeachers = await _context.Users.Where(u => u.RoleId == 3)
+                .Where(u => !u.Schedules.Any(s=> s.StartTime <= endTime && s.EndTime >= startTime)).ToListAsync();
+            ViewBag.AvailableTeachers = availableTeachers;
+            return View(replacement);
+        }
+        
+        replacement.ApprovedById = teacherId;
+        replacement.Status = Status.Approved;
+        await _context.SaveChangesAsync();
+        return RedirectToAction("Index");
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    /*[HttpGet]
+public async Task<IActionResult> Approve(int? id)
+{
+    if (id == null)
+    {
+        return NotFound();
+    }
+
+    var replacement = await _context.Replacements
+        .Include(r => r.Schedule)
+        .FirstOrDefaultAsync(r => r.Id == id);
+
+    if (replacement == null)
+    {
+        return NotFound();
+    }
+
+    var startTime = replacement.Schedule.StartTime;
+    var endTime = replacement.Schedule.EndTime;
 
     
-    [HttpPost]
-    public async Task<IActionResult> GetTopicsBySchedule(int scheduleId)
+    var availableTeachers = await _context.Users
+        .Where(u => u.RoleId == 3)
+        .Where(u => !u.Schedules.Any(s => s.StartTime < endTime && s.EndTime > startTime))
+        .ToListAsync();
+
+    var replacementViewModel = await GetReplacementViewModel(); 
+
+    
+    if (availableTeachers.Count == 0)
     {
-        // Находим расписание по заданному ScheduleId
-        var schedule = await _context.Schedules
-            .Include(s => s.GroupCourse)
-            .ThenInclude(gc => gc.Course)
-            .FirstOrDefaultAsync(s => s.Id == scheduleId);
-
-        if (schedule == null || schedule.GroupCourse == null)
-        {
-            return NotFound("Schedule or GroupCourse not found.");
-        }
-
-        // Получаем курс для выбранного расписания
-        var course = schedule.GroupCourse.Course;
-
-        // Получаем топики, связанные с этим курсом через таблицу CoursesTopics
-        var courseTopics = await _context.CoursesTopics
-            .Where(ct => ct.CourseId == course.Id)
-            .Include(ct => ct.Topic) // Загружаем связанные топики
-            .ToListAsync();
-
-        // Возвращаем список топиков в формате JSON
-        var topics = courseTopics.Select(ct => new
-        {
-            id = ct.Id,
-            courseName = ct.Course.Name,
-            topicName = ct.Topic.Name
-        }).ToList();
-
-        return Json(topics);
+        ModelState.AddModelError("", "No teachers are available to approve");
     }
 
+    replacementViewModel.ApprovedByList = availableTeachers;
+    
+    return View(replacementViewModel);
+}
 
+/*[HttpPost]
+public async Task<IActionResult> Approve(int replacementId, int teacherId)
+{
+    var replacement = await _context.Replacements
+        .Include(r => r.Schedule)
+        .Include(u => u.TeacherApprove)
+        .FirstOrDefaultAsync(r => r.Id == replacementId);
 
+    if (replacement == null)
+    {
+        return NotFound();
+    }
+
+    var startTime = replacement.Schedule.StartTime;
+    var endTime = replacement.Schedule.EndTime;
+
+    var replacementViewModel = await GetReplacementViewModel();
+    var teacher = await _context.Users
+        .Include(u => u.Schedules)
+        .FirstOrDefaultAsync(u => u.Id == teacherId);
+
+    if (teacher == null || teacher.Schedules.Any(s => s.StartTime < endTime && s.EndTime > startTime))
+    {
+        ModelState.AddModelError("", "No teachers are available to approve");
+        var availableTeachers = await _context.Users
+            .Where(u => u.RoleId == 3)
+            .Where(u => !u.Schedules.Any(s => s.StartTime < endTime && s.EndTime > startTime))
+            .ToListAsync();
+
+        replacementViewModel.ApprovedByList = availableTeachers;
+        return View(replacementViewModel);
+    }
+    
+    replacement.ApprovedById = teacherId;
+    replacement.Status = Status.Approved;
+    await _context.SaveChangesAsync();
+    return RedirectToAction("Index", "Home");
+}
+*/
 
 }
