@@ -9,7 +9,7 @@ using TeachSyncApp.ViewModels;
 
 namespace TeachSyncApp.Controllers.User;
 
-[Authorize]
+[Authorize(Roles = "Admin")]
 public class UserController(ApplicationDbContext context) : Controller
 {
     [HttpGet]
@@ -157,9 +157,9 @@ public class UserController(ApplicationDbContext context) : Controller
         return user;
     }
 
-    private async Task<UserViewModel> GetUserEditViewModel()
+    private async Task<UserEditViewModel> GetUserEditViewModel()
     {
-        var user = new UserViewModel();
+        var user = new UserEditViewModel();
         user.Roles = await context.Roles.ToListAsync();
         return user;
     }
