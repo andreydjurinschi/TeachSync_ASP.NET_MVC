@@ -4,21 +4,20 @@
     ViewData["Title"] = "Home Page";
 }
 
-@if (User.Identity != null && User.Identity.IsAuthenticated)
-{
-    <p> HI! @User.Identity.Name</p>
-    <p> Email: @User.FindFirst(ClaimTypes.Email)?.Value</p>
-    <a asp-controller="Account" asp-action="Logout">Logout</a> 
-}
-else
-{
-    <p>Enter in system pls</p>
-    <a asp-controller="Account" asp-action="Login">Login</a> 
-}
 
 
-<div class="text-center">
-    <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
-        <h1 class="text-center">Welcome to TeacherSync Web App </h1>
+<div class="jumbotron p-4 p-md-5 text-white rounded-4 bg-dark">
+    <div class="column-gap-md-4 px-0">
+        <h1 class="display-4 font-italic">Welcome to <b>Teach sync app</b>, @if (User.Identity is { IsAuthenticated: true })
+                                                                     {
+                                                                         @User.Identity.Name;
+                                                                     }
+                                                                     else
+                                                                     {
+                                                                         <span>Anonymous</span>
+                                                                     }
+        </h1>
+        <p class="lead my-3">Info about application ...</p>
+        <p class="lead mb-0"><a href="https://github.com/andreydjurinschi" class="text-white font-weight-bold">Come here</a></p>
     </div>
 </div>

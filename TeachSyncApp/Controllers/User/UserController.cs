@@ -61,21 +61,21 @@ public class UserController(ApplicationDbContext context) : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(UserViewModel modelUser)
+    public async Task<IActionResult> Create(UserCreateViewModel modelUserCreate)
     {
         if(!ModelState.IsValid)
         {
-            modelUser = await GetUserViewModel();
-            return View(modelUser);
+            modelUserCreate = await GetUserViewModel();
+            return View(modelUserCreate);
         }
 
         var user = new Models.User
         {
-            Name = modelUser.Name,
-            Surname = modelUser.Surname,
-            Email = modelUser.Email,
-            Password = modelUser.Password,
-            RoleId = modelUser.RoleId
+            Name = modelUserCreate.Name,
+            Surname = modelUserCreate.Surname,
+            Email = modelUserCreate.Email,
+            Password = modelUserCreate.Password,
+            RoleId = modelUserCreate.RoleId
         };
         context.Users.Add(user);
         await context.SaveChangesAsync();
@@ -150,9 +150,9 @@ public class UserController(ApplicationDbContext context) : Controller
         }
     }
 
-    private async Task<UserViewModel> GetUserViewModel()
+    private async Task<UserCreateViewModel> GetUserViewModel()
     {
-        var user = new UserViewModel();
+        var user = new UserCreateViewModel();
         user.Roles = await context.Roles.ToListAsync();
         return user;
     }

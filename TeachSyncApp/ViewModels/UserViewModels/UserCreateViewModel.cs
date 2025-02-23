@@ -1,9 +1,10 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using TeachSyncApp.Models;
 
 namespace TeachSyncApp.ViewModels;
 
-public class UserViewModel
+public class UserCreateViewModel
 {
     public int Id { get; set; }
     
@@ -19,11 +20,8 @@ public class UserViewModel
     [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessage = "Invalid email format.")]
     public string Email { get; set; } = string.Empty;
     
-    
     [Required]
     public string Password { get; set; } = string.Empty;
-    
-     
     
     [Required(ErrorMessage = "User must have role")] 
     [Display(Name = "Role")]
