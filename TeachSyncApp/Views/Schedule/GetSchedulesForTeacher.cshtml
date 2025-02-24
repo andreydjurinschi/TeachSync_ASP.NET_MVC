@@ -1,0 +1,37 @@
+@model IEnumerable<TeachSyncApp.Models.Schedule>
+
+@{
+    ViewData["Title"] = "Teacher's Schedule";
+}
+
+<h1>Schedule for @Model.FirstOrDefault()?.Teacher?.Name</h1>
+
+<table class="table table-striped table-hover">
+    <thead>
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.First().DayOfWeekId)</th>
+        <th>Teacher</th>
+        <th>Classroom</th>
+        <th>Group-Course</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var schedule in Model)
+    {
+        <tr>
+            <td>@schedule.WeekDays.Name</td>
+            <td>@schedule.Teacher.Name</td>
+            <td>@schedule.ClassRoom.Name</td>
+            <td>@schedule.GroupCourse.Group.Name - @schedule.GroupCourse.Course.Name</td>
+            <td>@schedule.StartTime.ToString("hh\\:mm")</td>
+            <td>@schedule.EndTime.ToString("hh\\:mm")</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Back to Schedules</a>
+</div>

@@ -1,0 +1,44 @@
+@model IEnumerable<User>
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+
+<table class="table table-striped table-hover">
+    <thead>
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Name)</th>
+        <th>@Html.DisplayNameFor(model => model.Surname)</th>
+        <th>@Html.DisplayNameFor(model => model.Email)</th>
+        <th>@Html.DisplayNameFor(model => model.CreatedAt)</th>
+        <th>@Html.DisplayNameFor(model => model.RoleId)</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role.Name)
+            </td>
+            <td>
+                <a asp-action="CreateForTeacher" asp-route-teacherId="@item.Id" class="btn btn-primary">Create Schedule</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -1,5 +1,7 @@
 using System.Diagnostics;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TeachSyncApp.Context;
 using TeachSyncApp.Models;
 
@@ -18,7 +20,8 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return View();
+        var user = _context.Users.FirstOrDefault(u => User.Identity != null && u.Email == User.Identity.Name); 
+        return View(user);
     }
 
     public IActionResult Privacy()

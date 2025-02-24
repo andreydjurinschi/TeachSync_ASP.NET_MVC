@@ -30,6 +30,48 @@ public class SeedData
                 );
                 context.SaveChanges();
             }
+            
+            if (!context.DaysOfWeek.Any())
+            {
+                context.DaysOfWeek.AddRange(
+                    new WeekDays { Name = "Monday" },
+                    new WeekDays { Name = "Tuesday" },
+                    new WeekDays { Name = "Wednesday" },
+                    new WeekDays { Name = "Thursday" },
+                    new WeekDays { Name = "Friday" },
+                    new WeekDays { Name = "Saturday" },
+                    new WeekDays { Name = "Sunday" }
+                    
+                );
+                context.SaveChanges();
+            }
+            
+            if (!context.Topics.Any())
+            {
+                context.Topics.AddRange(
+                    new Topic { Name = "Programming" },
+                    new Topic { Name = "Basic Programming" },
+                    new Topic { Name = "OOP" },
+                    new Topic { Name = "Web Development" },
+                    new Topic { Name = "Backend Development" },
+                    new Topic { Name = "Frontend Development" },
+                    new Topic { Name = "Databases" },
+                    new Topic { Name = "Algorithms" },
+                    new Topic { Name = "Data Structures" },
+                    new Topic { Name = "Mobile Development" },
+                    new Topic { Name = "Game Development" },
+                    new Topic { Name = "Software Design" },
+                    new Topic { Name = "Testing" },
+                    new Topic { Name = "Version Control" },
+                    new Topic { Name = "CI/CD" },
+                    new Topic { Name = "Cloud Computing" },
+                    new Topic { Name = "Machine Learning" },
+                    new Topic { Name = "Artificial Intelligence" },
+                    new Topic { Name = "Cybersecurity" },
+                    new Topic { Name = "DevOps" }
+                );
+                context.SaveChanges();
+            }
 
             if (!context.Users.Any())
             {

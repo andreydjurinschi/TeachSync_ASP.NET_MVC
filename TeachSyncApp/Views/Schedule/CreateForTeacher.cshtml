@@ -16,21 +16,12 @@
             {
                 <option value="@day.Id">@day.Name</option>
             }
-            
+
         </select>
         <span asp-validation-for="DayOfWeekId" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
-        <label class="control-label">Teacher</label>
-        <select name="TeacherId" class="form-control">
-            @foreach (var teacher in Model.TeacherList)
-            {
-                <option value="@teacher.Id">@teacher.Name @teacher.Surname</option>
-            }
-        </select>
-        <span asp-validation-for="TeacherId" class="text-danger"></span>
-    </div>
+    <input type="hidden" asp-for="TeacherId" />
 
     <div class="form-group">
         <label class="control-label">Classroom</label>
@@ -43,16 +34,7 @@
         <span asp-validation-for="ClassRoomId" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
-        <label class="control-label">Group-Course</label>
-        <select name="GroupCourseId" class="form-control">
-            @foreach (var groupCourse in Model.GroupCourseList)
-            {
-                <option value="@groupCourse.Id">@groupCourse.Group.Name - @groupCourse.Course.Name</option>
-            }
-        </select>
-        <span asp-validation-for="GroupCourseId" class="text-danger"></span>
-    </div>
+    <input type="hidden" asp-for="GroupCourseList" />
 
     <div class="form-group">
         <label asp-for="StartTime" class="control-label">Start Time</label>

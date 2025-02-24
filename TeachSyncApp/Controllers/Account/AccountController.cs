@@ -31,7 +31,7 @@ public class AccountController : Controller
 
         if (user == null)
         {
-            ModelState.AddModelError(string.Empty, "Неверный логин или пароль");
+            ModelState.AddModelError(string.Empty, "Invalid login or password");
             return View();
         }
         

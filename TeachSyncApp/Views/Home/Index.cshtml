@@ -8,16 +8,19 @@
 
 <div class="jumbotron p-4 p-md-5 text-white rounded-4 bg-dark">
     <div class="column-gap-md-4 px-0">
-        <h1 class="display-4 font-italic">Welcome to <b>Teach sync app</b>, @if (User.Identity is { IsAuthenticated: true })
-                                                                     {
-                                                                         @User.Identity.Name;
-                                                                     }
-                                                                     else
-                                                                     {
-                                                                         <span>Anonymous</span>
-                                                                     }
+        <h1 class="display-4 font-italic">Welcome to <b>Teach sync app</b>, 
+            @if (User.Identity is { IsAuthenticated: true })
+            {
+                @User.Identity.Name; 
+            }
+            else
+            {
+                <span>Anonymous</span>
+            }
+            
         </h1>
         <p class="lead my-3">Info about application ...</p>
         <p class="lead mb-0"><a href="https://github.com/andreydjurinschi" class="text-white font-weight-bold">Come here</a></p>
+
     </div>
 </div>
