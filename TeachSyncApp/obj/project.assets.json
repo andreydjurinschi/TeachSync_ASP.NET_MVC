@@ -8332,27 +8332,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Vladimir Djurinschi\\.nuget\\packages\\": {}
+    "C:\\Users\\djuri\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Vladimir Djurinschi\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\TeachSyncApp.csproj",
+      "projectUniqueName": "C:\\Users\\djuri\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\TeachSyncApp.csproj",
       "projectName": "TeachSyncApp",
-      "projectPath": "C:\\Users\\Vladimir Djurinschi\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\TeachSyncApp.csproj",
-      "packagesPath": "C:\\Users\\Vladimir Djurinschi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Vladimir Djurinschi\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\obj\\",
+      "projectPath": "C:\\Users\\djuri\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\TeachSyncApp.csproj",
+      "packagesPath": "C:\\Users\\djuri\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\djuri\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Vladimir Djurinschi\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\djuri\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -8419,16 +8416,8 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json."
-    }
-  ]
+  }
 }

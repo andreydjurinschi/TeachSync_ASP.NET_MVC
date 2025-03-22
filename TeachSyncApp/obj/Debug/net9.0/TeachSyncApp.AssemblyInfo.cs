@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TeachSyncApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5866ea2f09e0525bc2cbda514d3e38aa4da58dc5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+54ea90763fa697988c39675c28daae85b8bfd71c")]
 [assembly: System.Reflection.AssemblyProductAttribute("TeachSyncApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TeachSyncApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
