@@ -108,12 +108,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/djuri/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Notification/GetForUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpY2F0aW9uXEdldEZvclVzZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/djuri/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Replacement/Approve.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwbGFjZW1lbnRcQXBwcm92ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/djuri/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Replacement/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwbGFjZW1lbnRcQ3JlYXRlLmNzaHRtbA==
+[C:/Users/djuri/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Replacement/CreateForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwbGFjZW1lbnRcQ3JlYXRlRm9ybS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/djuri/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Replacement/Delete.cshtml]

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using TeachSyncApp.Context;
 using TeachSyncApp.Models;
 using TeachSyncApp.ViewModels;
+using TeachSyncApp.ViewModels.UserViewModels;
 
 
 namespace TeachSyncApp.Controllers.User;

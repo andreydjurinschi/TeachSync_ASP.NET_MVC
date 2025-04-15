@@ -1,8 +1,7 @@
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using TeachSyncApp.Models;
 
-namespace TeachSyncApp.ViewModels;
+namespace TeachSyncApp.ViewModels.UserViewModels;
 
 public class UserCreateViewModel
 {

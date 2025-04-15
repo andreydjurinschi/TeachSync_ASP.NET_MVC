@@ -21,6 +21,8 @@ public class ApplicationDbContext : DbContext
     public DbSet<WeekDays> DaysOfWeek { get; set; }
     public DbSet<Schedule> Schedules { get; set; }
     public DbSet<Replacement> Replacements { get; set; }
+    
+    public DbSet<Notification> Notifications { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -117,6 +119,24 @@ public class ApplicationDbContext : DbContext
             .HasOne(r => r.CourseTopic)
             .WithMany(ct => ct.Replacements)
             .HasForeignKey(r => r.CourseTopicId)
+            .OnDelete(DeleteBehavior.Restrict);
+        
+        modelBuilder.Entity<Notification>()
+            .HasOne(n => n.Teacher)
+            .WithMany() 
+            .HasForeignKey(n => n.TeacherId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Notification>()
+            .HasOne(n => n.Replacement)
+            .WithMany() 
+            .HasForeignKey(n => n.ReplacementId)
+            .OnDelete(DeleteBehavior.Restrict);
+        
+        modelBuilder.Entity<Notification>()
+            .HasOne(n => n.Schedule)
+            .WithMany() 
+            .HasForeignKey(n => n.ScheduleId)
             .OnDelete(DeleteBehavior.Restrict);
     }
 }

@@ -3,7 +3,6 @@
 {
     <div class="alert alert-danger">@error.ErrorMessage</div>
 }
-<a asp-controller="Replacement" asp-action="Create">Request for replacement</a>
 <table class="table table-striped table-hover">
     <thead>
     <tr>
@@ -46,7 +45,6 @@
                     @if (item.ApprovedById == null)
                     {
                         <span>Not approved</span>
-                        <a class="btn btn-primary" asp-controller="Replacement" asp-action="Approve" asp-route-id="@item.Id">Approve</a>
                     }
                     else
                     {

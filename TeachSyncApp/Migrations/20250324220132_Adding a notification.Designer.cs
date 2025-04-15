@@ -12,8 +12,8 @@ using TeachSyncApp.Context;
 namespace TeachSyncApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250218141755_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250324220132_Adding a notification")]
+    partial class Addinganotification
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -92,6 +92,32 @@ namespace TeachSyncApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Groups", (string)null);
+                });
+
+            modelBuilder.Entity("TeachSyncApp.Models.Notification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ReplacementId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeacherId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReplacementId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("TeachSyncApp.Models.Replacement", b =>
@@ -312,6 +338,25 @@ namespace TeachSyncApp.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("TeachSyncApp.Models.Notification", b =>
+                {
+                    b.HasOne("TeachSyncApp.Models.Replacement", "Replacement")
+                        .WithMany()
+                        .HasForeignKey("ReplacementId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("TeachSyncApp.Models.User", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Replacement");
+
+                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("TeachSyncApp.Models.Replacement", b =>

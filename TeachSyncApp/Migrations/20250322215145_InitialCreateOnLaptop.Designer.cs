@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TeachSyncApp.Context;
 
@@ -11,9 +12,11 @@ using TeachSyncApp.Context;
 namespace TeachSyncApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250322215145_InitialCreateOnLaptop")]
+    partial class InitialCreateOnLaptop
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -89,37 +92,6 @@ namespace TeachSyncApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Groups", (string)null);
-                });
-
-            modelBuilder.Entity("TeachSyncApp.Models.Notification", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ReplacementId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ScheduleId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TeacherId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ReplacementId");
-
-                    b.HasIndex("ScheduleId");
-
-                    b.HasIndex("TeacherId");
-
-                    b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("TeachSyncApp.Models.Replacement", b =>
@@ -340,33 +312,6 @@ namespace TeachSyncApp.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("TeachSyncApp.Models.Notification", b =>
-                {
-                    b.HasOne("TeachSyncApp.Models.Replacement", "Replacement")
-                        .WithMany()
-                        .HasForeignKey("ReplacementId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("TeachSyncApp.Models.Schedule", "Schedule")
-                        .WithMany()
-                        .HasForeignKey("ScheduleId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("TeachSyncApp.Models.User", "Teacher")
-                        .WithMany()
-                        .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Replacement");
-
-                    b.Navigation("Schedule");
-
-                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("TeachSyncApp.Models.Replacement", b =>

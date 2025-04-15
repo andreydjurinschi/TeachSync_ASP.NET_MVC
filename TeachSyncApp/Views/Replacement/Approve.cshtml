@@ -1,3 +1,4 @@
+@using System.Security.Claims
 @model Replacement
 
 <div class="container mt-4">
@@ -5,16 +6,9 @@
 
     <form asp-action="Approve" method="post" class="card p-4 shadow-sm">
         <input type="hidden" name="replacementId" value="@Model.Id" />
-        <div class="mb-3">
-            <label for="teacherId" class="form-label fw-bold">Select Teacher:</label>
-            <select id="teacherId" name="teacherId" class="form-select">
-                <option value="">-- Select an available teacher --</option>
-                @foreach (var teacher in ViewBag.AvailableTeachers)
-                {
-                    <option value="@teacher.Id">@teacher.Name @teacher.Surname</option>
-                }
-            </select>
-        </div>
+        <input type="hidden" name="teacherId" value="@User.FindFirstValue(ClaimTypes.NameIdentifier)" />
+
+        <p>Вы собираетесь подтвердить замену.</p>
 
         <div class="d-flex justify-content-end">
             <a asp-action="Index" class="btn btn-secondary me-2">Cancel</a>

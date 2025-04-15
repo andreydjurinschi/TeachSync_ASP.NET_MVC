@@ -4,7 +4,7 @@
     ViewData["Title"] = "Teacher's Schedule";
 }
 
-<h1>Schedule for @Model.FirstOrDefault()?.Teacher?.Name</h1>
+<h1>Schedule</h1>
 
 <table class="table table-striped table-hover">
     <thead>
@@ -15,6 +15,8 @@
         <th>Group-Course</th>
         <th>Start Time</th>
         <th>End Time</th>
+        <th>Request for 
+            replacement</th>
     </tr>
     </thead>
     <tbody>
@@ -27,6 +29,7 @@
             <td>@schedule.GroupCourse.Group.Name - @schedule.GroupCourse.Course.Name</td>
             <td>@schedule.StartTime.ToString("hh\\:mm")</td>
             <td>@schedule.EndTime.ToString("hh\\:mm")</td>
+            <td><a asp-controller="Replacement" asp-action="CreateForm" asp-route-teacherId="@schedule.Teacher.Id" asp-route-courseId="@schedule.GroupCourse.Course.Id" class="btn btn-info">Request</a></td>
         </tr>
     }
     </tbody>

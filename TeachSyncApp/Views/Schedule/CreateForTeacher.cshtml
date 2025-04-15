@@ -20,6 +20,17 @@
         </select>
         <span asp-validation-for="DayOfWeekId" class="text-danger"></span>
     </div>
+    <div class="form-group">
+        <label class="control-label">Group</label>
+        <select name="GroupCourseId" class="form-control">
+            @foreach (var groupCourse in Model.GroupCourseList)
+            {
+                <option value="@groupCourse.Id">@groupCourse.Course.Name - @groupCourse.Group.Name</option>
+            }
+
+        </select>
+        <span asp-validation-for="DayOfWeekId" class="text-danger"></span>
+    </div>
 
     <input type="hidden" asp-for="TeacherId" />
 
@@ -33,8 +44,7 @@
         </select>
         <span asp-validation-for="ClassRoomId" class="text-danger"></span>
     </div>
-
-    <input type="hidden" asp-for="GroupCourseList" />
+    
 
     <div class="form-group">
         <label asp-for="StartTime" class="control-label">Start Time</label>

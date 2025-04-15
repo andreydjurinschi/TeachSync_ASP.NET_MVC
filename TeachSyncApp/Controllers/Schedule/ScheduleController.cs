@@ -55,6 +55,7 @@ public class ScheduleController : Controller
     {
         var username = User.Identity?.Name;
         var teacher = await _context.Users.FirstOrDefaultAsync(u => u.Name == username);
+        int ? teacherId = teacher != null ? teacher.Id : null;
         if (teacher == null)
         {
             return NotFound();
@@ -173,6 +174,33 @@ public class ScheduleController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    public async Task<IActionResult> Delete(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+        var schedule = await GetScheduleById(id);
+        return View(schedule);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> DeleteConfirmed(int id)
+    {
+        var schedule = await GetScheduleById(id);
+        try
+        {
+            _context.Schedules.Remove(schedule);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        catch (Exception e)
+        {
+            ModelState.AddModelError("", "Cannot delete schedule");
+            return RedirectToAction(nameof(Index));
+        }
+    }
+
 
     private async Task<List<Models.Schedule>> GetSchedules()
     {
@@ -199,7 +227,7 @@ public class ScheduleController : Controller
             .ThenInclude(g => g.Course)
             .FirstOrDefaultAsync(s => s.Id == id))!;
     }
-
+    
     private async Task<ScheduleViewModel> GetScheduleViewModels()
     {
         var schedule = new ScheduleViewModel();

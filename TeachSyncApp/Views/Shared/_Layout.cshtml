@@ -63,6 +63,9 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Schedule" asp-action="GetSchedulesForTeacher" asp-route-teacherId="@User.FindFirstValue(ClaimTypes.NameIdentifier)">My schedules</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Notification" asp-action="GetForUser">Notifications</a>
+                    </li>
                 </ul>
             </div>
         }

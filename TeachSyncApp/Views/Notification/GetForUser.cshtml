@@ -1,0 +1,46 @@
+@using System.Security.Claims
+@model List<TeachSyncApp.Models.Notification>
+@{
+    ViewData["Title"] = "Notifications";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Ваши уведомления</h2>
+
+    @if (Model.Any())
+    {
+        <div class="list-group">
+            @foreach (var item in Model)
+            {
+                <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5 class="mb-1">Replacement request</h5>
+                        <p class="mb-1">
+                            Time: @item.Replacement.Schedule.WeekDays.Name: @item.Replacement.Schedule.StartTime - @item.Replacement.Schedule.EndTime
+                        </p>
+                        <p class="mb-1">
+                            Teacher: @item.Replacement.Schedule.Teacher.Name
+                        </p>
+                        <p class="mb-1">
+                            Course: @item.Schedule.GroupCourse.Course.Name
+                        </p>
+                        <p class="mb-1">
+                            Topic: @item.Replacement.CourseTopic.Topic.Name
+                        </p>
+                        <p class="mb-1">
+                            Group: @item.Schedule.GroupCourse.Group.Name
+                        </p>
+                          <small class="text-muted">Создано: @item.CreatedAt.ToString("dd.MM.yyyy HH:mm")</small>
+                        <br>
+                        <a asp-controller="Replacement" asp-action="Approve" asp-route-replacementId="@item.Replacement.Id" asp-route-teacherId="@int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!)" class="btn btn-info">Approve</a>
+                    </div>
+                    <span class="badge bg-primary">Новое</span>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">Нет новых уведомлений.</div>
+    }
+</div>
