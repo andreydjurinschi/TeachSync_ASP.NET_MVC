@@ -34,13 +34,13 @@
                         <br>
                         <a asp-controller="Replacement" asp-action="Approve" asp-route-replacementId="@item.Replacement.Id" asp-route-teacherId="@int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!)" class="btn btn-info">Approve</a>
                     </div>
-                    <span class="badge bg-primary">Новое</span>
+                    <span class="badge bg-primary">NEW</span>
                 </div>
             }
         </div>
     }
     else
     {
-        <div class="alert alert-info">Нет новых уведомлений.</div>
+        <div class="alert alert-info">No notifications</div>
     }
 </div>

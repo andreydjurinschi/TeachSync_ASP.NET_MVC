@@ -3,7 +3,10 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.IdentityModel.Tokens;
 using TeachSyncApp.Context;
+using TeachSyncApp.ViewModels.UserViewModels;
 
 namespace TeachSyncApp.Controllers.Account;
 
@@ -57,4 +60,46 @@ public class AccountController : Controller
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         return RedirectToAction("Index", "Home");
     }
+
+    [HttpGet]
+    public IActionResult PasswordRecovery()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> PasswordRecovery(PasswordRecoveryViewModel model)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(model);
+        }
+
+        if (model.Password.IsNullOrEmpty() ||  model.Email.IsNullOrEmpty() ||  model.ConfirmPassword.IsNullOrEmpty())
+        {
+            ModelState.AddModelError(string.Empty, "All fields are required");
+            return View(model);
+        }
+        
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
+        if (user == null)
+        {
+            ModelState.AddModelError(string.Empty, "Invalid login or password");
+            return View(model);
+        }
+        
+        if (model.Password != model.ConfirmPassword)
+        {
+            ModelState.AddModelError(string.Empty, "Passwords do not match");
+            return View(model);
+        }
+        
+        user.Password = model.Password;
+        _context.Update(user);
+        await _context.SaveChangesAsync();
+        ModelState.AddModelError(string.Empty, "Password successfully changed");
+        return View("Login");
+    }
+
+
 }
