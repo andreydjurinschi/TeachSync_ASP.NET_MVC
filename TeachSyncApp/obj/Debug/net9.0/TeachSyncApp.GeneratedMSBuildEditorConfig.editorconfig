@@ -116,6 +116,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpY2F0aW9uXEdldEZvclVzZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/djuri/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Profile/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/djuri/RiderProjects/TeachSync_ASP.NET_MVC/TeachSyncApp/Views/Replacement/Approve.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwbGFjZW1lbnRcQXBwcm92ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

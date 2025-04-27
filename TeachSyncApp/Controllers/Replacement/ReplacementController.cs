@@ -212,8 +212,6 @@ public class ReplacementController : Controller
         ViewBag.AvailableTeachers = availableTeachers;
         return View(replacement);
     }
-
-    
     
     [HttpPost]
     public async Task<IActionResult> Approve(int replacementId, int teacherId)

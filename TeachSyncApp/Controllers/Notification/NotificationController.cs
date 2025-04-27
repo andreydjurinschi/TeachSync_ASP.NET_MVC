@@ -41,4 +41,29 @@ public class NotificationController : Controller
         return View(notifications);
     }
 
+    [HttpPost]
+    public async Task<IActionResult> DropNotification(int notificationId)
+    {
+        int teacherId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+        var notification = _context.Notifications.FirstOrDefault(
+            n => n.TeacherId == teacherId
+            && n.Id == notificationId
+        );
+
+        if (notification == null)
+        {
+            return NotFound();
+        }
+
+        try
+        {
+            _context.Notifications.Remove(notification);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(GetForUser));
+        }
+        catch (DbUpdateException e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
 }
