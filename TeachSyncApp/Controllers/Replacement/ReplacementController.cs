@@ -84,7 +84,6 @@ public class ReplacementController : Controller
             var endTime = replacement.Schedule.EndTime;
             var availableTeachers = await _context.Users.Where(u => u.RoleId == 3)
                 .Where(u => !u.Schedules.Any(s=> s.StartTime <= endTime && s.EndTime >= startTime && s.DayOfWeekId == replacement.Schedule.DayOfWeekId)).ToListAsync();
-//http://localhost:5239/Replacement/Approve
             foreach (var teacher in availableTeachers)
             {
                 var notification = new Models.Notification();
@@ -239,5 +238,7 @@ public class ReplacementController : Controller
         await _context.SaveChangesAsync();
         return RedirectToAction("Index");
     }
+
+    
 
 }

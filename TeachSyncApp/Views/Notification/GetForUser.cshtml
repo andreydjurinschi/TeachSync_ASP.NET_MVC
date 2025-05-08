@@ -33,7 +33,10 @@
                           <small class="text-muted">Создано: @item.CreatedAt.ToString("dd.MM.yyyy HH:mm")</small>
                         <br>
                         <a asp-controller="Replacement" asp-action="Approve" asp-route-replacementId="@item.Replacement.Id" asp-route-teacherId="@int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!)" class="btn btn-info">Approve</a>
-                        <a asp-controller="Notification" asp-action="DropNotification" asp-route-notificationId="@item.Id" class="btn btn-danger">DECLINE</a>
+                        <form asp-action="DropNotification" method="post">
+                            <input type="hidden" name="notificationId" value="@item.Id">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
                     </div>
                     <span class="badge bg-primary">NEW</span>
                 </div>

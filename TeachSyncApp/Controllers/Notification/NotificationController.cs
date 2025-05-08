@@ -59,7 +59,18 @@ public class NotificationController : Controller
         {
             _context.Notifications.Remove(notification);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(GetForUser));
+            var replacementId = notification.ReplacementId;
+            var otherNotifications = await _context.Notifications.Where(n => n.ReplacementId == replacementId).ToListAsync();
+            if (otherNotifications.Count == 0)
+            {
+                var replacement = await _context.Replacements.Where(r => r.Id == replacementId).FirstOrDefaultAsync();
+                if (replacement != null)
+                {
+                    _context.Replacements.Remove(replacement);
+                    await _context.SaveChangesAsync();
+                }
+            }
+            return RedirectToAction("GetForUser");
         }
         catch (DbUpdateException e)
         {
