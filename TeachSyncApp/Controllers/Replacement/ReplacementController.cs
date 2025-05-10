@@ -238,6 +238,9 @@ public class ReplacementController : Controller
         await _context.SaveChangesAsync();
         return RedirectToAction("Index");
     }
+    
+    [HttpGet]
+    
 
     
 

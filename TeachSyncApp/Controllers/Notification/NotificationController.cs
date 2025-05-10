@@ -54,7 +54,6 @@ public class NotificationController : Controller
         {
             return NotFound();
         }
-
         try
         {
             _context.Notifications.Remove(notification);
