@@ -23,6 +23,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Replacement> Replacements { get; set; }
     
     public DbSet<Notification> Notifications { get; set; }
+    public DbSet<ReplacementResponse> ReplacementResponses { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -120,23 +121,38 @@ public class ApplicationDbContext : DbContext
             .WithMany(ct => ct.Replacements)
             .HasForeignKey(r => r.CourseTopicId)
             .OnDelete(DeleteBehavior.Restrict);
-        
+
         modelBuilder.Entity<Notification>()
             .HasOne(n => n.Teacher)
-            .WithMany() 
+            .WithMany()
             .HasForeignKey(n => n.TeacherId)
             .OnDelete(DeleteBehavior.Restrict);
 
         modelBuilder.Entity<Notification>()
             .HasOne(n => n.Replacement)
-            .WithMany() 
+            .WithMany()
             .HasForeignKey(n => n.ReplacementId)
             .OnDelete(DeleteBehavior.Restrict);
-        
+
         modelBuilder.Entity<Notification>()
             .HasOne(n => n.Schedule)
-            .WithMany() 
+            .WithMany()
             .HasForeignKey(n => n.ScheduleId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<ReplacementResponse>()
+            .HasKey(r => r.Id);
+
+        modelBuilder.Entity<ReplacementResponse>()
+            .HasOne(r => r.Replacement)
+            .WithMany()
+            .HasForeignKey(r => r.ReplacementId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<ReplacementResponse>()
+            .HasOne(r => r.Teacher)
+            .WithMany()
+            .HasForeignKey(r => r.TeacherId)
             .OnDelete(DeleteBehavior.Restrict);
     }
 }

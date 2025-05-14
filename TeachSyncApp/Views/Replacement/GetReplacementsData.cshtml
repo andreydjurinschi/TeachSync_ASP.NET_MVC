@@ -1,0 +1,60 @@
+@model TeachSyncApp.ViewModels.Replacement.ReplacementStatisticsViewModel
+
+<h1>Replacement statistics</h1>
+
+<h2>Applied replacements</h2>
+@if (Model.AppliedReplacements.Any())
+{
+    @foreach (var applied in Model.AppliedReplacements)
+    {
+        var schedule = applied.Replacement?.Schedule;
+        <div>
+            <p><strong>Teacher:</strong> @applied.Teacher?.Name @applied.Teacher?.Surname</p>
+            <p><strong>Course:</strong> @schedule?.GroupCourse?.Course?.Name</p>
+            <p><strong>Group:</strong> @schedule?.GroupCourse?.Group?.Name</p>
+            <p><strong>Time:</strong> @schedule?.StartTime - @schedule?.EndTime</p>
+            <p><strong>Day:</strong> @schedule?.DayOfWeekId</p>
+            <hr />
+        </div>
+    }
+}
+
+<h2>Rejected replacements</h2>
+@if (Model.RejectedReplacements.Any())
+{
+    @foreach (var rejected in Model.RejectedReplacements)
+    {
+        var schedule = rejected.Replacement?.Schedule;
+        <div>
+            <p><strong>Teacher:</strong> @rejected.Teacher?.Name @rejected.Teacher?.Surname </p>
+            <p><strong>Course:</strong> @schedule?.GroupCourse?.Course?.Name</p>
+            <p><strong>Group:</strong> @schedule?.GroupCourse?.Group?.Name</p>
+            <p><strong>Time:</strong> @schedule?.StartTime - @schedule?.EndTime</p>
+            <p><strong>Day:</strong> @schedule?.DayOfWeekId</p>
+            <hr />
+        </div>
+    }
+}
+
+<h2>Pending replacements</h2>
+@if (Model.PendingReplacements.Any())
+{
+    
+    foreach (var r in Model.PendingReplacements)
+    {
+        <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                Schedule
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><span class="dropdown-item"><b>Teacher:</b> @r.Schedule?.Teacher?.Name @r.Schedule?.Teacher?.Surname</span></li>
+                <li><span class="dropdown-item"><b>Group:</b> @r.Schedule?.GroupCourse.Group.Name</span></li>
+                <li><span class="dropdown-item"><b>Course:</b> @r.CourseTopic?.Course?.Name</span></li>
+                <li><span class="dropdown-item"><b>Topics:</b>@r.CourseTopic?.Topic?.Name</span></li>
+                <li><span class="dropdown-item"><b>Time:</b> @r.Schedule?.StartTime - @r.Schedule?.EndTime</span></li>
+                <li><span class="dropdown-item"><b>Day:</b> @r.Schedule?.WeekDays?.Name</span></li>
+            </ul>
+            <hr />
+        </div>
+    }
+}

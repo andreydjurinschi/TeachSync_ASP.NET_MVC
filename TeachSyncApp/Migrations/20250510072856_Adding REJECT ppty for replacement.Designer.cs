@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TeachSyncApp.Context;
 
@@ -11,9 +12,11 @@ using TeachSyncApp.Context;
 namespace TeachSyncApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250510072856_Adding REJECT ppty for replacement")]
+    partial class AddingREJECTpptyforreplacement
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -154,35 +157,6 @@ namespace TeachSyncApp.Migrations
                     b.HasIndex("ScheduleId");
 
                     b.ToTable("Replacements");
-                });
-
-            modelBuilder.Entity("TeachSyncApp.Models.ReplacementResponse", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ReplacementId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ResponsedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TeacherId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ReplacementId");
-
-                    b.HasIndex("TeacherId");
-
-                    b.ToTable("ReplacementResponses");
                 });
 
             modelBuilder.Entity("TeachSyncApp.Models.Role", b =>
@@ -422,25 +396,6 @@ namespace TeachSyncApp.Migrations
                     b.Navigation("Schedule");
 
                     b.Navigation("TeacherApprove");
-                });
-
-            modelBuilder.Entity("TeachSyncApp.Models.ReplacementResponse", b =>
-                {
-                    b.HasOne("TeachSyncApp.Models.Replacement", "Replacement")
-                        .WithMany()
-                        .HasForeignKey("ReplacementId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TeachSyncApp.Models.User", "Teacher")
-                        .WithMany()
-                        .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Replacement");
-
-                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("TeachSyncApp.Models.Schedule", b =>

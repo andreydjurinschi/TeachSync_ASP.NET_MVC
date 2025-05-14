@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using TeachSyncApp.Context;
 using TeachSyncApp.Models;
 using TeachSyncApp.ViewModels;
+using TeachSyncApp.ViewModels.Replacement;
 
 namespace TeachSyncApp.Controllers.Replacement;
 
@@ -191,7 +192,7 @@ public class ReplacementController : Controller
         }
     } 
     
-        [HttpGet]
+    [HttpGet]
     public async Task<IActionResult> Approve(int? replacementId, int teacherId)
     {
         if (replacementId == null)
@@ -211,7 +212,7 @@ public class ReplacementController : Controller
         ViewBag.AvailableTeachers = availableTeachers;
         return View(replacement);
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> Approve(int replacementId, int teacherId)
     {
@@ -233,15 +234,118 @@ public class ReplacementController : Controller
             return View(replacement);
         }
         
+        var alreadyResponsed = await _context.ReplacementResponses
+            .AnyAsync(r => r.Id == replacementId  && r.TeacherId == teacher.Id);
+
+        if (!alreadyResponsed)
+        {
+            ReplacementResponse replacementResponse  = new ReplacementResponse();
+            replacementResponse.ReplacementId = replacement.Id;
+            replacementResponse.TeacherId = teacher.Id;
+            replacementResponse.Status = Status.Approved;
+            replacementResponse.ResponsedAt = DateTime.Now;
+            _context.ReplacementResponses.Add(replacementResponse);
+            await _context.SaveChangesAsync();
+        }
+        
         replacement.ApprovedById = teacherId;
         replacement.Status = Status.Approved;
         await _context.SaveChangesAsync();
         return RedirectToAction("Index");
     }
-    
-    [HttpGet]
-    
+
+    [HttpPost]
+    public async Task<IActionResult> Reject(int? replacementId, int? teacherId)
+    {
+        if (replacementId == null || teacherId == null)
+        {
+            return NotFound();
+        }
+        
+        var replacement = await _context.Replacements.FindAsync(replacementId);
+        var teacher = await _context.Users.FindAsync(teacherId);
+
+        if (replacement == null || teacher == null)
+        {
+            return NotFound();
+        }
+        
+        ReplacementResponse replacementResponse  = new ReplacementResponse();
+        replacementResponse.ReplacementId = replacement.Id;
+        replacementResponse.TeacherId = teacher.Id;
+        replacementResponse.Status = Status.Rejected;
+        replacementResponse.ResponsedAt = DateTime.Now;
+        _context.ReplacementResponses.Add(replacementResponse);
+        await _context.SaveChangesAsync();
+        
+        Models.Notification notification = _context.Notifications
+            .FirstOrDefault(n => n.ReplacementId == replacementId && n.TeacherId == teacher.Id)!;
+        try
+        {
+            _context.Notifications.Remove(notification);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("GetForUser", "Notification");
+        }
+        catch (DbUpdateException)
+        {
+            ModelState.AddModelError("", "Cannot delete replacement");
+            return RedirectToAction(nameof(Index));
+        }
+    }
+
+[HttpGet]
+public async Task<IActionResult> GetReplacementsData()
+{
+    var pendingReplacements = await _context.Replacements
+        .Where(r => r.Status == Status.Pending)
+        .Include(r => r.Schedule)
+        .ThenInclude(s => s.Teacher)
+        .Include(r => r.CourseTopic)
+        .ThenInclude(t => t.Course)
+        .Include(r => r.CourseTopic)
+        .ThenInclude(t => t.Topic)
+        .ToListAsync();
+
+    var approvedReplacements = await _context.ReplacementResponses
+        .Where(r => r.Status == Status.Approved)
+        .Include(r => r.Teacher)
+        .Include(r => r.Replacement)
+            .ThenInclude(rep => rep.Schedule)
+                .ThenInclude(s => s.Teacher)
+        .Include(r => r.Replacement)
+            .ThenInclude(rep => rep.Schedule)
+                .ThenInclude(s => s.GroupCourse)
+                    .ThenInclude(gc => gc.Course)
+        .Include(r => r.Replacement)
+            .ThenInclude(rep => rep.Schedule)
+                .ThenInclude(s => s.GroupCourse)
+                    .ThenInclude(gc => gc.Group)
+        .ToListAsync();
+
+    var rejectedReplacements = await _context.ReplacementResponses
+        .Where(r => r.Status == Status.Rejected)
+        .Include(r => r.Teacher)
+        .Include(r => r.Replacement)
+            .ThenInclude(rep => rep.Schedule)
+                .ThenInclude(s => s.Teacher)
+        .Include(r => r.Replacement)
+            .ThenInclude(rep => rep.Schedule)
+                .ThenInclude(s => s.GroupCourse)
+                    .ThenInclude(gc => gc.Course)
+        .Include(r => r.Replacement)
+            .ThenInclude(rep => rep.Schedule)
+                .ThenInclude(s => s.GroupCourse)
+                    .ThenInclude(gc => gc.Group)
+        .ToListAsync();
+
+    ReplacementStatisticsViewModel replacementStatisticsViewModel = new()
+    {
+        PendingReplacements = pendingReplacements,
+        AppliedReplacements = approvedReplacements,
+        RejectedReplacements = rejectedReplacements
+    };
+    return View(replacementStatisticsViewModel);
+}
 
     
-
 }
