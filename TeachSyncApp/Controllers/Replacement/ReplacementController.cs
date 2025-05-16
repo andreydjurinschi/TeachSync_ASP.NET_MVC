@@ -292,18 +292,25 @@ public class ReplacementController : Controller
             return RedirectToAction(nameof(Index));
         }
     }
-
+    
 [HttpGet]
-public async Task<IActionResult> GetReplacementsData()
+public async Task<IActionResult> GetReplacementsData(string sortByReplacementType)
 {
     var pendingReplacements = await _context.Replacements
         .Where(r => r.Status == Status.Pending)
         .Include(r => r.Schedule)
-        .ThenInclude(s => s.Teacher)
+            .ThenInclude(s => s.Teacher)
+        .Include(r => r.Schedule)
+            .ThenInclude(s => s.GroupCourse)
+                .ThenInclude(gc => gc.Group)
+        .Include(r => r.Schedule)
+            .ThenInclude(s => s.GroupCourse)
+                .ThenInclude(gc => gc.Course)
+        .Include(r => r.Schedule.WeekDays)
         .Include(r => r.CourseTopic)
-        .ThenInclude(t => t.Course)
+            .ThenInclude(ct => ct.Course)
         .Include(r => r.CourseTopic)
-        .ThenInclude(t => t.Topic)
+            .ThenInclude(ct => ct.Topic)
         .ToListAsync();
 
     var approvedReplacements = await _context.ReplacementResponses
@@ -311,15 +318,13 @@ public async Task<IActionResult> GetReplacementsData()
         .Include(r => r.Teacher)
         .Include(r => r.Replacement)
             .ThenInclude(rep => rep.Schedule)
-                .ThenInclude(s => s.Teacher)
+                .ThenInclude(s => s.GroupCourse)
+                    .ThenInclude(gc => gc.Group)
         .Include(r => r.Replacement)
             .ThenInclude(rep => rep.Schedule)
                 .ThenInclude(s => s.GroupCourse)
                     .ThenInclude(gc => gc.Course)
-        .Include(r => r.Replacement)
-            .ThenInclude(rep => rep.Schedule)
-                .ThenInclude(s => s.GroupCourse)
-                    .ThenInclude(gc => gc.Group)
+        .Include(r => r.Replacement!.Schedule.WeekDays)
         .ToListAsync();
 
     var rejectedReplacements = await _context.ReplacementResponses
@@ -327,25 +332,37 @@ public async Task<IActionResult> GetReplacementsData()
         .Include(r => r.Teacher)
         .Include(r => r.Replacement)
             .ThenInclude(rep => rep.Schedule)
-                .ThenInclude(s => s.Teacher)
+                .ThenInclude(s => s.GroupCourse)
+                    .ThenInclude(gc => gc.Group)
         .Include(r => r.Replacement)
             .ThenInclude(rep => rep.Schedule)
                 .ThenInclude(s => s.GroupCourse)
                     .ThenInclude(gc => gc.Course)
-        .Include(r => r.Replacement)
-            .ThenInclude(rep => rep.Schedule)
-                .ThenInclude(s => s.GroupCourse)
-                    .ThenInclude(gc => gc.Group)
+        .Include(r => r.Replacement.Schedule.WeekDays)
         .ToListAsync();
-
-    ReplacementStatisticsViewModel replacementStatisticsViewModel = new()
+    ViewBag.ReplacemntType =  String.IsNullOrEmpty(sortByReplacementType) ? sortByReplacementType : "";
+    var model = new ReplacementStatisticsViewModel();
+    switch (sortByReplacementType?.ToLower())
     {
-        PendingReplacements = pendingReplacements,
-        AppliedReplacements = approvedReplacements,
-        RejectedReplacements = rejectedReplacements
-    };
-    return View(replacementStatisticsViewModel);
+        case "pending":
+            model.PendingReplacements = pendingReplacements;
+            break;
+        case "approved":
+            model.AppliedReplacements = approvedReplacements;
+            break;
+        case "rejected":
+            model.RejectedReplacements = rejectedReplacements;
+            break;
+        default:
+            model.PendingReplacements = pendingReplacements;
+            model.AppliedReplacements = approvedReplacements;
+            model.RejectedReplacements = rejectedReplacements;
+            break;
+    }
+    return View(model);
 }
 
-    
+
+
+
 }

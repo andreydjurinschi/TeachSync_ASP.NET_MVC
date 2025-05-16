@@ -2,18 +2,40 @@
 
 <h1>Replacement statistics</h1>
 
+
+<a asp-action="GetReplacementsData" asp-route-sortByReplacementType="pending">
+    Show only pending replacements (@Model.PendingReplacements.Count)
+</a><br />
+
+<a asp-action="GetReplacementsData" asp-route-sortByReplacementType="approved">
+    Show only applied replacements (@Model.AppliedReplacements.Count)
+</a><br />
+
+<a asp-action="GetReplacementsData" asp-route-sortByReplacementType="rejected">
+    Show only rejected replacements (@Model.RejectedReplacements.Count)
+</a><br />
+
+<a asp-action="GetReplacementsData">
+    Show all replacements
+</a>
+
 <h2>Applied replacements</h2>
 @if (Model.AppliedReplacements.Any())
 {
-    @foreach (var applied in Model.AppliedReplacements)
+    foreach (var applied in Model.AppliedReplacements)
     {
         var schedule = applied.Replacement?.Schedule;
-        <div>
-            <p><strong>Teacher:</strong> @applied.Teacher?.Name @applied.Teacher?.Surname</p>
-            <p><strong>Course:</strong> @schedule?.GroupCourse?.Course?.Name</p>
-            <p><strong>Group:</strong> @schedule?.GroupCourse?.Group?.Name</p>
-            <p><strong>Time:</strong> @schedule?.StartTime - @schedule?.EndTime</p>
-            <p><strong>Day:</strong> @schedule?.DayOfWeekId</p>
+        <div class="dropdown">
+            <span>Teacher accepted: @applied.Teacher?.Name @applied.Teacher?.Surname</span>
+            <a class="btn btn-success dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Schedule
+            </a>
+            <ul class="dropdown-menu">
+                <li><span class="dropdown-item"><b>Group:</b> @schedule?.GroupCourse?.Group?.Name</span></li>
+                <li><span class="dropdown-item"><b>Course:</b> @schedule?.GroupCourse?.Course?.Name</span></li>
+                <li><span class="dropdown-item"><b>Time:</b> @schedule?.StartTime - @schedule?.EndTime</span></li>
+                <li><span class="dropdown-item"><b>Day:</b> @schedule?.WeekDays.Name</span></li>
+            </ul>
             <hr />
         </div>
     }
@@ -22,15 +44,20 @@
 <h2>Rejected replacements</h2>
 @if (Model.RejectedReplacements.Any())
 {
-    @foreach (var rejected in Model.RejectedReplacements)
+    foreach (var rejected in Model.RejectedReplacements)
     {
         var schedule = rejected.Replacement?.Schedule;
-        <div>
-            <p><strong>Teacher:</strong> @rejected.Teacher?.Name @rejected.Teacher?.Surname </p>
-            <p><strong>Course:</strong> @schedule?.GroupCourse?.Course?.Name</p>
-            <p><strong>Group:</strong> @schedule?.GroupCourse?.Group?.Name</p>
-            <p><strong>Time:</strong> @schedule?.StartTime - @schedule?.EndTime</p>
-            <p><strong>Day:</strong> @schedule?.DayOfWeekId</p>
+        <div class="dropdown">
+            <span>Teacher rejected: @rejected.Teacher?.Name @rejected.Teacher?.Surname</span>
+            <a class="btn btn-danger dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Schedule
+            </a>
+            <ul class="dropdown-menu">
+                <li><span class="dropdown-item"><b>Group:</b> @schedule?.GroupCourse?.Group?.Name</span></li>
+                <li><span class="dropdown-item"><b>Course:</b> @schedule?.GroupCourse?.Course?.Name</span></li>
+                <li><span class="dropdown-item"><b>Time:</b> @schedule?.StartTime - @schedule?.EndTime</span></li>
+                <li><span class="dropdown-item"><b>Day:</b> @schedule?.WeekDays.Name</span></li>
+            </ul>
             <hr />
         </div>
     }
@@ -39,22 +66,21 @@
 <h2>Pending replacements</h2>
 @if (Model.PendingReplacements.Any())
 {
-    
     foreach (var r in Model.PendingReplacements)
     {
         <div class="dropdown">
-            <a class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            <span>Teacher sent: @r.Schedule.Teacher.Name @r.Schedule.Teacher.Surname</span>
+            <a class="btn btn-secondary dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Schedule
             </a>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><span class="dropdown-item"><b>Teacher:</b> @r.Schedule?.Teacher?.Name @r.Schedule?.Teacher?.Surname</span></li>
+            <ul class="dropdown-menu">
                 <li><span class="dropdown-item"><b>Group:</b> @r.Schedule?.GroupCourse.Group.Name</span></li>
                 <li><span class="dropdown-item"><b>Course:</b> @r.CourseTopic?.Course?.Name</span></li>
-                <li><span class="dropdown-item"><b>Topics:</b>@r.CourseTopic?.Topic?.Name</span></li>
+                <li><span class="dropdown-item"><b>Topics:</b> @r.CourseTopic?.Topic?.Name</span></li>
                 <li><span class="dropdown-item"><b>Time:</b> @r.Schedule?.StartTime - @r.Schedule?.EndTime</span></li>
                 <li><span class="dropdown-item"><b>Day:</b> @r.Schedule?.WeekDays?.Name</span></li>
             </ul>
-            <hr />
+            <hr/>
         </div>
     }
 }
