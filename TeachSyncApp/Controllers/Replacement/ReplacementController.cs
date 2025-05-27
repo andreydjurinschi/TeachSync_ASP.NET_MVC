@@ -294,7 +294,7 @@ public class ReplacementController : Controller
     }
     
 [HttpGet]
-public async Task<IActionResult> GetReplacementsData(string sortByReplacementType)
+public async Task<IActionResult> GetReplacementsData(string status)
 {
     var pendingReplacements = await _context.Replacements
         .Where(r => r.Status == Status.Pending)
@@ -340,9 +340,10 @@ public async Task<IActionResult> GetReplacementsData(string sortByReplacementTyp
                     .ThenInclude(gc => gc.Course)
         .Include(r => r.Replacement.Schedule.WeekDays)
         .ToListAsync();
-    ViewBag.ReplacemntType =  String.IsNullOrEmpty(sortByReplacementType) ? sortByReplacementType : "";
+    ViewBag.status
+        =  String.IsNullOrEmpty(status) ? status : "";
     var model = new ReplacementStatisticsViewModel();
-    switch (sortByReplacementType?.ToLower())
+    switch (status?.ToLower())
     {
         case "pending":
             model.PendingReplacements = pendingReplacements;

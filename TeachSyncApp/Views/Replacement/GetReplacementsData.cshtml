@@ -1,23 +1,27 @@
 @model TeachSyncApp.ViewModels.Replacement.ReplacementStatisticsViewModel
 
 <h1>Replacement statistics</h1>
+<div>
+    <a asp-action="GetReplacementsData" asp-route-status="pending">
+        Pending replacements
+    </a>
 
+    <a asp-action="GetReplacementsData" asp-route-status="approved">
+        Applied replacements
+    </a>
 
-<a asp-action="GetReplacementsData" asp-route-sortByReplacementType="pending">
-    Show only pending replacements (@Model.PendingReplacements.Count)
-</a><br />
+    <a asp-action="GetReplacementsData" asp-route-status="rejected">
+        Rejected replacements
+    </a>
 
-<a asp-action="GetReplacementsData" asp-route-sortByReplacementType="approved">
-    Show only applied replacements (@Model.AppliedReplacements.Count)
-</a><br />
-
-<a asp-action="GetReplacementsData" asp-route-sortByReplacementType="rejected">
-    Show only rejected replacements (@Model.RejectedReplacements.Count)
-</a><br />
-
-<a asp-action="GetReplacementsData">
-    Show all replacements
+    <a asp-action="GetReplacementsData">
+        All replacements
+    </a>
+</div>
+<a asp-action="GetReplacementsData" asp-route-status="pending">
+    Pending replacements
 </a>
+
 
 <h2>Applied replacements</h2>
 @if (Model.AppliedReplacements.Any())
