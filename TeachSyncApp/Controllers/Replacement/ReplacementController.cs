@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +20,10 @@ public class ReplacementController : Controller
 
     private async Task<List<Models.Replacement>> GetReplacements()
     {
+        var username = User.Identity?.Name;
+        var teacher = await _context.Users.FirstOrDefaultAsync(u => u.Name == username);
         var replacements = await _context.Replacements
+            .Where(r => teacher != null && r.Schedule.TeacherId == teacher.Id)
             .Include(r => r.Schedule)
             .ThenInclude(s => s.WeekDays)
             .Include(r => r.Schedule)
@@ -245,9 +249,11 @@ public class ReplacementController : Controller
             replacementResponse.Status = Status.Approved;
             replacementResponse.ResponsedAt = DateTime.Now;
             _context.ReplacementResponses.Add(replacementResponse);
+            Models.Notification notification = _context.Notifications
+                .FirstOrDefault(n => n.ReplacementId == replacementId && n.TeacherId == teacher.Id)!;
+                _context.Remove(notification);
             await _context.SaveChangesAsync();
         }
-        
         replacement.ApprovedById = teacherId;
         replacement.Status = Status.Approved;
         await _context.SaveChangesAsync();

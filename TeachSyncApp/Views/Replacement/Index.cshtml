@@ -1,12 +1,8 @@
 @model IEnumerable<Replacement>
-@foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-{
-    <div class="alert alert-danger">@error.ErrorMessage</div>
-}
 <table class="table table-striped table-hover">
     <thead>
     <tr>
-        <th>@Html.DisplayNameFor(model => model.RequestRime)</th>
+        <th>Request Time</th>
         <th>Teacher Sent</th>
         <th>@Html.DisplayNameFor(model => model.Schedule)</th>
         <th>@Html.DisplayNameFor(model => model.TeacherApprove)</th>
@@ -55,7 +51,11 @@
                     @Html.DisplayFor(modelItem => item.Status)
                 </td>
                 <td>
-                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    @if (item.Status == Status.Pending)
+                    {
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>    
+                    }
+                    
                 </td>
             </tr>
         }

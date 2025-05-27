@@ -38,6 +38,7 @@ public class NotificationController : Controller
             .Include(n => n.Teacher)
             .Where(n => n.TeacherId == teacherId)
             .ToListAsync();
+        ViewData["notificationsCount"] = notifications.Count;
         return View(notifications);
     }
 

@@ -55,7 +55,7 @@ public class ScheduleController : Controller
     {
         var username = User.Identity?.Name;
         var teacher = await _context.Users.FirstOrDefaultAsync(u => u.Name == username);
-        int ? teacherId = teacher != null ? teacher.Id : null;
+        /*int ? teacherId = teacher != null ? teacher.Id : null;*/
         if (teacher == null)
         {
             return NotFound();
