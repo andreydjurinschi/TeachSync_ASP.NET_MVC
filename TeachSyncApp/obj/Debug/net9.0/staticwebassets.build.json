@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "YHCY7eieKD5aP/WzEdx6JjYYgH5niVuW8kZK9sU4d5g=",
+  "Hash": "gFlgeO4NgXwESnctSRxfSoYO2yyxAeP0OGD9xd8Jw1U=",
   "Source": "TeachSyncApp",
   "BasePath": "_content/TeachSyncApp",
   "Mode": "Default",
@@ -2432,12 +2432,12 @@
       "OriginalItemSpec": "C:\\Users\\djuri\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
     },
     {
-      "Identity": "C:\\Users\\djuri\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\obj\\Debug\\net9.0\\compressed\\p6oymrr7kq-xtxxf3hu2r.gz",
+      "Identity": "C:\\Users\\djuri\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\obj\\Debug\\net9.0\\compressed\\p6oymrr7kq-b8e7ngjfas.gz",
       "SourceId": "TeachSyncApp",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\djuri\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/TeachSyncApp",
-      "RelativePath": "js/site#[.{fingerprint=xtxxf3hu2r}]?.js.gz",
+      "RelativePath": "js/site#[.{fingerprint=b8e7ngjfas}]?.js.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -2446,8 +2446,8 @@
       "RelatedAsset": "C:\\Users\\djuri\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\wwwroot\\js\\site.js",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "rl5dcbfpcw",
-      "Integrity": "Ydq7YvQUzhbo68waLZeQvZnPOvmTeQ+HyDqjkA1whsA=",
+      "Fingerprint": "ekf3b2aj4w",
+      "Integrity": "jgRLNfbhqwg7If025I5qiIZwLocp2Q0C3QUT7kbXTus=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\djuri\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\wwwroot\\js\\site.js"
@@ -3307,8 +3307,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "xtxxf3hu2r",
-      "Integrity": "hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo=",
+      "Fingerprint": "b8e7ngjfas",
+      "Integrity": "NRWlPa1hBSDNxQC2NEnHaRjyarUqr64iluVYb6E60pU=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
@@ -18284,13 +18284,13 @@
       ]
     },
     {
-      "Route": "js/site.js",
-      "AssetFile": "C:\\Users\\djuri\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\obj\\Debug\\net9.0\\compressed\\p6oymrr7kq-xtxxf3hu2r.gz",
+      "Route": "js/site.b8e7ngjfas.js",
+      "AssetFile": "C:\\Users\\djuri\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\obj\\Debug\\net9.0\\compressed\\p6oymrr7kq-b8e7ngjfas.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.005263157895"
+          "Quality": "0.004761904762"
         }
       ],
       "ResponseHeaders": [
@@ -18300,19 +18300,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "189"
+          "Value": "209"
         },
         {
           "Name": "ETag",
-          "Value": "\"Ydq7YvQUzhbo68waLZeQvZnPOvmTeQ+HyDqjkA1whsA=\""
+          "Value": "\"jgRLNfbhqwg7If025I5qiIZwLocp2Q0C3QUT7kbXTus=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 22 Mar 2025 21:39:12 GMT"
+          "Value": "Thu, 29 May 2025 13:27:14 GMT"
         },
         {
           "Name": "Cache-Control",
-          "Value": "no-cache"
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Encoding",
@@ -18328,18 +18328,26 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo=\""
+          "Value": "W/\"NRWlPa1hBSDNxQC2NEnHaRjyarUqr64iluVYb6E60pU=\""
         }
       ],
       "EndpointProperties": [
         {
+          "Name": "fingerprint",
+          "Value": "b8e7ngjfas"
+        },
+        {
+          "Name": "label",
+          "Value": "js/site.js"
+        },
+        {
           "Name": "integrity",
-          "Value": "sha256-hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo="
+          "Value": "sha256-NRWlPa1hBSDNxQC2NEnHaRjyarUqr64iluVYb6E60pU="
         }
       ]
     },
     {
-      "Route": "js/site.js",
+      "Route": "js/site.b8e7ngjfas.js",
       "AssetFile": "C:\\Users\\djuri\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\wwwroot\\js\\site.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -18349,7 +18357,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "231"
+          "Value": "441"
         },
         {
           "Name": "Content-Type",
@@ -18357,121 +18365,21 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo=\""
+          "Value": "\"NRWlPa1hBSDNxQC2NEnHaRjyarUqr64iluVYb6E60pU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 22 Mar 2025 21:39:12 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo="
-        }
-      ]
-    },
-    {
-      "Route": "js/site.js.gz",
-      "AssetFile": "C:\\Users\\djuri\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\obj\\Debug\\net9.0\\compressed\\p6oymrr7kq-xtxxf3hu2r.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "189"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"Ydq7YvQUzhbo68waLZeQvZnPOvmTeQ+HyDqjkA1whsA=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sat, 22 Mar 2025 21:39:12 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-Ydq7YvQUzhbo68waLZeQvZnPOvmTeQ+HyDqjkA1whsA="
-        }
-      ]
-    },
-    {
-      "Route": "js/site.xtxxf3hu2r.js",
-      "AssetFile": "C:\\Users\\djuri\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\obj\\Debug\\net9.0\\compressed\\p6oymrr7kq-xtxxf3hu2r.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.005263157895"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "189"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"Ydq7YvQUzhbo68waLZeQvZnPOvmTeQ+HyDqjkA1whsA=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sat, 22 Mar 2025 21:39:12 GMT"
+          "Value": "Thu, 29 May 2025 13:27:14 GMT"
         },
         {
           "Name": "Cache-Control",
           "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "xtxxf3hu2r"
+          "Value": "b8e7ngjfas"
         },
         {
           "Name": "label",
@@ -18479,13 +18387,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo="
+          "Value": "sha256-NRWlPa1hBSDNxQC2NEnHaRjyarUqr64iluVYb6E60pU="
         }
       ]
     },
     {
-      "Route": "js/site.xtxxf3hu2r.js",
-      "AssetFile": "C:\\Users\\djuri\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\wwwroot\\js\\site.js",
+      "Route": "js/site.b8e7ngjfas.js.gz",
+      "AssetFile": "C:\\Users\\djuri\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\obj\\Debug\\net9.0\\compressed\\p6oymrr7kq-b8e7ngjfas.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -18494,7 +18402,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "231"
+          "Value": "209"
         },
         {
           "Name": "Content-Type",
@@ -18502,56 +18410,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo=\""
+          "Value": "\"jgRLNfbhqwg7If025I5qiIZwLocp2Q0C3QUT7kbXTus=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 22 Mar 2025 21:39:12 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "xtxxf3hu2r"
-        },
-        {
-          "Name": "label",
-          "Value": "js/site.js"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo="
-        }
-      ]
-    },
-    {
-      "Route": "js/site.xtxxf3hu2r.js.gz",
-      "AssetFile": "C:\\Users\\djuri\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\obj\\Debug\\net9.0\\compressed\\p6oymrr7kq-xtxxf3hu2r.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "189"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"Ydq7YvQUzhbo68waLZeQvZnPOvmTeQ+HyDqjkA1whsA=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sat, 22 Mar 2025 21:39:12 GMT"
+          "Value": "Thu, 29 May 2025 13:27:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -18569,7 +18432,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "xtxxf3hu2r"
+          "Value": "b8e7ngjfas"
         },
         {
           "Name": "label",
@@ -18577,7 +18440,144 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-Ydq7YvQUzhbo68waLZeQvZnPOvmTeQ+HyDqjkA1whsA="
+          "Value": "sha256-jgRLNfbhqwg7If025I5qiIZwLocp2Q0C3QUT7kbXTus="
+        }
+      ]
+    },
+    {
+      "Route": "js/site.js",
+      "AssetFile": "C:\\Users\\djuri\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\obj\\Debug\\net9.0\\compressed\\p6oymrr7kq-b8e7ngjfas.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.004761904762"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "209"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"jgRLNfbhqwg7If025I5qiIZwLocp2Q0C3QUT7kbXTus=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 29 May 2025 13:27:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"NRWlPa1hBSDNxQC2NEnHaRjyarUqr64iluVYb6E60pU=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-NRWlPa1hBSDNxQC2NEnHaRjyarUqr64iluVYb6E60pU="
+        }
+      ]
+    },
+    {
+      "Route": "js/site.js",
+      "AssetFile": "C:\\Users\\djuri\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\wwwroot\\js\\site.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "441"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"NRWlPa1hBSDNxQC2NEnHaRjyarUqr64iluVYb6E60pU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 29 May 2025 13:27:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-NRWlPa1hBSDNxQC2NEnHaRjyarUqr64iluVYb6E60pU="
+        }
+      ]
+    },
+    {
+      "Route": "js/site.js.gz",
+      "AssetFile": "C:\\Users\\djuri\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\obj\\Debug\\net9.0\\compressed\\p6oymrr7kq-b8e7ngjfas.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "209"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"jgRLNfbhqwg7If025I5qiIZwLocp2Q0C3QUT7kbXTus=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 29 May 2025 13:27:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-jgRLNfbhqwg7If025I5qiIZwLocp2Q0C3QUT7kbXTus="
         }
       ]
     },

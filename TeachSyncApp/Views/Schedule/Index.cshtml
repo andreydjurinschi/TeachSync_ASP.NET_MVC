@@ -1,29 +1,36 @@
 @model IEnumerable<Schedule>
 
 <a asp-controller="Schedule" asp-action="Create" class="btn btn-primary mb-3">Create Schedule</a>
-<div class="album py-5 bg-light">
-    <div class="container">
-        <div class="row">
-            @foreach (var item in Model)
-            {
-                <div class="col-md-4 mb-4">
-                    <div class="card" style="width: 100%;">
-                        <div class="card-body">
-                            <h5 class="card-title">Teacher: @Html.DisplayFor(modelItem => item.Teacher.Name)
-                                @Html.DisplayFor(modelItem => item.Teacher.Surname)</h5>
-                            <h5 class="card-title">Group: @Html.DisplayFor(modelItem => item.GroupCourse.Group.Name)</h5>
-                            <h5 class="card-title">Course: @Html.DisplayFor(modelItem => item.GroupCourse.Course.Name)</h5>
-                            <h5 class="card-title">Start: @Html.DisplayFor(modelItem => item.StartTime)</h5>
-                            <h5 class="card-title">End: @Html.DisplayFor(modelItem => item.EndTime)</h5>
-                            <h5 class="card-title">Classroom: @Html.DisplayFor(modelItem => item.ClassRoom.Name)</h5>
-                            <h5 class="card-title">Week: @Html.DisplayFor(modelItem => item.WeekDays.Name)</h5>
-                            
-                            <a class="card-link" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                            <a class="card-link" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                        </div>
-                    </div>
-                </div>
-            }
-        </div>
-    </div>
-</div>
+
+<table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+    <tr class="text-center">
+        <th>Teacher</th>
+        <th>Group</th>
+        <th>Course</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Classroom</th>
+        <th>Weekday</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Teacher.Name @item.Teacher.Surname</td>
+            <td>@item.GroupCourse.Group.Name</td>
+            <td>@item.GroupCourse.Course.Name</td>
+            <td>@item.StartTime</td>
+            <td>@item.EndTime</td>
+            <td>@item.ClassRoom.Name</td>
+            <td>@item.WeekDays.Name</td>
+            <td class="text-center">
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
