@@ -21,15 +21,13 @@
         <span asp-validation-for="DayOfWeekId" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label class="control-label">Group</label>
+        <label class="control-label">Course / Group</label>
         <select name="GroupCourseId" class="form-control">
             @foreach (var groupCourse in Model.GroupCourseList)
             {
                 <option value="@groupCourse.Id">@groupCourse.Course.Name - @groupCourse.Group.Name</option>
             }
-
         </select>
-        <span asp-validation-for="DayOfWeekId" class="text-danger"></span>
     </div>
 
     <input type="hidden" asp-for="TeacherId" />

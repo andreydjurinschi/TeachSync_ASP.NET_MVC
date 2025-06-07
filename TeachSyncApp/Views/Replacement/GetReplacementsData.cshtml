@@ -1,90 +1,86 @@
 @model TeachSyncApp.ViewModels.Replacement.ReplacementStatisticsViewModel
 
-<h1>Replacement statistics</h1>
-<div>
-    <a asp-action="GetReplacementsData" asp-route-status="pending">
-        Pending replacements
-    </a>
+<div class="container mt-4">
+    <h1 class="mb-4">Replacement Statistics</h1>
 
-    <a asp-action="GetReplacementsData" asp-route-status="approved">
-        Applied replacements
-    </a>
 
-    <a asp-action="GetReplacementsData" asp-route-status="rejected">
-        Rejected replacements
-    </a>
+    <div class="btn-group mb-4" role="group" aria-label="Filter by status">
+        <a class="btn btn-outline-primary" asp-action="GetReplacementsData" asp-route-status="pending">Pending</a>
+        <a class="btn btn-outline-success" asp-action="GetReplacementsData" asp-route-status="approved">Approved</a>
+        <a class="btn btn-outline-danger" asp-action="GetReplacementsData" asp-route-status="rejected">Rejected</a>
+        <a class="btn btn-outline-secondary" asp-action="GetReplacementsData">All</a>
+    </div>
 
-    <a asp-action="GetReplacementsData">
-        All replacements
-    </a>
+
+    <h2 class="text-success mt-4">Approved Replacements</h2>
+    @if (Model.AppliedReplacements.Any())
+    {
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            @foreach (var applied in Model.AppliedReplacements)
+            {
+                var schedule = applied.Replacement?.Schedule;
+                <div class="col">
+                    <div class="card border-success">
+                        <div class="card-header bg-success text-white">
+                            Teacher accepted: @applied.Teacher?.Name @applied.Teacher?.Surname
+                        </div>
+                        <div class="card-body">
+                            <p><b>Group:</b> @schedule?.GroupCourse?.Group?.Name</p>
+                            <p><b>Course:</b> @schedule?.GroupCourse?.Course?.Name</p>
+                            <p><b>Time:</b> @schedule?.StartTime - @schedule?.EndTime</p>
+                            <p><b>Day:</b> @schedule?.WeekDays?.Name</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+    <h2 class="text-danger mt-5">Rejected Replacements</h2>
+    @if (Model.RejectedReplacements.Any())
+    {
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            @foreach (var rejected in Model.RejectedReplacements)
+            {
+                var schedule = rejected.Replacement?.Schedule;
+                <div class="col">
+                    <div class="card border-danger">
+                        <div class="card-header bg-danger text-white">
+                            Teacher rejected: @rejected.Teacher?.Name @rejected.Teacher?.Surname
+                        </div>
+                        <div class="card-body">
+                            <p><b>Group:</b> @schedule?.GroupCourse?.Group?.Name</p>
+                            <p><b>Course:</b> @schedule?.GroupCourse?.Course?.Name</p>
+                            <p><b>Time:</b> @schedule?.StartTime - @schedule?.EndTime</p>
+                            <p><b>Day:</b> @schedule?.WeekDays?.Name</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+    <h2 class="text-warning mt-5">Pending Replacements</h2>
+    @if (Model.PendingReplacements.Any())
+    {
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            @foreach (var r in Model.PendingReplacements)
+            {
+                <div class="col">
+                    <div class="card border-warning">
+                        <div class="card-header bg-warning text-dark">
+                            Teacher sent: @r.Schedule.Teacher.Name @r.Schedule.Teacher.Surname
+                        </div>
+                        <div class="card-body">
+                            <p><b>Group:</b> @r.Schedule?.GroupCourse.Group.Name</p>
+                            <p><b>Course:</b> @r.CourseTopic?.Course?.Name</p>
+                            <p><b>Topics:</b> @r.CourseTopic?.Topic?.Name</p>
+                            <p><b>Time:</b> @r.Schedule?.StartTime - @r.Schedule?.EndTime</p>
+                            <p><b>Day:</b> @r.Schedule?.WeekDays?.Name</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
 </div>
-<a asp-action="GetReplacementsData" asp-route-status="pending">
-    Pending replacements
-</a>
-
-
-<h2>Applied replacements</h2>
-@if (Model.AppliedReplacements.Any())
-{
-    foreach (var applied in Model.AppliedReplacements)
-    {
-        var schedule = applied.Replacement?.Schedule;
-        <div class="dropdown">
-            <span>Teacher accepted: @applied.Teacher?.Name @applied.Teacher?.Surname</span>
-            <a class="btn btn-success dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Schedule
-            </a>
-            <ul class="dropdown-menu">
-                <li><span class="dropdown-item"><b>Group:</b> @schedule?.GroupCourse?.Group?.Name</span></li>
-                <li><span class="dropdown-item"><b>Course:</b> @schedule?.GroupCourse?.Course?.Name</span></li>
-                <li><span class="dropdown-item"><b>Time:</b> @schedule?.StartTime - @schedule?.EndTime</span></li>
-                <li><span class="dropdown-item"><b>Day:</b> @schedule?.WeekDays.Name</span></li>
-            </ul>
-            <hr />
-        </div>
-    }
-}
-
-<h2>Rejected replacements</h2>
-@if (Model.RejectedReplacements.Any())
-{
-    foreach (var rejected in Model.RejectedReplacements)
-    {
-        var schedule = rejected.Replacement?.Schedule;
-        <div class="dropdown">
-            <span>Teacher rejected: @rejected.Teacher?.Name @rejected.Teacher?.Surname</span>
-            <a class="btn btn-danger dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Schedule
-            </a>
-            <ul class="dropdown-menu">
-                <li><span class="dropdown-item"><b>Group:</b> @schedule?.GroupCourse?.Group?.Name</span></li>
-                <li><span class="dropdown-item"><b>Course:</b> @schedule?.GroupCourse?.Course?.Name</span></li>
-                <li><span class="dropdown-item"><b>Time:</b> @schedule?.StartTime - @schedule?.EndTime</span></li>
-                <li><span class="dropdown-item"><b>Day:</b> @schedule?.WeekDays.Name</span></li>
-            </ul>
-            <hr />
-        </div>
-    }
-}
-
-<h2>Pending replacements</h2>
-@if (Model.PendingReplacements.Any())
-{
-    foreach (var r in Model.PendingReplacements)
-    {
-        <div class="dropdown">
-            <span>Teacher sent: @r.Schedule.Teacher.Name @r.Schedule.Teacher.Surname</span>
-            <a class="btn btn-secondary dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Schedule
-            </a>
-            <ul class="dropdown-menu">
-                <li><span class="dropdown-item"><b>Group:</b> @r.Schedule?.GroupCourse.Group.Name</span></li>
-                <li><span class="dropdown-item"><b>Course:</b> @r.CourseTopic?.Course?.Name</span></li>
-                <li><span class="dropdown-item"><b>Topics:</b> @r.CourseTopic?.Topic?.Name</span></li>
-                <li><span class="dropdown-item"><b>Time:</b> @r.Schedule?.StartTime - @r.Schedule?.EndTime</span></li>
-                <li><span class="dropdown-item"><b>Day:</b> @r.Schedule?.WeekDays?.Name</span></li>
-            </ul>
-            <hr/>
-        </div>
-    }
-}

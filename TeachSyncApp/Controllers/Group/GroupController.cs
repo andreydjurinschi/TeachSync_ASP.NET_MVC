@@ -13,12 +13,21 @@ public class GroupController : Controller
     {
         _context = context;
     }
-
+    // атрибут, указывающий на обработку GET-запроса
     [HttpGet]
     public async Task<IActionResult> Index()
     {
-        
-        var groups = await _context.Groups.Include(g=> g.GroupCourses).ThenInclude(c=> c.Course).ThenInclude(c => c.User).ToListAsync();
+        // извлекаем список всех групп из базы даных с использованием асинхронного метода ToListAsync() 
+        var groups = await _context.Groups
+        // подключаем связанные сущности GroupCourses (связь между курсами и группами)      
+            .Include(g=> g.GroupCourses)
+        // подключаем связанные группы для доступа к названию каждой группы
+            .ThenInclude(c=> c.Course)
+        // подключаем преподавателя, ведущего данный курс
+            .ThenInclude(c => c.User)
+        // ассинхронное выполнение запроса и преобразование в список
+            .ToListAsync();
+        // возвращаем представление, передавая ему список групп с загруженными связанными данными
         return View(groups);
     }
     

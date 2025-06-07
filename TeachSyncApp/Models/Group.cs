@@ -12,5 +12,5 @@ public class Group
     [Range(2018,2025, ErrorMessage = "Please enter an Year between 2018 and 2025")]
     public int Year { get; set; } = DateTime.Now.Year;
     public int Capacity { get; set; }
-    public ICollection<GroupCourse> GroupCourses { get; set; } = new HashSet<GroupCourse>();
+    public List<GroupCourse> GroupCourses { get; set; } = new List<GroupCourse>();
 }

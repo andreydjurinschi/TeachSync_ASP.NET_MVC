@@ -8,7 +8,7 @@
         <input type="hidden" name="replacementId" value="@Model.Id" />
         <input type="hidden" name="teacherId" value="@User.FindFirstValue(ClaimTypes.NameIdentifier)" />
 
-        <p>Вы собираетесь подтвердить замену.</p>
+        <p>You want to accept replacement request</p>
 
         <div class="d-flex justify-content-end">
             <a asp-action="Index" class="btn btn-secondary me-2">Cancel</a>

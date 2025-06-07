@@ -27,29 +27,40 @@ public class AccountController : Controller
     [HttpPost]
     public async Task<IActionResult> Login(string email, string password)
     {
-        
+        /***
+         * поиск полльзователя по логину и паролю
+         * загрузка связанной сущности Role
+         */
         var user = _context.Users.Include(user => user.Role)
             .FirstOrDefault(u => u.Email == email && u.Password == password);
-
+        /***
+         * если пользователь не найден, то возвращаем ту же форму с характерным сообщением
+         */
         if (user == null)
         {
             ModelState.AddModelError(string.Empty, "Invalid login or password");
             return View();
         }
-        
+        /***
+         * создается список claims - информация о пользователе, вошедшем в систему
+         */
         var claims = new List<Claim>
         {
+            // claim с именем
             new Claim(ClaimTypes.Name, user.Name),
+            // claim с почтой
             new Claim(ClaimTypes.Email, user.Email),
+            // claim c ролью
             new Claim(ClaimTypes.Role, user.Role.Name), 
+            // claim c идентификатором
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
         };
-
+        // утсанавливаем схему аутентификации и передаем все claims 
         var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+        // оболочка, которая передается в систему авторизации
         var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
-        
+        // выполняется вход в систему и перенаправление на главную страницу
         await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
-
         return RedirectToAction("Index", "Home");
     }
     public async Task<IActionResult> Logout()

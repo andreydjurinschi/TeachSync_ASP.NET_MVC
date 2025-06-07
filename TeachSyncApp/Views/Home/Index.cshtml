@@ -8,19 +8,42 @@
 
 <div class="jumbotron p-4 p-md-5 text-white rounded-4 bg-dark">
     <div class="column-gap-md-4 px-0">
-        <h1 class="display-4 font-italic">Welcome to <b>Teach sync app</b>, 
+        <h1 class="display-4 font-italic">Welcome to <b>Teach Sync App</b>,
             @if (User.Identity is { IsAuthenticated: true })
             {
-                @User.Identity.Name; 
+                @User.Identity.Name
             }
             else
             {
                 <span>Anonymous</span>
             }
-            
         </h1>
-        <p class="lead my-3">Info about application ...</p>
-        <p class="lead mb-0"><a href="https://github.com/andreydjurinschi" class="text-white font-weight-bold">Come here</a></p>
+        <p class="lead my-3">A platform for managing the educational process, teacher substitutions, and academic workload tracking.</p>
+        <p class="lead mb-3">
+        <ul>
+            <li>Manage schedules and teacher substitutions</li>
+            <li>User roles: Administrator, Manager, Teacher</li>
+            <li>Authentication and access control</li>
+            <li>Password recovery support</li>
+        </ul>
+        </p>
+        <p class="lead mb-0">
+            <a href="https://github.com/andreydjurinschi" class="btn btn-outline-light btn-lg mt-3">Source code on GitHub</a>
+        </p>
+    </div>
+</div>
 
+<div class="row mt-5">
+    <div class="col-md-6">
+        <h2>Who is this app for?</h2>
+        <p>Teach Sync App is designed for school administrators and teachers who need to streamline substitution management and academic operations.</p>
+    </div>
+    <div class="col-md-6">
+        <h2>How to get started?</h2>
+        <ol>
+            <li>Log in with your account</li>
+            <li>Access features based on your role</li>
+            <li>Manage your schedule and substitutions with ease</li>
+        </ol>
     </div>
 </div>
