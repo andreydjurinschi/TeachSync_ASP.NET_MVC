@@ -30,9 +30,9 @@
                         <p class="mb-1">
                             Group: @item.Schedule.GroupCourse.Group.Name
                         </p>
-                          <small class="text-muted">Sended: @item.CreatedAt.ToString("dd.MM.yyyy HH:mm")</small>
+                          <small class="text-muted">Sent: @item.CreatedAt.ToString("dd.MM.yyyy HH:mm")</small>
                         <br>
-                        <a asp-controller="Replacement" asp-action="Approve" asp-route-replacementId="@item.Replacement.Id" asp-route-teacherId="@int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!)" class="btn btn-info">Approve</a>
+                        <a asp-controller="Replacement" asp-action="GetApproveForm" asp-route-replacementId="@item.Replacement.Id" class="btn btn-info">Approve</a>
                         <form asp-controller="Replacement" asp-action="Reject" method="post">
                             <input type="hidden" name="replacementId" value="@item.ReplacementId" />
                             <input type="hidden" name="teacherId" value="@item.TeacherId" />

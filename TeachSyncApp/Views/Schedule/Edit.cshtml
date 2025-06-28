@@ -1,6 +1,6 @@
 @model TeachSyncApp.ViewModels.ScheduleViewModel
 
-<h1>Edit Schedule</h1>
+<h1 class="mb-4">Edit Schedule</h1>
 
 <form asp-action="Edit" method="post">
     @Html.AntiForgeryToken()
@@ -10,75 +10,78 @@
         <div class="alert alert-danger">@error.ErrorMessage</div>
     }
 
-    <div class="form-group">
-        <label class="control-label">Day of Week</label>
-        @foreach (var day in Model.DayOfWeekList)
-        {
-            <div class="form-check">
-                <input type="radio" asp-for="DayOfWeekId" class="form-check-input" value="@day.Id" id="day-@day.Id">
-                <label class="form-check-label" for="day-@day.Id">@day.Name</label>
-            </div>
-        }
+    <div class="mb-3">
+        <label class="form-label">Day of the Week</label>
+        <div>
+            @foreach (var day in Model.DayOfWeekList)
+            {
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="DayOfWeekId" class="form-check-input" value="@day.Id" id="day-@day.Id" />
+                    <label class="form-check-label" for="day-@day.Id">@day.Name</label>
+                </div>
+            }
+        </div>
         <span asp-validation-for="DayOfWeekId" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
-        <label class="control-label">Teacher</label>
-        @foreach (var teacher in Model.TeacherList)
-        {
-            <div class="form-check">
-                <input type="radio" asp-for="TeacherId" class="form-check-input" value="@teacher.Id" id="teacher-@teacher.Id">
-                <label class="form-check-label" for="teacher-@teacher.Id">@teacher.Name</label>
-            </div>
-        }
+    <div class="mb-3">
+        <label class="form-label">Teacher</label>
+        <div>
+            @foreach (var teacher in Model.TeacherList)
+            {
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="TeacherId" class="form-check-input" value="@teacher.Id" id="teacher-@teacher.Id" />
+                    <label class="form-check-label" for="teacher-@teacher.Id">@teacher.Name @teacher.Surname</label>
+                </div>
+            }
+        </div>
         <span asp-validation-for="TeacherId" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
-        <label class="control-label">Classroom</label>
-        @foreach (var classroom in Model.ClassRoomList)
-        {
-            <div class="form-check">
-                <input type="radio" asp-for="ClassRoomId" class="form-check-input" value="@classroom.Id" id="classroom-@classroom.Id"
-                       >
-                <label class="form-check-label" for="classroom-@classroom.Id">@classroom.Name</label>
-            </div>
-        }
+    <div class="mb-3">
+        <label class="form-label">Classroom</label>
+        <div>
+            @foreach (var classroom in Model.ClassRoomList)
+            {
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="ClassRoomId" class="form-check-input" value="@classroom.Id" id="classroom-@classroom.Id" />
+                    <label class="form-check-label" for="classroom-@classroom.Id">@classroom.Name</label>
+                </div>
+            }
+        </div>
         <span asp-validation-for="ClassRoomId" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
-        <label class="control-label">Group-Course</label>
-        @foreach (var groupCourse in Model.GroupCourseList)
-        {
-            <div class="form-check">
-                <input type="radio" asp-for="GroupCourseId" class="form-check-input" value="@groupCourse.Id" id="groupcourse-@groupCourse.Id"
-                       >
-                <label class="form-check-label" for="groupcourse-@groupCourse.Id">
-                    @groupCourse.Group.Name - @groupCourse.Course.Name
-                </label>
-            </div>
-        }
+    <div class="mb-3">
+        <label class="form-label">Group - Course</label>
+        <div>
+            @foreach (var groupCourse in Model.GroupCourseList)
+            {
+                <div class="form-check">
+                    <input type="radio" asp-for="GroupCourseId" class="form-check-input" value="@groupCourse.Id" id="groupcourse-@groupCourse.Id" />
+                    <label class="form-check-label" for="groupcourse-@groupCourse.Id">
+                        @groupCourse.Group.Name - @groupCourse.Course.Name
+                    </label>
+                </div>
+            }
+        </div>
         <span asp-validation-for="GroupCourseId" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
-        <label asp-for="StartTime" class="control-label">Start Time</label>
+    <div class="mb-3">
+        <label asp-for="StartTime" class="form-label">Start Time</label>
         <input asp-for="StartTime" class="form-control" type="time" />
         <span asp-validation-for="StartTime" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
-        <label asp-for="EndTime" class="control-label">End Time</label>
+    <div class="mb-3">
+        <label asp-for="EndTime" class="form-label">End Time</label>
         <input asp-for="EndTime" class="form-control" type="time" />
         <span asp-validation-for="EndTime" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
+    <div class="mt-4">
         <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>
     </div>
 </form>
-
-<div>
-    <a asp-action="Index">Back to list</a>
-</div>

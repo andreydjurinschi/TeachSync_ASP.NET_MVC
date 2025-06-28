@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -53,7 +54,6 @@ public class ReplacementController : Controller
             CourseTopicsList = await _context.CoursesTopics
                 .Include(c => c.Topic)
                 .Include(c => c.Course)
-                //.ThenInclude(c => c.Name)
                 .ToListAsync(),
             ApprovedByList = new List<Models.User>()
         };
@@ -61,13 +61,16 @@ public class ReplacementController : Controller
     }
 
     [HttpPost]
+    [SuppressMessage("ReSharper", "InvalidXmlDocComment")]
     public async Task<IActionResult> Create(ReplacementViewModel replacementData)
     {
+        // проверка валидности данных из формы
         if (!ModelState.IsValid)
         {
+            // если данные не валидны,
             return RedirectToAction(nameof(Index));
         }
-        
+        // создание модели замены для сохранения в БД
         var replacementToDb = new Models.Replacement
         {
             ScheduleId = replacementData.ScheduleId,
@@ -76,35 +79,44 @@ public class ReplacementController : Controller
             ApprovedById = replacementData.ApprovedById,
             Status = Status.Pending,
         };
-
+        // добавление замены в контекст и последующее ее сохранение в БД 
         _context.Add(replacementToDb);
         await _context.SaveChangesAsync();
         
+        // получаем полную информацию о замене, включая данные о расписании
         var replacement = await _context.Replacements
             .Include(r => r.Schedule)
             .FirstOrDefaultAsync(r => r.Id == replacementToDb.Id);
+        
+        // если замена успешно найдена, то
         if (replacement != null)
         {
+            // в переменные сохраняем данные о начале и конце занятии
             var startTime = replacement.Schedule.EndTime;
             var endTime = replacement.Schedule.EndTime;
+            
+            
+            // получаем свободных учителей у которых время и день занятий не пересекаются с заменой
             var availableTeachers = await _context.Users.Where(u => u.RoleId == 3)
                 .Where(u => !u.Schedules.Any(s=> s.StartTime <= endTime && s.EndTime >= startTime && s.DayOfWeekId == replacement.Schedule.DayOfWeekId)).ToListAsync();
+            // каждому свободному учителю создаем уведомления
             foreach (var teacher in availableTeachers)
             {
                 var notification = new Models.Notification();
                 notification.ScheduleId = replacement.ScheduleId;
                 notification.TeacherId = teacher.Id;
                 notification.ReplacementId = replacement.Id;
+                // добавляем уведомление в контекст и сохраняем изменения
                 _context.Notifications.Add(notification);
                 await _context.SaveChangesAsync();
             }
         }
         else
         {
+            // если замена не найдена - возвращаем ошибку 404
             return NotFound();
         }
-
-
+        // переходим на страницу со списком замен
         return RedirectToAction(nameof(Index));
     }
 
@@ -196,69 +208,93 @@ public class ReplacementController : Controller
         }
     } 
     
+    // Метод для получения формы с подтверждением замены
     [HttpGet]
-    public async Task<IActionResult> Approve(int? replacementId, int teacherId)
+    public async Task<IActionResult> GetApproveForm(int? replacementId)
     {
         if (replacementId == null)
-        {
             return NotFound();
-        }
-        var replacement = await _context.Replacements.Include(r => r.Schedule).FirstOrDefaultAsync(r => r.Id == replacementId);
+        // поиск замены по идентификатору с загрузкой всех необходимых сущностей
+        var replacement = await _context.Replacements
+                // получение расписания
+            .Include(r => r.Schedule)
+                // получение кабинета, указанного в расписании
+            .ThenInclude(s => s.ClassRoom)
+                // получение курса и темы курса
+            .Include(r => r.CourseTopic)
+                // получение курса (для вывода его названия в представлении)
+            .ThenInclude(ct => ct.Course)
+                // подключение курса и темы курса
+            .Include(r => r.CourseTopic)
+                // получение темы (для вывода ее названия в представлении)
+            .ThenInclude(ct => ct.Topic)
+                // поиск замену по указанному Id
+            .FirstOrDefaultAsync(r => r.Id == replacementId);
+        
+        // если замена не найдена, то возвращается ошибка 404
         if (replacement == null)
         {
             return NotFound();
         }
-        var startTime = replacement.Schedule.StartTime;
-        var endTime = replacement.Schedule.EndTime;
-        var availableTeachers = await _context.Users.Where(u => u.RoleId == 3)
-            .Where(u => !u.Schedules.Any(s=> s.StartTime <= endTime && s.EndTime >= startTime && s.DayOfWeekId == replacement.Schedule.DayOfWeekId)).ToListAsync();
- 
-        ViewBag.AvailableTeachers = availableTeachers;
+        // возвращаем представление с данными замены
         return View(replacement);
     }
-
-    [HttpPost]
+    
+    [HttpPost] 
     public async Task<IActionResult> Approve(int replacementId, int teacherId)
     {
-        var replacement = await _context.Replacements.Include(r => r.Schedule).FirstOrDefaultAsync(r => r.Id == replacementId);
+        // получаем замену по ID с включением расписания
+        var replacement = await _context.Replacements
+            .Include(r => r.Schedule)
+            .FirstOrDefaultAsync(r => r.Id == replacementId);
+
         if (replacement == null)
+            return NotFound();
+
+        // получаем учителя по ID
+        var teacher = await _context.Users.FirstOrDefaultAsync(u => u.Id == teacherId);
+        if (teacher == null)
         {
             return NotFound();
         }
-        var startTime = replacement.Schedule.StartTime;
-        var endTime = replacement.Schedule.EndTime;
-        
-        var teacher = await _context.Users.Include(u => u.Schedules).FirstOrDefaultAsync(u => u.Id == teacherId);
-        if (teacher == null || teacher.Schedules.Any(s => s.StartTime <= endTime && s.EndTime >= startTime))
-        {
-            ModelState.AddModelError("", "No teachers are available to approve"); 
-            var availableTeachers = await _context.Users.Where(u => u.RoleId == 3)
-                .Where(u => !u.Schedules.Any(s=> s.StartTime <= endTime && s.EndTime >= startTime)).ToListAsync();
-            ViewBag.AvailableTeachers = availableTeachers;
-            return View(replacement);
-        }
-        
-        var alreadyResponsed = await _context.ReplacementResponses
-            .AnyAsync(r => r.Id == replacementId  && r.TeacherId == teacher.Id);
 
+        // проверяем, не создавался ли уже отклик от этого учителя
+        var alreadyResponsed = await _context.ReplacementResponses
+            .AnyAsync(r => r.ReplacementId == replacementId && r.TeacherId == teacherId);
+
+        // если отклик отсутствует — создаём новый
         if (!alreadyResponsed)
         {
-            ReplacementResponse replacementResponse  = new ReplacementResponse();
-            replacementResponse.ReplacementId = replacement.Id;
-            replacementResponse.TeacherId = teacher.Id;
-            replacementResponse.Status = Status.Approved;
-            replacementResponse.ResponsedAt = DateTime.Now;
-            _context.ReplacementResponses.Add(replacementResponse);
-            Models.Notification notification = _context.Notifications
-                .FirstOrDefault(n => n.ReplacementId == replacementId && n.TeacherId == teacher.Id)!;
-                _context.Remove(notification);
+            var response = new ReplacementResponse
+            {
+                ReplacementId = replacement.Id,
+                TeacherId = teacher.Id,
+                Status = Status.Approved,
+                ResponsedAt = DateTime.Now
+            };
+
+            _context.ReplacementResponses.Add(response);
+
+            // удаляем уведомление, если есть
+            var notification = await _context.Notifications
+                .FirstOrDefaultAsync(n => n.ReplacementId == replacementId && n.TeacherId == teacherId);
+
+            if (notification != null)
+                _context.Notifications.Remove(notification);
+
             await _context.SaveChangesAsync();
         }
+
+        // обновляем замену: кто утвердил и статус
         replacement.ApprovedById = teacherId;
         replacement.Status = Status.Approved;
+
         await _context.SaveChangesAsync();
+
+        // перенаправление на список замен
         return RedirectToAction("Index");
     }
+
 
     [HttpPost]
     public async Task<IActionResult> Reject(int? replacementId, int? teacherId)

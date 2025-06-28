@@ -5,11 +5,11 @@
     <h2 class="mb-4">Approve Replacement</h2>
 
     <form asp-action="Approve" method="post" class="card p-4 shadow-sm">
-        <input type="hidden" name="replacementId" value="@Model.Id" />
-        <input type="hidden" name="teacherId" value="@User.FindFirstValue(ClaimTypes.NameIdentifier)" />
+        <input type="hidden" name="replacementId" value="@Model.Id"/>
+        <input type="hidden" name="teacherId" value="@User.FindFirstValue(ClaimTypes.NameIdentifier)"/>
 
         <p>You want to accept replacement request</p>
-
+        <p>@Model.Schedule.ClassRoom.Name | @Model.Schedule.StartTime - @Model.Schedule.EndTime | @Model.CourseTopic.Course.Name | @Model.CourseTopic.Topic.Name</p>
         <div class="d-flex justify-content-end">
             <a asp-action="Index" class="btn btn-secondary me-2">Cancel</a>
             <button type="submit" class="btn btn-primary">Approve</button>

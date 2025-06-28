@@ -130,7 +130,20 @@ public class UserController(ApplicationDbContext context) : Controller
         {
             return NotFound();
         }
-        var user = await GetUserById(id);
+        Models.User user = await GetUserById(id);
+        var hasDependencies = user.Responses.Any() || user.Schedules.Any() || user.Courses.Any();
+
+        if (hasDependencies)
+        {
+            ViewBag.HasDependencies = true;
+            ViewBag.ReplacementResponses = user.Responses;
+            ViewBag.Schedules = user.Schedules;
+            ViewBag.Courses = user.Courses;
+        }
+        else
+        {
+            ViewBag.HasDependencies = false;
+        }
         return View(user);
     }
 

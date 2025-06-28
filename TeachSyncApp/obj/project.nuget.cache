@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "y1TVisNvoeI=",
+  "dgSpecHash": "EuDIfAo9BO0=",
   "success": true,
   "projectFilePath": "C:\\Users\\djuri\\RiderProjects\\TeachSync_ASP.NET_MVC\\TeachSyncApp\\TeachSyncApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\djuri\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\djuri\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
+    "C:\\Users\\djuri\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\djuri\\.nuget\\packages\\bootstrap\\5.3.3\\bootstrap.5.3.3.nupkg.sha512",
     "C:\\Users\\djuri\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\djuri\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

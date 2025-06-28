@@ -33,4 +33,5 @@ public class User
     public ICollection<Courses> Courses { get; set; } = new List<Courses>();
     public ICollection<Schedule> Schedules { get; set; } = new List<Schedule>();
     public ICollection<Replacement> Replacements { get; set; } = new HashSet<Replacement>();
+    public ICollection<ReplacementResponse> Responses { get; set; } = new HashSet<ReplacementResponse>();
 }
