@@ -2143,3 +2143,4 @@ C:\Users\djuri\RiderProjects\TeachSync_ASP.NET_MVC\TeachSyncApp\bin\Debug\net9.0
 C:\Users\djuri\RiderProjects\TeachSync_ASP.NET_MVC\TeachSyncApp\obj\Debug\net9.0\TeachSyncApp.genruntimeconfig.cache
 C:\Users\djuri\RiderProjects\TeachSync_ASP.NET_MVC\TeachSyncApp\obj\Debug\net9.0\ref\TeachSyncApp.dll
 C:\Users\djuri\RiderProjects\TeachSync_ASP.NET_MVC\TeachSyncApp\obj\Debug\net9.0\compressed\p6oymrr7kq-b8e7ngjfas.gz
+C:\Users\djuri\RiderProjects\TeachSync_ASP.NET_MVC\TeachSyncApp\bin\Debug\net9.0\BCrypt.Net-Next.dll

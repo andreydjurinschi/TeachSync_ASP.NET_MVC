@@ -38,48 +38,52 @@ public class CourseTopicController : Controller
     public IActionResult CreateGet(int? id)
     {
         if (id == null)
-        {
             return BadRequest("Course ID is required");
-        }
 
-        ViewBag.CourseId = id.Value; 
-        ViewBag.Topics = new SelectList(_context.Topics, "Id", "Name"); 
-    
+        ViewBag.CourseId = id.Value;
+
+        // разделение по Id
+        ViewBag.InformaticsTopics = _context.Topics
+            .Where(t => t.Id < 21)
+            .Select(t => new SelectListItem { Value = t.Id.ToString(), Text = t.Name })
+            .ToList();
+
+        ViewBag.DesignTopics = _context.Topics
+            .Where(t => t.Id >= 21)
+            .Select(t => new SelectListItem { Value = t.Id.ToString(), Text = t.Name })
+            .ToList();
+
         return View("Create");
     }
 
 
+
     [HttpPost]
-    public async Task<IActionResult> CreatePost(int topicId, int courseId)
+    public async Task<IActionResult> CreatePost(int courseId, int[] selectedTopicIds)
     {
-        if (!ModelState.IsValid)
+        if(selectedTopicIds == null || selectedTopicIds.Length == 0)
         {
-
+            ModelState.AddModelError(string.Empty, "Please select at least one topic.");
             ViewBag.CourseId = courseId;
             ViewBag.Topics = new SelectList(_context.Topics, "Id", "Name");
-            return View("Create");
-        }
-        
-        bool exists = await _context.CoursesTopics
-            .AnyAsync(ct => ct.CourseId == courseId && ct.TopicId == topicId);
-
-        if (exists)
-        {
-            ModelState.AddModelError("", "Course Topic already exists");
-            ViewBag.CourseId = courseId;
-            ViewBag.Topics = new SelectList(_context.Topics, "Id", "Name");
-            return View("Create");
+            return RedirectToAction("Index", "Course");
         }
 
-        var courseTopic = new Models.intermediateModels.CourseTopic
+        foreach(var topicId in selectedTopicIds)
         {
-            CourseId = courseId,
-            TopicId = topicId
-        };
-        _context.Add(courseTopic);
+            var courseTopic = new Models.intermediateModels.CourseTopic
+            {
+                CourseId = courseId,
+                TopicId = topicId
+            };
+            _context.CoursesTopics.Add(courseTopic);
+        }
+
         await _context.SaveChangesAsync();
-        return RedirectToAction("Index", "Course");
+
+        return RedirectToAction("Details", "Course", new { id = courseId });
     }
+
 
     
     [HttpGet]

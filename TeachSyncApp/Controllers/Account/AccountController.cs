@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using TeachSyncApp.Context;
+using TeachSyncApp.utils;
 using TeachSyncApp.ViewModels.UserViewModels;
 
 namespace TeachSyncApp.Controllers.Account;
@@ -31,12 +32,12 @@ public class AccountController : Controller
          * поиск полльзователя по логину и паролю
          * загрузка связанной сущности Role
          */
-        var user = _context.Users.Include(user => user.Role)
-            .FirstOrDefault(u => u.Email == email && u.Password == password);
+        var user = await _context.Users.Include(u => u.Role)
+            .FirstOrDefaultAsync(u => u.Email == email);
         /***
          * если пользователь не найден, то возвращаем ту же форму с характерным сообщением
          */
-        if (user == null)
+        if (user == null || !PasswordHasher.VerifyPassword(password, user.Password))
         {
             ModelState.AddModelError(string.Empty, "Invalid login or password");
             return View();

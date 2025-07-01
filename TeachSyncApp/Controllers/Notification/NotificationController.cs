@@ -18,7 +18,6 @@ public class NotificationController : Controller
     [HttpGet]
     public async Task<IActionResult> GetForUser()
     {
-        
         int teacherId =  int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!); 
         
         var notifications = await _context.Notifications

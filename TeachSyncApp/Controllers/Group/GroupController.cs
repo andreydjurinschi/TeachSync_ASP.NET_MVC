@@ -132,7 +132,9 @@ public class GroupController : Controller
         {
             return NotFound();
         }
-
+        var groupCourse = await _context.GroupCourses.Where(g=> g.GroupId == id).ToListAsync();
+        _context.GroupCourses.RemoveRange(groupCourse);
+        await _context.SaveChangesAsync();
         try
         {
             _context.Groups.Remove(group);
@@ -142,7 +144,7 @@ public class GroupController : Controller
         catch (DbUpdateException )
         {
             ModelState.AddModelError("", "Can not delete group");
-            return RedirectToAction("Delete", "Group");
+            return RedirectToAction("Index", "Group");
         }
         
     }

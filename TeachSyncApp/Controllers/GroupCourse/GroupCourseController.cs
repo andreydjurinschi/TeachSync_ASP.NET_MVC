@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -5,6 +6,7 @@ using TeachSyncApp.Context;
 
 namespace TeachSyncApp.Controllers.GroupCourse;
 
+[Authorize(Roles = "Admin")]
 public class GroupCourseController : Controller
 {
     ApplicationDbContext _context;
@@ -120,6 +122,19 @@ public class GroupCourseController : Controller
         _context.Update(groupCourse);
         await _context.SaveChangesAsync();
         return RedirectToAction(nameof(Index));
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> DeleteCourseFromGroup(int groupId, int courseId)
+    {
+        var groupCourse = _context.GroupCourses.FirstOrDefault(g => g.GroupId == groupId && g.CourseId == courseId);
+        if (groupCourse == null)
+        {
+            return NotFound();
+        }
+        _context.Remove(groupCourse);
+        await _context.SaveChangesAsync();
+        return RedirectToAction("Index", "Group");
     }
 
 

@@ -22,10 +22,11 @@
             <option value="">Select a Topic</option>
             @foreach (var item in Model.CourseTopicsList)
             {
-                <option value="@item.Id">@item.Course.Name @item.Topic.Name</option>
+                <option value="@item.Id">@item.Topic.Name</option>
             }
         </select>
     </div>
+    <br>
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Create Replacement</button>
     </div>

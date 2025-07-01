@@ -9,7 +9,10 @@
         <th>@Html.DisplayNameFor(model => model.Capacity)</th>
         <th>@Html.DisplayNameFor(model => model.GroupCourses)</th>
         <th>Teacher</th>
-        <th></th>
+        <th>Details</th>
+        <th>Add Course</th>
+        <th>Edit</th>
+        <th>Delete</th>
     </tr>
     </thead>
     <tbody>
@@ -24,14 +27,28 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Capacity)
-            </td>            
-            <td>
+            </td>
+            <td colspan="2">
                 @if (item.GroupCourses.Any())
                 {
-                    <ul>
+                    <ul class="list-unstyled">
                         @foreach (var courseTopic in item.GroupCourses)
                         {
-                            <li>@courseTopic.Course.Name</li>
+                            <li class="d-flex justify-content-between align-items-center">
+                    <span>
+                        @courseTopic.Course.Name
+                    </span>
+                                <form asp-controller="GroupCourse"
+                                      asp-action="DeleteCourseFromGroup"
+                                      asp-route-groupId="@item.Id"
+                                      asp-route-courseId="@courseTopic.CourseId"
+                                      method="post"
+                                      class="d-inline">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this course?')">
+                                        <i class="bi bi-x-circle"></i> Remove
+                                    </button>
+                                </form>
+                            </li>
                         }
                     </ul>
                 }
@@ -40,6 +57,7 @@
                     <p>No courses assigned</p>
                 }
             </td>
+
             <td>
                 @if (item.GroupCourses.Any())
                 {

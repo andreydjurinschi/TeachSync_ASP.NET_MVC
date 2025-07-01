@@ -1,20 +1,35 @@
-@model TeachSyncApp.Models.intermediateModels.CourseTopic
+@{
+    var informaticsTopics = ViewBag.InformaticsTopics as List<SelectListItem> ?? new List<SelectListItem>();
+    var designTopics = ViewBag.DesignTopics as List<SelectListItem> ?? new List<SelectListItem>();
+}
 
 <form asp-action="CreatePost" method="post">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" name="courseId" value="@ViewBag.CourseId" />
 
     <div class="form-group">
-        <label for="topicId">Select Topic</label>
-        <select id="topicId" name="topicId" class="form-control">
-            @foreach (var topic in ViewBag.Topics)
-            {
-                <option value="@topic.Value">@topic.Text</option>
-            }
-        </select>
+        <label><strong>Informatics Topics</strong></label>
+        @foreach (var topic in informaticsTopics)
+        {
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="selectedTopicIds" value="@topic.Value" id="topic-@topic.Value" />
+                <label class="form-check-label" for="topic-@topic.Value">@topic.Text</label>
+            </div>
+        }
     </div>
-    
-    
 
-    <button type="submit" class="btn btn-primary">Connect course with topic</button>
+    <div class="form-group">
+        <label><strong>Design Topics</strong></label>
+        @foreach (var topic in designTopics)
+        {
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="selectedTopicIds" value="@topic.Value" id="topic-@topic.Value" />
+                <label class="form-check-label" for="topic-@topic.Value">@topic.Text</label>
+            </div>
+        }
+    </div>
+
+    <button type="submit" class="btn btn-primary">Connect course with topics</button>
+    <br>
+    <a asp-controller="Course" asp-action="Index">Get back</a>
 </form>

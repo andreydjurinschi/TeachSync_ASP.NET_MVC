@@ -47,9 +47,12 @@
                         <span>@item.TeacherApprove?.Name @item.TeacherApprove?.Surname </span>
                     }
                 </td>
-                <td>
+                <td class="@(item.Status == Status.Pending ? "text-warning" :
+                           item.Status == Status.Approved ? "text-success" :
+                           item.Status == Status.Rejected ? "text-danger" : "text-secondary")">
                     @Html.DisplayFor(modelItem => item.Status)
                 </td>
+
                 <td>
                     @if (item.Status == Status.Pending)
                     {

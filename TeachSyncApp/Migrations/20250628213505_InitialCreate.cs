@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TeachSyncApp.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreateOnLaptop : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -253,6 +253,74 @@ namespace TeachSyncApp.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Notifications",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TeacherId = table.Column<int>(type: "int", nullable: false),
+                    ReplacementId = table.Column<int>(type: "int", nullable: false),
+                    ScheduleId = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notifications", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Notifications_Replacements_ReplacementId",
+                        column: x => x.ReplacementId,
+                        principalTable: "Replacements",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Notifications_Schedules_ScheduleId",
+                        column: x => x.ScheduleId,
+                        principalTable: "Schedules",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Notifications_Users_TeacherId",
+                        column: x => x.TeacherId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ReplacementResponses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ReplacementId = table.Column<int>(type: "int", nullable: false),
+                    TeacherId = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    ResponsedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ReplacementResponses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ReplacementResponses_Replacements_ReplacementId",
+                        column: x => x.ReplacementId,
+                        principalTable: "Replacements",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ReplacementResponses_Users_TeacherId",
+                        column: x => x.TeacherId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ReplacementResponses_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Courses_TeacherId",
                 table: "Courses",
@@ -277,6 +345,36 @@ namespace TeachSyncApp.Migrations
                 name: "IX_GroupCourses_GroupId",
                 table: "GroupCourses",
                 column: "GroupId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Notifications_ReplacementId",
+                table: "Notifications",
+                column: "ReplacementId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Notifications_ScheduleId",
+                table: "Notifications",
+                column: "ScheduleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Notifications_TeacherId",
+                table: "Notifications",
+                column: "TeacherId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ReplacementResponses_ReplacementId",
+                table: "ReplacementResponses",
+                column: "ReplacementId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ReplacementResponses_TeacherId",
+                table: "ReplacementResponses",
+                column: "TeacherId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ReplacementResponses_UserId",
+                table: "ReplacementResponses",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Replacements_ApprovedById",
@@ -322,6 +420,12 @@ namespace TeachSyncApp.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Notifications");
+
+            migrationBuilder.DropTable(
+                name: "ReplacementResponses");
+
             migrationBuilder.DropTable(
                 name: "Replacements");
 

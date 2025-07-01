@@ -74,7 +74,7 @@ public class CourseController(ApplicationDbContext context) : Controller
         };
         context.Courses.Add(course);
         await context.SaveChangesAsync();
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction("Index");
     }
 
     [HttpGet]
@@ -128,6 +128,7 @@ public class CourseController(ApplicationDbContext context) : Controller
             return NotFound();
         }
         var course = await context.Courses.Include(c => c.User).Where(c => c.Id == id).FirstOrDefaultAsync();
+
         if (course == null)
         {
             return NotFound();
@@ -142,7 +143,8 @@ public class CourseController(ApplicationDbContext context) : Controller
         {
             return NotFound();
         }
-
+        var courseTopics = await context.CoursesTopics.Where(courseTopic => courseTopic.CourseId == id).ToListAsync();
+        context.CoursesTopics.RemoveRange(courseTopics);
         try
         {
             context.Courses.Remove(course);

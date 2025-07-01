@@ -147,7 +147,7 @@ public class ApplicationDbContext : DbContext
             .HasOne(r => r.Replacement)
             .WithMany()
             .HasForeignKey(r => r.ReplacementId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.Restrict);
 
         modelBuilder.Entity<ReplacementResponse>()
             .HasOne(r => r.Teacher)

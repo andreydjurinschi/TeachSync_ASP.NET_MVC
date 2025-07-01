@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TeachSyncApp.Context;
 using TeachSyncApp.Models;
+using TeachSyncApp.utils;
 using TeachSyncApp.ViewModels;
 using TeachSyncApp.ViewModels.UserViewModels;
 
@@ -75,7 +76,7 @@ public class UserController(ApplicationDbContext context) : Controller
             Name = modelUserCreate.Name,
             Surname = modelUserCreate.Surname,
             Email = modelUserCreate.Email,
-            Password = modelUserCreate.Password,
+            Password = PasswordHasher.HashPassword(modelUserCreate.Password),
             RoleId = modelUserCreate.RoleId
         };
         context.Users.Add(user);
@@ -147,22 +148,22 @@ public class UserController(ApplicationDbContext context) : Controller
         return View(user);
     }
 
-    [HttpPost]
-    public async Task<IActionResult> DeleteConfirmed(int id)
+[HttpPost]
+public async Task<IActionResult> DeleteConfirmed(int id)
+{
+    var user = await GetUserById(id);
+    try
     {
-        var user = await GetUserById(id);
-        try
-        {
-            context.Users.Remove(user);
-            await context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-        catch (DbUpdateException)
-        {
-            ModelState.AddModelError("", "User could not be deleted");
-            return RedirectToAction("Index", "User");
-        }
+        context.Users.Remove(user);
+        await context.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
     }
+    catch (DbUpdateException)
+    {
+        TempData["DeleteError"] = "Teacher cannot be deleted, because he is used is the system... Please check the courses";
+        return RedirectToAction(nameof(Index));
+    }
+}
 
     private async Task<UserCreateViewModel> GetUserViewModel()
     {

@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using TeachSyncApp.Context;
 using TeachSyncApp.Models.intermediateModels;
+using TeachSyncApp.utils;
 
 namespace TeachSyncApp.Models.SeedData;
 
@@ -133,7 +134,7 @@ public class SeedData
                 context.Users.Add(new User
                 {
                     Name = "Alexey", Surname = "Volkov", Email = "alexey@gmail.com", CreatedAt = DateTime.Now,
-                    RoleId = 1, Password = "password1234"
+                    RoleId = 1, Password = PasswordHasher.HashPassword("password1234") 
                 });
                /* context.Users.Add(new User
                 {
